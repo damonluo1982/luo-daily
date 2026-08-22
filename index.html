@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="LUO必看">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<title>LUO每日必看</title>
+<style>
+:root {
+  --bg: #eef0f4;
+  --bg-grad: linear-gradient(180deg,#eef0f4 0%,#e8ebf0 100%);
+  --sidebar-bg: #161821;
+  --sidebar-active: #23263a;
+  --card-bg: #fff;
+  --card-shadow: 0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --card-shadow-hover: 0 2px 8px rgba(0,0,0,.08);
+  --t1: #1a1a2e;
+  --t2: #5f6580;
+  --t3: #9da3b4;
+  --border: #e5e8ed;
+  --border-light: #f0f2f5;
+  --red: #e74c3c;
+  --red-bg: #fdf2f2;
+  --red-light: #fef5f5;
+  --green: #16a34a;
+  --green-bg: #f0fdf4;
+  --blue: #2563eb;
+  --blue-bg: #eff6ff;
+  --orange: #ea580c;
+  --orange-bg: #fff7ed;
+  --purple: #7c3aed;
+  --purple-bg: #f5f3ff;
+  --indigo: #4f46e5;
+  --indigo-bg: #eef2ff;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --safe-bottom: env(safe-area-inset-bottom,0px);
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { -webkit-text-size-adjust:100%; }
+body { font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg-grad); color:var(--t1); font-size:13px; line-height:1.5; -webkit-font-smoothing:antialiased; }
+
+/* ===== SIDEBAR (desktop only) ===== */
+.sidebar { width:200px; min-height:100vh; background:var(--sidebar-bg); position:fixed; left:0; top:0; z-index:100; display:flex; flex-direction:column; transition:transform .3s cubic-bezier(.4,0,.2,1); }
+.sidebar-header { padding:18px 16px 14px; border-bottom:1px solid rgba(255,255,255,.06); }
+.sidebar-header h1 { font-size:15px; color:#fff; font-weight:700; letter-spacing:-.3px; }
+.sidebar-header .date { font-size:10px; color:var(--t3); margin-top:3px; }
+.nav-section { padding:8px 0; flex:1; }
+.nav-item { display:flex; align-items:center; gap:10px; padding:12px 16px; cursor:pointer; border-left:3px solid transparent; color:#8589a0; transition:all .15s; }
+.nav-item:active { background:var(--sidebar-active); }
+.nav-item.active { background:var(--sidebar-active); border-left-color:var(--blue); color:#fff; }
+.nav-item .icon { font-size:17px; width:22px; text-align:center; }
+.nav-item .label { font-size:12px; font-weight:500; }
+.nav-item .badge { margin-left:auto; font-size:8px; padding:2px 5px; border-radius:8px; background:var(--red); color:#fff; font-weight:700; letter-spacing:.3px; }
+.sidebar-footer { padding:10px 16px; border-top:1px solid rgba(255,255,255,.06); }
+.send-btn { width:100%; padding:9px; background:linear-gradient(135deg,#07c160,#06ad56); color:#fff; border:none; border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; }
+.send-btn:active { opacity:.85; }
+.version { text-align:center; font-size:9px; color:var(--t3); margin-top:8px; }
+
+/* ===== BOTTOM NAV (mobile) ===== */
+.bottom-nav { display:none; position:fixed; bottom:0; left:0; right:0; z-index:100; background:rgba(255,255,255,.92); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border-top:1px solid var(--border); padding-bottom:var(--safe-bottom); box-shadow:0 -1px 10px rgba(0,0,0,.06); }
+.bottom-nav-inner { display:flex; align-items:center; justify-content:space-around; padding:4px 0 2px; }
+.bn-item { display:flex; flex-direction:column; align-items:center; gap:1px; padding:6px 4px; cursor:pointer; color:var(--t3); transition:color .15s; flex:1; min-width:0; }
+.bn-item .bn-icon { font-size:19px; line-height:1; }
+.bn-item .bn-label { font-size:9px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
+.bn-item.active { color:var(--blue); }
+.bn-item:active { transform:scale(.92); }
+
+/* ===== MOBILE TOP BAR ===== */
+.mobile-topbar { display:none; position:sticky; top:0; z-index:90; background:rgba(255,255,255,.88); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border-light); padding:10px 14px; align-items:center; justify-content:space-between; }
+.mobile-topbar .mt-title { font-size:14px; font-weight:700; color:var(--t1); }
+.mobile-topbar .mt-tag { font-size:9px; color:var(--green); background:var(--green-bg); padding:2px 7px; border-radius:10px; font-weight:600; }
+
+/* ===== MAIN ===== */
+.main { margin-left:200px; padding:14px 16px 20px; min-height:100vh; }
+.section-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.section-title { font-size:17px; font-weight:700; letter-spacing:-.3px; }
+.update-tag { font-size:10px; color:var(--green); background:var(--green-bg); padding:3px 9px; border-radius:12px; font-weight:600; }
+.content-section { display:none; }
+.content-section.active { display:block; animation:fadeIn .3s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+
+/* ===== KEY VIEWS ===== */
+.key-view { background:var(--card-bg); border-radius:var(--radius); padding:12px 14px; margin-bottom:10px; box-shadow:var(--card-shadow); }
+.kv-header { font-size:12px; font-weight:700; margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+.kv-header .pill { font-size:9px; padding:2px 7px; border-radius:5px; font-weight:600; }
+.kv-body { font-size:12px; color:var(--t2); line-height:1.6; }
+.kv-body strong { color:var(--t1); }
+.kv-body p { margin-bottom:3px; }
+.kv-body p:last-child { margin-bottom:0; }
+
+/* ===== DATA CARDS ===== */
+.card-row { display:grid; gap:8px; margin-bottom:10px; }
+.row-4 { grid-template-columns:repeat(4,1fr); }
+.row-3 { grid-template-columns:repeat(3,1fr); }
+.row-2 { grid-template-columns:repeat(2,1fr); }
+.mcard { background:var(--card-bg); border-radius:var(--radius-sm); padding:10px 11px; box-shadow:var(--card-shadow); transition:box-shadow .2s; }
+.mcard .cl { font-size:10px; color:var(--t2); margin-bottom:3px; font-weight:500; }
+.mcard .cv { font-size:15px; font-weight:800; letter-spacing:-.3px; }
+.mcard .cc { font-size:11px; font-weight:700; margin-top:2px; }
+.mcard .cs { font-size:9px; color:var(--t3); margin-top:1px; }
+.cc.up { color:var(--red); }
+.cc.down { color:var(--green); }
+.cc.neutral { color:var(--t2); }
+
+/* ===== BLOCK ===== */
+.block { margin-bottom:12px; }
+.block-title { font-size:13px; font-weight:700; margin-bottom:7px; padding-left:9px; border-left:3px solid var(--blue); letter-spacing:-.2px; }
+
+/* ===== TABLE ===== */
+.tbl-wrap { background:var(--card-bg); border-radius:var(--radius-sm); overflow:hidden; box-shadow:var(--card-shadow); overflow-x:auto; -webkit-overflow-scrolling:touch; }
+table { width:100%; border-collapse:collapse; font-size:11px; }
+th { padding:7px 8px; background:#f7f8fa; color:var(--t2); font-weight:600; text-align:left; white-space:nowrap; border-bottom:1px solid var(--border); font-size:10px; }
+td { padding:6px 8px; border-bottom:1px solid var(--border-light); white-space:nowrap; }
+tr:last-child td { border-bottom:none; }
+.up-t { color:var(--red); font-weight:600; }
+.down-t { color:var(--green); font-weight:600; }
+
+/* ===== RECO ===== */
+.reco-stack { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
+.reco-item { background:var(--card-bg); border-radius:var(--radius-sm); padding:10px 12px; box-shadow:var(--card-shadow); border-left:3px solid var(--blue); }
+.reco-item .ri-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
+.reco-item .ri-period { font-size:10px; color:var(--t3); font-weight:600; }
+.reco-item .ri-title { font-size:12px; font-weight:700; }
+.reco-item .ri-body { font-size:11px; color:var(--t2); line-height:1.55; }
+.reco-item .ri-body strong { color:var(--t1); }
+.risk-tag { font-size:9px; padding:2px 7px; border-radius:4px; font-weight:600; }
+.risk-high { background:var(--red-bg); color:var(--red); }
+.risk-medium { background:var(--orange-bg); color:var(--orange); }
+.risk-low { background:var(--green-bg); color:var(--green); }
+
+/* ===== INFO LIST ===== */
+.ilist { list-style:none; }
+.ili { padding:7px 0; border-bottom:1px solid var(--border-light); display:flex; gap:8px; }
+.ili:last-child { border-bottom:none; }
+.ili .ic { width:26px; height:26px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; }
+.ili .ct { flex:1; min-width:0; }
+.ili .it { font-size:12px; font-weight:600; margin-bottom:1px; }
+.ili .id { font-size:11px; color:var(--t2); line-height:1.5; }
+.ili .is { font-size:9px; color:var(--t3); margin-top:2px; }
+
+/* ===== TAGS ===== */
+.tags { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:6px; }
+.tag { padding:2px 8px; border-radius:10px; font-size:10px; font-weight:600; }
+.tag.r { background:var(--red-bg); color:var(--red); }
+.tag.g { background:var(--green-bg); color:var(--green); }
+.tag.b { background:var(--blue-bg); color:var(--blue); }
+.tag.o { background:var(--orange-bg); color:var(--orange); }
+.tag.p { background:var(--purple-bg); color:var(--purple); }
+
+/* ===== ALERT ===== */
+.alert-c { padding:8px 11px; border-radius:7px; font-size:11px; line-height:1.5; margin-bottom:8px; display:flex; gap:7px; }
+.alert-w { background:var(--orange-bg); border-left:3px solid var(--orange); color:#9a3412; }
+.alert-i { background:var(--blue-bg); border-left:3px solid var(--blue); color:#1e40af; }
+.alert-d { background:var(--red-bg); border-left:3px solid var(--red); color:#991b1b; }
+
+/* ===== DISCLAIMER ===== */
+.disc { font-size:10px; color:var(--t3); margin-top:8px; padding:8px 10px; background:var(--border-light); border-radius:7px; line-height:1.5; }
+
+/* ===== FAIPAI CARD ===== */
+.fp-card { background:var(--card-bg); border-radius:var(--radius-sm); padding:8px 11px; margin-bottom:5px; box-shadow:var(--card-shadow); border-left:3px solid var(--orange); }
+.fp-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:3px; gap:6px; }
+.fp-title { font-size:11px; font-weight:700; }
+.fp-price { font-size:12px; font-weight:800; color:var(--orange); white-space:nowrap; }
+.fp-info { font-size:10px; color:var(--t2); line-height:1.45; }
+.fp-tag { font-size:9px; padding:1px 5px; border-radius:3px; background:var(--orange-bg); color:var(--orange); font-weight:600; }
+.fp-hot { border-left:3px solid var(--red) !important; background:linear-gradient(90deg,var(--red-light),#fff 60%) !important; }
+.fp-hot-tag { font-size:9px; padding:1px 5px; border-radius:3px; background:var(--red); color:#fff; font-weight:700; margin-right:4px; }
+
+/* ===== HR LEARN ===== */
+.learn-hero { background:linear-gradient(135deg,rgba(79,70,229,.06),rgba(124,58,237,.06)); border-radius:var(--radius); padding:12px 14px; margin-bottom:8px; position:relative; overflow:hidden; border:1px solid rgba(79,70,229,.1); }
+.learn-hero::before { content:''; position:absolute; top:-25px; right:-25px; width:70px; height:70px; background:radial-gradient(circle,rgba(79,70,229,.12),transparent 70%); border-radius:50%; z-index:0; }
+.learn-hero > * { position:relative; z-index:1; }
+.learn-date { font-size:10px; color:var(--t2); margin-bottom:2px; }
+.learn-topic-tag { font-size:9px; padding:2px 7px; border-radius:5px; background:var(--indigo-bg); color:var(--indigo); font-weight:700; display:inline-block; margin-bottom:5px; }
+.learn-title { font-size:15px; font-weight:800; color:var(--t1); margin-bottom:7px; line-height:1.3; letter-spacing:-.3px; }
+.learn-sec { margin-bottom:7px; }
+.learn-sec-title { font-size:11px; font-weight:700; color:var(--indigo); margin-bottom:2px; display:flex; align-items:center; gap:4px; }
+.learn-sec-body { font-size:11px; color:var(--t2); line-height:1.55; }
+.learn-sec-body strong { color:var(--t1); }
+.learn-sec-body ul { margin:2px 0 0 0; padding-left:14px; }
+.learn-sec-body li { margin-bottom:1px; }
+.learn-history-title { font-size:11px; font-weight:700; margin:10px 0 5px; color:var(--t1); display:flex; align-items:center; gap:6px; }
+.learn-topic-list { display:grid; grid-template-columns:repeat(2,1fr); gap:4px; }
+.learn-topic-item { display:flex; align-items:center; gap:5px; padding:4px 6px; border-radius:6px; font-size:10px; background:var(--card-bg); box-shadow:0 1px 1px rgba(0,0,0,.04); }
+.learn-topic-item .ti-num { width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:800; flex-shrink:0; }
+.learn-topic-item .ti-num.current { background:var(--indigo); color:#fff; }
+.learn-topic-item .ti-num.normal { background:var(--border); color:var(--t2); }
+.learn-topic-item .ti-text { flex:1; color:var(--t2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.learn-topic-item .ti-text.current { color:var(--t1); font-weight:700; }
+
+/* ===== MOBILE SIDEBAR TOGGLE ===== */
+.menu-toggle { display:none; position:fixed; top:10px; left:10px; z-index:101; width:36px; height:36px; background:var(--sidebar-bg); border:none; border-radius:8px; color:#fff; font-size:18px; cursor:pointer; align-items:center; justify-content:center; }
+
+/* sidebar nav active colors per module */
+.nav-item.active[onclick*="stock"] { border-left-color:var(--red); }
+.nav-item.active[onclick*="house"] { border-left-color:var(--blue); }
+.nav-item.active[onclick*="salary"] { border-left-color:var(--purple); }
+.nav-item.active[onclick*="huawei"] { border-left-color:var(--orange); }
+.nav-item.active[onclick*="learn"] { border-left-color:var(--indigo); }
+
+/* ===== SECTION ACCENT COLORS ===== */
+#section-stock .block-title { border-left-color:var(--red); }
+#section-house .block-title { border-left-color:var(--blue); }
+#section-salary .block-title { border-left-color:var(--purple); }
+#section-huawei .block-title { border-left-color:var(--orange); }
+#section-learn .block-title { border-left-color:var(--indigo); }
+/* bottom nav active color per tab */
+.bn-item.active[data-title*="A股"] { color:var(--red); }
+.bn-item.active[data-title*="房产"] { color:var(--blue); }
+.bn-item.active[data-title*="薪酬"] { color:var(--purple); }
+.bn-item.active[data-title*="华为"] { color:var(--orange); }
+.bn-item.active[data-title*="HR"] { color:var(--indigo); }
+/* mobile topbar accent */
+.bn-item:active { transform:scale(.92); }
+
+@media (max-width:768px) {
+  .sidebar { transform:translateX(-100%); width:200px; }
+  .sidebar.open { transform:translateX(0); }
+  .main { margin-left:0; padding:0 10px calc(70px + var(--safe-bottom)); }
+  .menu-toggle { display:flex; }
+  .bottom-nav { display:block; }
+  .mobile-topbar { display:flex; }
+  .section-head { display:none; }
+  .row-4 { grid-template-columns:repeat(2,1fr); }
+  .row-3 { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:480px) {
+  .row-4 { grid-template-columns:repeat(2,1fr); }
+  .row-3 { grid-template-columns:repeat(2,1fr); }
+  .row-2 { grid-template-columns:1fr; }
+  .mcard { padding:8px 9px; }
+  .mcard .cv { font-size:14px; }
+  .learn-hero { padding:10px 12px; }
+  .learn-title { font-size:14px; }
+  .learn-sec-body { font-size:11px; line-height:1.5; }
+  .learn-topic-list { grid-template-columns:1fr; }
+  .key-view { padding:10px 12px; }
+  .block { margin-bottom:10px; }
+  .card-row { gap:6px; margin-bottom:8px; }
+  .fp-card { padding:7px 10px; margin-bottom:4px; }
+}
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+<!-- MOBILE TOP BAR -->
+<div class="mobile-topbar" id="mobileTopbar">
+  <div class="mt-title" id="mtTitle">📈 A股投资预测</div>
+  <div class="mt-tag" id="mtTag">更新：8/21收盘</div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h1>LUO每日必看</h1>
+    <div class="date">2026-08-22 周六</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-item active" onclick="switchTab('stock',this)">
+      <span class="icon">📈</span><span class="label">A股投资预测</span><span class="badge">HOT</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('house',this)">
+      <span class="icon">🏠</span><span class="label">房产投资建议</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('salary',this)">
+      <span class="icon">💰</span><span class="label">薪酬COE热点</span><span class="badge">NEW</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('huawei',this)">
+      <span class="icon">📱</span><span class="label">华为最新消息</span><span class="badge">NEW</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('learn',this)">
+      <span class="icon">📚</span><span class="label">HR每日学习</span>
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    <button class="send-btn" onclick="location.href='mailto:81225055@qq.com'"><span>📧</span><span>邮件推送已开启</span></button>
+    <div class="version">v3.0 · Powered by AI</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- ===== SECTION 1: STOCK ===== -->
+<div class="content-section active" id="section-stock">
+  <div class="section-head">
+    <div class="section-title">📈 A股投资预测</div>
+    <div class="update-tag">更新：8/22</div>
+  </div>
+  <!--MOD:stock:START-->
+<div class="key-view" style="border-left:3px solid var(--t1); padding:10px 12px;">
+  <div class="kv-header" style="margin-bottom:5px;">📋 昨日收盘速览 <span class="pill" style="background:#f0f2f5;color:var(--t1);">8/21(周五)</span></div>
+  <div class="kv-body" style="padding-top:2px;">
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:5px; margin-bottom:5px;">
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">上证指数</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">3,905</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.04%</div></div>
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">深证成指</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">14,094</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.87%</div></div>
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">创业板指</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">3,546</div><div style="font-size:9px;color:var(--red);font-weight:700;">+1.43%</div></div>
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">沪深300</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">4,619</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.57%</div></div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:5px; margin-bottom:5px;">
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">科创50</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">1,654</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.04%</div></div>
+      <div style="background:var(--border-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">两市成交</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">1.88万亿</div><div style="font-size:9px;color:var(--t2);font-weight:700;">沪8834亿+深9958亿</div></div>
+      <div style="background:var(--border-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">北向资金</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">—</div><div style="font-size:9px;color:var(--t2);font-weight:700;">数据未更新</div></div>
+      <div style="background:var(--border-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">涨跌比</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">—</div><div style="font-size:9px;color:var(--t2);font-weight:700;">数据未更新</div></div>
+    </div>
+    <p style="font-size:10px;color:var(--t2);margin:4px 0 0 0;line-height:1.45;">📊 <strong>盘面要点：</strong>主要指数全线上涨，创业板指(+1.43%)领涨，深证成指(+0.87%)次之；两市合计成交1.88万亿，较前日变化不大；科技成长风格占优，市场情绪偏暖，但量能未明显放大，持续性待观察。</p>
+  </div>
+</div>
+
+<div class="key-view" style="border-left:3px solid var(--red);">
+  <div class="kv-header">📌 本周总结 <span class="pill" style="background:var(--red-bg);color:var(--red);">8/17-8/21</span></div>
+  <div class="kv-body">
+    <p>① <strong>指数分化</strong>：上证周内窄幅震荡收平，创业板/深成指表现强势，成长风格明显占优，科创50相对偏弱</p>
+    <p>② <strong>量能平稳</strong>：两市日均成交约1.9万亿，未见显著放量或缩量，存量资金博弈格局延续</p>
+    <p>③ <strong>风格偏成长</strong>：创业板+1.43%显著跑赢上证+0.04%，显示资金偏好高弹性成长板块，消费/金融等权重板块表现平淡</p>
+    <p>④ <strong>市场情绪回暖</strong>：主要指数全线收红，赚钱效应改善，但需关注量能能否配合指数上攻</p>
+  </div>
+</div>
+
+<div class="key-view" style="border-left:3px solid var(--orange);">
+  <div class="kv-header">📌 下周操作建议 <span class="pill" style="background:var(--orange-bg);color:var(--orange);">8/24-8/28</span></div>
+  <div class="kv-body">
+    <p>① <strong>明天(周一)</strong>：关注创业板/深成指强势能否延续，若放量上攻可关注成长类ETF（创业板ETF/科技ETF）；若缩量回落则谨慎追高 ⚠️中风险</p>
+    <p>② <strong>未来一周</strong>：重点观察两市成交能否站稳2万亿，若放量突破则反弹有望延续；否则维持震荡格局，建议均衡配置（宽基+成长） ⚠️中风险</p>
+    <p>③ <strong>未来一个月</strong>：关注政策面催化（如产业扶持/货币宽松预期），方向上关注科技成长（半导体ETF/新能源ETF）与顺周期（有色ETF/证券ETF）轮动机会 ⚠️中高风险</p>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-title">📊 本周涨跌幅最大板块（8/17-8/21）</div>
+  <div class="card-row row-2">
+    <div class="mcard" style="border-top:3px solid var(--red);">
+      <div class="tags"><span class="tag r">涨幅TOP5</span></div>
+      <div class="tbl-wrap" style="box-shadow:none;">
+        <table>
+          <thead><tr><th>板块</th><th>周涨幅</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>贵金属</td><td class="up-t">+16.2%</td><td>连涨5日</td></tr>
+            <tr><td>石油石化</td><td class="up-t">+5.44%</td><td>资源品走强</td></tr>
+            <tr><td>有色金属</td><td class="up-t">+2.50%</td><td>资金持续流入</td></tr>
+            <tr><td>银行</td><td class="up-t">+2.40%</td><td>防御属性</td></tr>
+            <tr><td>航运港口</td><td class="up-t">连涨5日</td><td>景气度回升</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="mcard" style="border-top:3px solid var(--green);">
+      <div class="tags"><span class="tag g">跌幅TOP5</span></div>
+      <div class="tbl-wrap" style="box-shadow:none;">
+        <table>
+          <thead><tr><th>板块</th><th>周跌幅</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>传媒</td><td class="down-t">-5.54%</td><td>资金流出</td></tr>
+            <tr><td>计算机</td><td class="down-t">-4.95%</td><td>获利回吐</td></tr>
+            <tr><td>综合</td><td class="down-t">-3.97%</td><td>弱势整理</td></tr>
+            <tr><td>医药生物</td><td class="down-t">-3.0%+</td><td>集采压力</td></tr>
+            <tr><td>电子</td><td class="down-t">-2.76%</td><td>主力大幅流出</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="alert-c alert-i"><span>💡</span><div><strong>板块轮动信号：</strong>资源品（贵金属/有色/石油）+银行等防御方向领涨，科技（电子/计算机/传媒）集体回调。主力资金明显从科技板块撤出，转向资源与防御板块，风格切换特征显著。</div></div>
+</div>
+
+<div class="block">
+  <div class="block-title">📅 本周关键事件（8/17-8/21）</div>
+  <div class="mcard" style="padding:8px 10px;">
+    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">① <strong>贵金属价格大涨</strong>：本周贵金属板块累计涨超16%，创3月以来新高，带动有色/资源股走强</p>
+    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">② <strong>主力资金大调仓</strong>：本周主力合计净流出约1490亿，电子行业净流出570亿居首，资源品获净流入</p>
+    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">③ <strong>市场风格切换</strong>：31个申万一级行业仅7个上涨，资金从成长/科技撤出转向资源+银行等防御板块</p>
+    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">④ <strong>量能持续萎缩</strong>：两市成交连续4日缩量，市场观望情绪浓厚，等待方向选择</p>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-title">🥇 黄金·过去一周每日收盘（COMEX期货）</div>
+  <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:5px;">
+    <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/17(周一)</div><div style="font-size:12px;font-weight:800;">—</div><div style="font-size:9px;color:var(--t2);">—</div></div>
+    <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/18(周二)</div><div style="font-size:12px;font-weight:800;">—</div><div style="font-size:9px;color:var(--t2);">—</div></div>
+    <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/19(周三)</div><div style="font-size:12px;font-weight:800;">—</div><div style="font-size:9px;color:var(--t2);">—</div></div>
+    <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/20(周四)</div><div style="font-size:12px;font-weight:800;">—</div><div style="font-size:9px;color:var(--t2);">—</div></div>
+    <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/21(周五)</div><div style="font-size:12px;font-weight:800;">—</div><div style="font-size:9px;color:var(--t2);">—</div></div>
+  </div>
+  <p style="font-size:10px;color:var(--t2);margin:4px 0 0 0;line-height:1.45;">📊 <strong>周涨幅摘要：</strong>本周COMEX黄金期货数据暂缺。A股贵金属板块周涨超16%，黄金概念股表现强势，预计金价高位运行。</p>
+</div>
+
+<div class="disc">⚠️ AI风格模拟分析，不构成投资建议。数据来源东方财富/同花顺等公开渠道。红涨绿跌（中国股市惯例）。</div>
+  <!--MOD:stock:END-->
+</div>
+
+<!-- ===== SECTION 2: HOUSE ===== -->
+<div class="content-section" id="section-house">
+  <div class="section-head">
+    <div class="section-title">🏠 深圳房产投资建议</div>
+    <div class="update-tag">更新：8/22</div>
+  </div>
+  <!--MOD:house:START-->
+
+
+  <!-- 核心判断前置 -->
+  <div class="key-view" style="border-left:3px solid var(--blue);">
+    <div class="kv-header">📌 核心判断 <span class="pill" style="background:var(--blue-bg);color:var(--blue);">9月-明年2月</span></div>
+    <div class="kv-body">
+      <p>① <strong>核心区(南山/福田)</strong>：企稳回升3%-5%，稀缺资产持续走强，议价空间收窄至8%以内</p>
+      <p>② <strong>次核心(宝中/坂田)</strong>：分化加剧，坂田+3.2%领涨（华为辐射），宝中高位整固</p>
+      <p>③ <strong>外围(龙华观澜/深圳北站)</strong>：筑底以价换量，观澜-3.1%全市最跌</p>
+      <p>④ <strong>法拍机会</strong>：恒裕深圳湾8.2万/㎡成交(备案价6.9折)，招商桃花园7折起拍，笋盘频出</p>
+      <p>⑤ <strong>政策窗口</strong>：房贷利率3.05%历史最低+以旧换新最高省40万+9月最低工资上调2700元</p>
+    </div>
+  </div>
+
+  <!-- 法拍笋盘 -->
+  <div class="block">
+    <div class="block-title">🔨 深圳法拍房 · 笋盘速览</div>
+    
+    <!-- 月度统计 -->
+    <div class="card-row row-4" style="margin-bottom:8px;">
+      <div class="mcard" style="padding:8px 10px;"><div class="cl" style="font-size:9px;">上半年挂拍</div><div class="cv" style="font-size:13px;">4,916套</div><div class="cc up" style="font-size:10px;">同比+44.9%</div></div>
+      <div class="mcard" style="padding:8px 10px;"><div class="cl" style="font-size:9px;">上半年成交</div><div class="cv" style="font-size:13px;">2,396套</div><div class="cc up" style="font-size:10px;">同比+61.1%</div></div>
+      <div class="mcard" style="padding:8px 10px;"><div class="cl" style="font-size:9px;">清仓率</div><div class="cv" style="font-size:13px;">70.5%</div><div class="cc up" style="font-size:10px;">全国第二</div></div>
+      <div class="mcard" style="padding:8px 10px;"><div class="cl" style="font-size:9px;">折价率</div><div class="cv" style="font-size:13px;">93.7%</div><div class="cc down" style="font-size:10px;">捡漏空间收窄</div></div>
+    </div>
+
+    <!-- 各区成交率 -->
+    <div class="tbl-wrap" style="margin-bottom:8px;">
+      <table>
+        <thead><tr><th>区域</th><th>挂拍(套)</th><th>成交(套)</th><th>成交率</th><th>均价(元/㎡)</th></tr></thead>
+        <tbody>
+          <tr style="background:#fff5f5;"><td><strong>⭐福田</strong></td><td>293</td><td>230</td><td class="up-t"><strong>78.50%</strong></td><td><strong>65,753</strong></td></tr>
+          <tr style="background:#fff5f5;"><td><strong>⭐南山</strong></td><td>524</td><td>359</td><td class="up-t"><strong>68.51%</strong></td><td><strong>70,810</strong></td></tr>
+          <tr><td>龙华</td><td>172</td><td>109</td><td>63.37%</td><td>40,693</td></tr>
+          <tr><td>宝安</td><td>355</td><td>218</td><td>61.41%</td><td>43,781</td></tr>
+          <tr><td>龙岗</td><td>734</td><td>448</td><td>61.04%</td><td>26,291</td></tr>
+          <tr><td>罗湖</td><td>405</td><td>187</td><td class="down-t">46.17%</td><td>37,198</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert-c alert-w" style="margin-bottom:8px;"><span>⚠️</span><div style="font-size:10px;"><strong>趋势：</strong>2026上半年深圳法拍房挂拍4916套(同比+45%)，成交2396套(+61%)，流拍率51.26%(-8.75%)。折价率93.7%——成交价接近评估价，<strong>"捡漏"时代已过</strong>。核心区(福田/南山)成交率超68%，豪宅法拍出现超高溢价(蛇口别墅溢价360%)。刚需捡漏空间在龙华/坂田/宝安非核心区，折扣率60-80%。</div></div>
+
+    <!-- 已成交笋盘 -->
+    <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px;">✅ 已成交（2026上半年重点案例）</div>
+    <div class="fp-card fp-hot" style="border-left-color:var(--red);padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐南山</span>新世界豪园别墅 518㎡</div><div class="fp-price" style="font-size:12px;color:var(--green);">8,810万 (溢价260%)</div></div>
+      <div class="fp-info" style="font-size:10px;">南山科技园 · 14人225轮出价 · 起拍2450万 → 评估价3.6倍成交</div>
+    </div>
+    <div class="fp-card fp-hot" style="border-left-color:var(--red);padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐南山</span>蛇口半山海景别墅 281.61㎡</div><div class="fp-price" style="font-size:12px;color:var(--green);">8,708万 (溢价360%)</div></div>
+      <div class="fp-info" style="font-size:10px;">南山蛇口 · 18人167轮出价 · 起拍1893万 → 评估价3.6倍 · 海景稀缺</div>
+    </div>
+    <div class="fp-card fp-hot" style="border-left-color:var(--red);padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐南山</span>纯水岸十四期 301㎡</div><div class="fp-price" style="font-size:12px;color:var(--green);">3,500万 (溢价132.5%)</div></div>
+      <div class="fp-info" style="font-size:10px;">南山华侨城 · 45轮出价 · 起拍1505万 · 评估价1881万 → 近2倍成交</div>
+    </div>
+    <div class="fp-card fp-hot" style="border-left-color:var(--red);padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐福田</span>香域中央花园 203.62㎡</div><div class="fp-price" style="font-size:12px;color:var(--green);">3,356万 (溢价123%)</div></div>
+      <div class="fp-info" style="font-size:10px;">福田香蜜湖 · 18人35轮出价 · 起拍1504万 · 评估价1880万 · 豪宅学区</div>
+    </div>
+    <div class="fp-card fp-hot" style="border-left-color:var(--red);padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐福田</span>东海花园 171.22㎡</div><div class="fp-price" style="font-size:12px;color:var(--green);">1,862万 (超评估22.7%)</div></div>
+      <div class="fp-info" style="font-size:10px;">福田 · 83轮出价 · 起拍1214万 · 评估价1517万 → 超评估价成交</div>
+    </div>
+    <div class="fp-card fp-hot" style="border-left-color:var(--red);padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐龙华</span>龙悦居四期 63㎡</div><div class="fp-price" style="font-size:12px;color:var(--green);">263.9万</div></div>
+      <div class="fp-info" style="font-size:10px;">龙华梅林关 · 65轮延时 · 高于二手房约10万 · 刚需热门标的</div>
+    </div>
+
+    <!-- 即将开拍 -->
+    <div style="font-size:11px;font-weight:700;color:var(--orange);margin:8px 0 4px;">⏳ 即将开拍 & 坂田/龙华笋盘</div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐坂田</span>万科城二区复式J301 194㎡</div><div class="fp-price" style="font-size:12px;">578万起(2.98万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">龙岗坂田 · <span class="fp-tag">一拍</span> 市场价1000万 <strong style="color:var(--red);">58折！</strong> · 华为辐射区 · 复式大宅</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐坂田</span>四季花城F座502 102㎡</div><div class="fp-price" style="font-size:12px;">346万起(3.39万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">龙岗坂田 · <span class="fp-tag">再拍</span> 市场价510万 <strong style="color:var(--red);">68折</strong> · 万科物业</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐坂田</span>佳兆业悦峰3栋B305 120㎡</div><div class="fp-price" style="font-size:12px;">545万起(4.54万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">龙岗坂田 · <span class="fp-tag">一拍</span> 市场价720万 <strong style="color:var(--red);">76折</strong> · 改善四房</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐坂田</span>星光之约花园5栋601 94㎡</div><div class="fp-price" style="font-size:12px;">241万起(2.56万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">龙岗坂田 · <span class="fp-tag">一拍</span> 市场价320万 <strong style="color:var(--red);">75折</strong> · 低总价刚需</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐龙华</span>华盛珑悦1栋3701 161㎡</div><div class="fp-price" style="font-size:12px;">605万起(3.76万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">龙华 · <span class="fp-tag">一拍</span> 市场价830万 <strong style="color:var(--red);">73折</strong> · 大平层改善</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐龙华</span>壹成中心3座A2703 83㎡</div><div class="fp-price" style="font-size:12px;">322万起(3.88万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">龙华 · <span class="fp-tag">一拍</span> 市场价410万 <strong style="color:var(--red);">79折</strong> · 刚需三房</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐南山</span>钱柜商业大楼165处房产 3916.91㎡</div><div class="fp-price" style="font-size:12px;">8,255万起</div></div>
+      <div class="fp-info" style="font-size:10px;">南山 · <span class="fp-tag">8/26</span> 评估1.03亿(8折) · 商业整栋打包</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐福田</span>桐林公寓5A-01 62.11㎡</div><div class="fp-price" style="font-size:12px;">79万起(1.27万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">福田 · <span class="fp-tag">变卖中</span> 评估99万(8折) · 超低总价</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐宝安</span>金鼎花园B2栋801 68.73㎡</div><div class="fp-price" style="font-size:12px;">94万起(1.37万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">宝安新安 · <span class="fp-tag">变卖中</span> 评估168万(56折！) · 超低总价</div>
+    </div>
+    <div class="fp-card" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;">富士君荟苑1栋1502</div><div class="fp-price" style="font-size:12px;">574.9万起</div></div>
+      <div class="fp-info" style="font-size:10px;">宝安西乡 · 京东法拍 · 评估798.5万(72折) · ~19天后开拍</div>
+    </div>
+
+    <div class="alert-c alert-i" style="margin-bottom:8px;"><span>⭐</span><div style="font-size:10px;"><strong>重点关注片区标记：</strong>红色边框+⭐标签为坂田/龙华/宝安中心/南山/福田的房源。坂田片区笋盘最密集（万科城复式58折！），龙华华盛珑悦73折。核心区(南山/福田)法捡漏空间已极小(折价率93.7%)，刚需捡漏重点看坂田/龙华。</div></div>
+
+    <div class="alert-c alert-w"><span>⚠️</span><div style="font-size:10px;"><strong>提示：</strong>法拍房存在税费/清场/过户等风险，建议通过专业辅拍机构尽调。2026上半年深圳法拍清仓率70.5%全国第二。数据来源：阿里拍卖/京东法拍/中指研究院/同致诚评估。</div></div>
+  </div>
+
+  <!-- 重点片区 -->
+  <div class="block">
+    <div class="block-title">重点关注片区行情（8月最新）</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>区域</th><th>片区</th><th>挂牌(万/㎡)</th><th>环比</th><th>趋势</th></tr></thead>
+        <tbody>
+          <tr><td>南山</td><td>深圳湾</td><td>19.5</td><td class="up-t">+0.8%</td><td class="up-t">↑稀缺资产</td></tr>
+          <tr><td>南山</td><td>蛇口</td><td>11.1</td><td class="up-t">+2.7%</td><td class="up-t">↑滨海景观</td></tr>
+          <tr><td>南山</td><td>科技园</td><td>12.3</td><td class="down-t">-1.3%</td><td class="down-t">↓分化</td></tr>
+          <tr><td>福田</td><td>香蜜湖</td><td>14.6</td><td class="up-t">+0.2%</td><td class="up-t">↑豪宅稳固</td></tr>
+          <tr><td>福田</td><td>中心区</td><td>8.8</td><td class="up-t">+3.2%</td><td class="up-t">↑回暖明显</td></tr>
+          <tr><td>宝安</td><td>宝中</td><td>10.6</td><td class="down-t">-0.5%</td><td>→高位整固</td></tr>
+          <tr><td>龙华</td><td>深圳北站</td><td>5.8</td><td class="down-t">-2.0%</td><td class="down-t">↓供应挤压</td></tr>
+          <tr><td>龙华</td><td>观澜</td><td>5.5</td><td class="down-t">-3.1%</td><td class="down-t">↓全市最跌</td></tr>
+          <tr><td>龙岗</td><td>坂田</td><td>8.7</td><td class="up-t">+3.2%</td><td class="up-t">↑华为辐射领涨</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 市场数据 -->
+  <div class="block">
+    <div class="block-title">市场速览</div>
+    <div class="card-row row-4">
+      <div class="mcard"><div class="cl">上半年一二手成交</div><div class="cv">4.7万+套</div><div class="cc up">同比+30%+</div><div class="cs">一手18416 二手33892</div></div>
+      <div class="mcard"><div class="cl">7月新房均价</div><div class="cv">6.42万/㎡</div><div class="cc down">环比-2.11%</div><div class="cs">6月二手6.15万/㎡</div></div>
+      <div class="mcard"><div class="cl">房贷利率</div><div class="cv">3.05%</div><div class="cc up">历史最低</div><div class="cs">首套/二套统一</div></div>
+      <div class="mcard"><div class="cl">首付比例</div><div class="cv">15%起</div><div class="cc neutral">首套15% 二套20%</div><div class="cs">公积金额庭351万</div></div>
+    </div>
+  </div>
+
+  <!-- 政策 -->
+  <div class="block">
+    <div class="block-title">最新政策</div>
+    <div class="mcard">
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--red-bg);color:var(--red);">🔥</div><div class="ct"><div class="it">4/29新政：核心区限购松绑</div><div class="id">福田/南山/宝安新安深户限3套(原2套)，非深户持居住证无需社保可购1套。公积金额度翻倍：个人189万/家庭351万</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🔄</div><div class="ct"><div class="it">南山"以旧换新"消费券（8大权益）</div><div class="id">卖旧买新最高省40万，消费券2-5万，新盘85折，房贷3.0%，40天无忧退定</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">📉</div><div class="ct"><div class="it">房贷利率3.05%历史最低</div><div class="id">5年期LPR 3.5%，深圳LPR-45BP。公积金首套2.6%。首套/二套统一利率</div></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 半年预测 -->
+  <div class="block">
+    <div class="block-title">半年预测（2026.9-2027.2）</div>
+    <div class="reco-stack">
+      <div class="reco-item" style="border-left-color:var(--red);">
+        <div class="ri-head"><div><span class="ri-period">核心区</span> <span class="ri-title">企稳回升3%-5%</span></div><span class="risk-tag risk-low">低风险</span></div>
+        <div class="ri-body">深圳湾/香蜜湖土地断供+稀缺，持续看好。福田中心区+蛇口金融滨海双驱动涨2-4%。议价空间已收窄至8%以内，合适标的可出手。</div>
+      </div>
+      <div class="reco-item" style="border-left-color:var(--orange);">
+        <div class="ri-head"><div><span class="ri-period">次核心</span> <span class="ri-title">分化加剧，精选标的</span></div><span class="risk-tag risk-medium">中风险</span></div>
+        <div class="ri-body">坂田华为辐射+3.2%领涨龙岗，预计半年涨3-5%。宝中前海辐射高位整固，预计持平微涨2%。坂田性价比优于宝中。</div>
+      </div>
+      <div class="reco-item" style="border-left-color:var(--green);">
+        <div class="ri-head"><div><span class="ri-period">外围</span> <span class="ri-title">筑底以价换量</span></div><span class="risk-tag risk-medium">中风险</span></div>
+        <div class="ri-body">龙华观澜-3.1%全市最跌，继续承压。深圳北站/红山5-6万刚需承接，难显著反弹。刚需自住可择机，投资建议观望。</div>
+      </div>
+    </div>
+  </div>
+  <!--MOD:house:END-->
+</div>
+
+<!-- ===== SECTION 3: SALARY ===== -->
+<div class="content-section" id="section-salary">
+  <div class="section-head">
+    <div class="section-title">💰 薪酬COE热点</div>
+    <div class="update-tag">更新：8/22</div>
+  </div>
+  <!--MOD:salary:START-->
+
+
+  <!-- 核心速览前置 -->
+  <div class="key-view" style="border-left:3px solid var(--purple);">
+    <div class="kv-header">📌 本期速览 <span class="pill" style="background:var(--purple-bg);color:var(--purple);">8月</span></div>
+    <div class="kv-body">
+      <p>① <strong>美世2026预测</strong>：中国薪资增长4.0%（2025实际3.8%），高科技4.9%领跑，91%企业计划加薪</p>
+      <p>② <strong>怡安2026趋势</strong>：73%企业部署AI但仅18%员工参与再培训，88%企业相信人才决定AI成败</p>
+      <p>③ <strong>大厂动态</strong>：腾讯3864万股限制性股票锁AI人才，字节调薪预算+1.5倍，比亚迪+1000元/月</p>
+      <p>④ <strong>深圳最低工资</strong>：9月1日起2700元/月（+7.14%），全国第二</p>
+      <p>⑤ <strong>怡安薪酬预测</strong>：2026涨薪预算5.0%，高绩效者8-10%，普通2-3%甚至为零，"普调"时代终结</p>
+    </div>
+  </div>
+
+  <!-- 美世/怡安人才趋势 -->
+  <div class="block">
+    <div class="block-title">🧠 美世 & 怡安 人才趋势与薪酬行情</div>
+    
+    <div class="mcard" style="border-top:3px solid var(--blue); margin-bottom:8px;">
+      <div class="tags"><span class="tag b">美世 Mercer</span><span class="tag o">2026整体薪酬调研</span></div>
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">📊</div><div class="ct"><div class="it">2026薪资增长4.0%（不含冻薪）</div><div class="id">2025实际3.8%，2026预计4.0%，91%企业计划加薪（去年90%）。基于近4000家企业数据</div><div class="is">来源：美世2025-2026年度整体薪酬调研</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🏭</div><div class="ct"><div class="it">行业分化：高科技4.9%领跑</div><div class="id">高科技4.9% > 石油4.4% > 生命科学4.3% > 化工4.2% > 消费品3.9% > 汽车3.7%。技术专长溢价持续扩大</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">📉</div><div class="ct"><div class="it">主动离职率3.4%（去年同期3.9%）</div><div class="id">人才流动意愿保守，市场趋于稳定。一线城市预期4.0-4.3%，二线南京/天津/苏州3.7-3.9%</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🎁</div><div class="ct"><div class="it">灵活福利普及：96.3%企业提供意外险</div><div class="id">意外险96.3% > 补充健康保险83.6% > 人寿保险71.5%。福利成薪酬包重要组成</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🤖</div><div class="ct"><div class="it">AI影响80%工作，19%可能被颠覆</div><div class="id">美世建议"礼励效"框架：礼（倾听员工）× 励（精准激励）× 效（AI赋能提效）。人机团队重塑工作</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🌱</div><div class="ct"><div class="it">新生代员工(95后)需求变化</div><div class="id">不再仅为薪酬工作：更看重成长机会、情绪价值、灵活自主、团队氛围、工作生活平衡</div></div></li>
+      </ul>
+    </div>
+
+    <div class="mcard" style="border-top:3px solid var(--purple); margin-bottom:8px;">
+      <div class="tags"><span class="tag p">怡安 Aon</span><span class="tag o">2026人力资本趋势</span></div>
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">📈</div><div class="ct"><div class="it">2026涨薪预算5.0%（2025实际4.8%）</div><div class="id">高于全球平均。但"普调"时代终结——高绩效者8-10%，普通2-3%甚至为零。薪酬差异化原则趋严</div><div class="is">来源：怡安2026人力资本研究</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🤖</div><div class="ct"><div class="it">73%企业部署AI，仅18%员工参与再培训</div><div class="id">88%企业相信人才决定AI成败，但技能提升严重滞后技术部署。中国企业38%处于AI部署阶段，38%试点阶段</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">💡</div><div class="ct"><div class="it">未来三年关键技能：适应力>领导力>数字素养</div><div class="id">技术技能仅排第三。人的软实力——适应、领导、共情、变革管理——成AI时代稀缺品</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🏢</div><div class="ct"><div class="it">中国EVP领先全球：35% vs 19%</div><div class="id">35%中国企业有清晰EVP（全球仅19%），44%人力资源数据成熟度高。但薪酬透明度仅15%成熟，AI人才招聘能力仅19%</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">😴</div><div class="ct"><div class="it">主动离职率4.6%（2024年5.8%）"卧倒"心态普遍</div><div class="id">跳槽涨薪幅度被压缩。员工求稳，企业追求效能→被动离职率上升。人才保留压力下降但效能要求提升</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🎯</div><div class="ct"><div class="it">怡安四大行动建议</div><div class="id">①AI战略与人力规划对齐 ②系统化全组织技能重塑 ③强化领导力与治理 ④数据驱动人才决策（仅12%CHRO用分析工具）</div></div></li>
+      </ul>
+    </div>
+
+    <div class="mcard" style="border-top:3px solid var(--orange);">
+      <div class="tags"><span class="tag o">美世+怡安 联合洞察</span></div>
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">🔥</div><div class="ct"><div class="it">"冰与火"并存：整体审慎 vs 核心赛道白热化</div><div class="id">美世：薪酬增长放缓但高科技领跑。怡安：普调终结但AI人才溢价。"新质生产力"创造极度稀缺的"三新人才"</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">⚡</div><div class="ct"><div class="it">COE关键启示</div><div class="id">①薪资资源向关键岗位倾斜，停止平均主义 ②AI技能岗位设独立薪酬宽带（Korn Ferry建议） ③员工福祉投入仅18%认为"有力"（低于全球25%），需加强 ④数据驱动EVP是弥合预期差距的关键</div></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 大厂薪酬 -->
+  <div class="block">
+    <div class="block-title">华为竞争对手薪酬动态</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>企业</th><th>最新动作</th><th>关键岗年薪</th><th>竞争焦点</th></tr></thead>
+        <tbody>
+          <tr><td><strong>腾讯</strong></td><td>3864万股限制性股票+195万购股权，归属19-48月</td><td>9-10级52-120万<br>人均成本112万</td><td>AI人才留存</td></tr>
+          <tr><td><strong>字节</strong></td><td>调薪预算+1.5倍，奖金池+35%，期权4年→3年</td><td>L3专家70-120万<br>校招SSP 75-80万</td><td>大模型/算法/全球化</td></tr>
+          <tr><td><strong>比亚迪</strong></td><td>精准涨薪，多数+1000元/月，核心最高+4500</td><td>研发15-25K/月<br>硕士应届18K起</td><td>新能源/智能化</td></tr>
+          <tr><td><strong>小米</strong></td><td>年终奖系数1.2，汽车部2-3倍</td><td>技术岗35-80万+</td><td>汽车/智能制造</td></tr>
+          <tr><td><strong>宁德时代</strong></td><td>1-6职级基层+150元/月（1月起）</td><td>基层综合7500/月</td><td>稳定生产端</td></tr>
+          <tr><td><strong>京东</strong></td><td>92%员工全薪+，采销最高25薪</td><td>采销25薪/年</td><td>供应链/物流</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 最低工资 -->
+  <div class="block">
+    <div class="block-title">深圳最低工资 & 国家政策</div>
+    <div class="card-row row-4">
+      <div class="mcard" style="border-left:3px solid var(--red);"><div class="cl">现行（截至8月）</div><div class="cv">2,520元</div><div class="cc neutral">23.7元/时</div></div>
+      <div class="mcard" style="border-left:3px solid var(--green);"><div class="cl">9月1日新标准</div><div class="cv">2,700元</div><div class="cc up">+180元(+7.14%)</div><div class="cs">25.4元/时</div></div>
+      <div class="mcard"><div class="cl">全国对比</div><div class="cv">深圳第2</div><div class="cc neutral">上海2740 > 深圳2700</div></div>
+      <div class="mcard"><div class="cl">广东一类</div><div class="cv">广州2680</div><div class="cc neutral">深圳略高</div></div>
+    </div>
+    <div class="alert-c alert-w"><span>⚠️</span><div><strong>COE关注：</strong>最低工资上调直接推高基层岗位用工成本。9月1日前需完成加班费/社保基数校准。计件工资岗位须重新评估劳动定额。</div></div>
+    <div class="mcard">
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🏛️</div><div class="ct"><div class="it">中央经济工作会议："制定实施城乡居民增收计划"</div><div class="id">从"推动"变为"制定实施"，居民增收升级为必须落地的行动方案</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">💰</div><div class="ct"><div class="it">AI岗位年薪50万+占比30.9%（整体仅5.36%）</div><div class="id">算法工程师需求+80%，AI产品经理+178%。人才缺口推高薪资</div><div class="is">来源：猎聘大数据</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">📊</div><div class="ct"><div class="it">1-7月全国财政收入14.37万亿(+5.8%)</div><div class="id">高技术产业使用外资+32.7%，占比41.6%。经济基本面支撑薪酬增长</div></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- COE行动 -->
+  <div class="block">
+    <div class="block-title">COE行动建议</div>
+    <div class="card-row row-3">
+      <div class="mcard" style="border-top:3px solid var(--red);">
+        <div class="tags"><span class="tag r">紧急(9月前)</span></div>
+        <ul class="ilist">
+          <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">最低工资基数校准</div><div class="id" style="font-size:10px;">9月1日2700元，更新加班/社保基数</div></div></li>
+          <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">竞对薪酬基准更新</div><div class="id" style="font-size:10px;">腾讯/字节/比亚迪最新数据已出</div></div></li>
+        </ul>
+      </div>
+      <div class="mcard" style="border-top:3px solid var(--orange);">
+        <div class="tags"><span class="tag o">重要(Q3内)</span></div>
+        <ul class="ilist">
+          <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">薪酬差异化方案</div><div class="id" style="font-size:10px;">怡安：高绩效8-10%vs普通2-3%，停普调</div></div></li>
+          <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">AI技能薪酬宽带</div><div class="id" style="font-size:10px;">Korn Ferry建议设独立宽带，溢价明显</div></div></li>
+        </ul>
+      </div>
+      <div class="mcard" style="border-top:3px solid var(--green);">
+        <div class="tags"><span class="tag g">持续跟踪</span></div>
+        <ul class="ilist">
+          <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">美世/怡安年度报告</div><div class="id" style="font-size:10px;">2026薪资增长4.0%/5.0%，行业分化</div></div></li>
+          <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">EVP与员工福祉</div><div class="id" style="font-size:10px;">怡安：仅18%认为福祉投入有力，需加强</div></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--MOD:salary:END-->
+</div>
+
+<!-- ===== SECTION 4: HUAWEI ===== -->
+<div class="content-section" id="section-huawei">
+  <div class="section-head">
+    <div class="section-title">📱 华为最新消息</div>
+    <div class="update-tag">更新：8/22</div>
+  </div>
+  <!--MOD:huawei:START-->
+
+
+  <!-- 核心速览 -->
+  <div class="key-view" style="border-left:3px solid var(--red);">
+    <div class="kv-header">📌 华为速览 <span class="pill" style="background:var(--red-bg);color:var(--red);">2026.8</span></div>
+    <div class="kv-body">
+      <p>① <strong>2025年报</strong>：营收8809亿(+2.2%)，净利润680亿(+8.7%)，研发投入1923亿(占21.8%)，现金流1274亿创新高</p>
+      <p>② <strong>中国手机第一</strong>：Q2出货1492万台/份额22.6%(+19.4%)，超越苹果18.1%；Mate 80国产单品销冠</p>
+      <p>③ <strong>鸿蒙OS 6</strong>：装机量突破8000万台，年底冲1亿；中国份额19%超iOS(17%)，成第二大手机OS</p>
+      <p>④ <strong>智能汽车</strong>：7月交付45046台，累计破148万台（新势力最快）；问界M9累计破30万台</p>
+      <p>⑤ <strong>昇腾AI芯片</strong>：2025出货81万颗，2026预计超120万颗；950超节点实现1024卡1EFLOPS</p>
+      <p>⑥ <strong>美国制裁升级</strong>：FCC全面禁止进口华为设备，MATCH法案扩大管制范围</p>
+    </div>
+  </div>
+
+  <!-- 集团动态 -->
+  <div class="block">
+    <div class="block-title">🏢 集团层面动态</div>
+    <div class="card-row row-4">
+      <div class="mcard" style="border-top:3px solid var(--blue);"><div class="cl">2025营收</div><div class="cv">8,809亿</div><div class="cc up">+2.2%</div><div class="cs">历史次高</div></div>
+      <div class="mcard" style="border-top:3px solid var(--green);"><div class="cl">净利润</div><div class="cv">680亿</div><div class="cc up">+8.7%</div><div class="cs">营业利润率11%</div></div>
+      <div class="mcard" style="border-top:3px solid var(--purple);"><div class="cl">研发投入</div><div class="cv">1,923亿</div><div class="cc up">占21.8%</div><div class="cs">近十年累计1.38万亿</div></div>
+      <div class="mcard" style="border-top:3px solid var(--orange);"><div class="cl">经营现金流</div><div class="cv">1,274亿</div><div class="cc up">+44.1%</div><div class="cs">近5年新高</div></div>
+    </div>
+    <div class="mcard">
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--red-bg);color:var(--red);">🗣️</div><div class="ct"><div class="it">任正非8/20最新讲话：AI两大基础优势——电力+电信网络</div><div class="id">与中国华能董事长会谈，强调"没有网络的算力是信息孤岛"，双方将在AI/算力/算电协同领域深化合作</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">👤</div><div class="ct"><div class="it">组织架构调整：汪涛当选副董事长，首次当值轮值董事长(4/1-9/30)</div><div class="id">轮值成员由"徐直军/孟晚舟/胡厚崑"变为"徐直军/孟晚舟/汪涛"；胡厚崑退出轮值序列。余承东集齐终端BG董事长+终端公司董事长+产品投资委员会主任三职</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🎯</div><div class="ct"><div class="it">孟晚舟定调：AI是未来十年最具确定性的战略机遇</div><div class="id">华为以硬件为主要盈利模式，AI驱动全产业智能化升级</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">⚠️</div><div class="ct"><div class="it">2026H1财报尚未发布（预计8月底-9月初）</div><div class="id">部分媒体称"H1收入4175亿"疑似误引2024年数据，建议等待官方披露核实</div></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 各产业板块 -->
+  <div class="block">
+    <div class="block-title">📊 各产业板块经营情况（2025年报）</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>板块</th><th>收入(亿)</th><th>同比</th><th>关键动态</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ICT基础设施</strong></td><td>3,750</td><td class="up-t">+2.6%</td><td>5G-A用户全球破亿；U6GHz商用元年；MWC发布AI-Centric Network</td></tr>
+          <tr><td><strong>终端业务</strong></td><td>3,445</td><td class="up-t">+1.6%</td><td>Mate 80国产单品销冠；2026出货目标6000万部(+20%)；5G手机重返国际市场</td></tr>
+          <tr><td><strong>智能汽车</strong></td><td>450</td><td class="up-t">+72.1%</td><td>增速最快板块！累计交付148万台；享界G9 8/20亮相</td></tr>
+          <tr><td><strong>数字能源</strong></td><td>773</td><td class="up-t">+12.7%</td><td>光伏逆变器全球9年第一；户储全球17.3%第一；兆瓦超充获首证</td></tr>
+          <tr><td><strong>云计算</strong></td><td>322</td><td class="down-t">-3.5%</td><td>阶段性承压；智算云客户突破1800家；IDC口径Q1中国IaaS+PaaS份额21.8%居首</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 市场份额 -->
+  <div class="block">
+    <div class="block-title">🏆 全球市场份额速览</div>
+    <div class="card-row row-2">
+      <div class="mcard" style="border-top:3px solid var(--red);">
+        <div class="tags"><span class="tag r">中国第一</span></div>
+        <div class="tbl-wrap" style="box-shadow:none;">
+          <table>
+            <thead><tr><th>领域</th><th>份额/排名</th><th>关键数据</th></tr></thead>
+            <tbody>
+              <tr><td><strong>中国手机</strong></td><td class="up-t">22.6% 第1</td><td>Q2出货1492万台(+19.4%)</td></tr>
+              <tr><td><strong>折叠屏</strong></td><td class="up-t">超50% 第1</td><td>Q1中国市场</td></tr>
+              <tr><td><strong>中国云计算</strong></td><td class="up-t">21.8% 第1</td><td>IDC Q1 IaaS+PaaS</td></tr>
+              <tr><td><strong>5G设备全球</strong></td><td class="up-t">28.7%-31.5% 第1</td><td>爱立信23-25%第二</td></tr>
+              <tr><td><strong>光伏逆变器</strong></td><td class="up-t">全球9年第1</td><td>累计超445GW</td></tr>
+              <tr><td><strong>户用储能</strong></td><td class="up-t">17.3% 第1</td><td>全球份额</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="mcard" style="border-top:3px solid var(--blue);">
+        <div class="tags"><span class="tag b">全球竞争格局</span></div>
+        <div class="tbl-wrap" style="box-shadow:none;">
+          <table>
+            <thead><tr><th>领域</th><th>华为</th><th>竞品</th></tr></thead>
+            <tbody>
+              <tr><td>全球手机Q2</td><td>约6.5%(第6)</td><td>三星22%>苹果20%>小米11%</td></tr>
+              <tr><td>中国手机Q2</td><td class="up-t">22.6%(第1)</td><td>苹果18.1%>OPPO/vivo各16%</td></tr>
+              <tr><td>5G设备全球</td><td class="up-t">~30%(第1)</td><td>爱立信~24%>诺基亚~17%</td></tr>
+              <tr><td>新势力7月</td><td>45046台(第3)</td><td>零跑10.1万>极氪3.6万>小米3万+</td></tr>
+              <tr><td>5G SEP专利</td><td class="up-t">超1.1万族第1</td><td>中国企业合计38.5%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HarmonyOS生态 -->
+  <div class="block">
+    <div class="block-title">🌀 HarmonyOS 生态进展</div>
+    <div class="card-row row-4">
+      <div class="mcard"><div class="cl">鸿蒙6装机量</div><div class="cv">8,000万+</div><div class="cc up">年底冲1亿</div><div class="cs">47天增1000万</div></div>
+      <div class="mcard"><div class="cl">中国OS份额</div><div class="cv">19%</div><div class="cc up">超iOS(17%)</div><div class="cs">第二大手机OS</div></div>
+      <div class="mcard"><div class="cl">全球开发者</div><div class="cv">1,100万+</div><div class="cc up">生态爆发</div><div class="cs">应用38-40万个</div></div>
+      <div class="mcard"><div class="cl">开源设备</div><div class="cv">13亿台</div><div class="cc up">代码1.4亿行</div><div class="cs">伙伴550+家</div></div>
+    </div>
+    <div class="mcard">
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🔄</div><div class="ct"><div class="it">HarmonyOS 7开发者测试版发布（HDC 6/12）</div><div class="id">彻底剔除安卓兼容层；综合性能提升超30%、内存占用降30%；智能体框架2.0复杂任务成功率超90%</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📱</div><div class="ct"><div class="it">TOP100应用适配率97%，微信/抖音9月迎鸿蒙重大版本升级</div><div class="id">鸿蒙版抖音安装量破1800万；微信500天迭代200+版本；应用日均下载2亿次</div></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 芯片/技术突破 -->
+  <div class="block">
+    <div class="block-title">🔧 芯片 & 技术突破</div>
+    <div class="card-row row-2">
+      <div class="mcard" style="border-top:3px solid var(--red);">
+        <div class="tags"><span class="tag r">麒麟芯片</span><span class="tag o">Mate 90系列 9月发布</span></div>
+        <ul class="ilist">
+          <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--red-bg);color:var(--red);">💎</div><div class="ct"><div class="it" style="font-size:11px;">麒麟9050 Pro（Pro Max/RS首发）</div><div class="id" style="font-size:10px;">全球首款"逻辑折叠"手机芯片——双层垂直堆叠，密度+55%接近3nm水准，功耗-41%，面积-37.5%</div></div></li>
+          <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🔬</div><div class="ct"><div class="it" style="font-size:11px;">海思"韬定律"</div><div class="id" style="font-size:10px;">以"时间缩微"(逻辑折叠/软硬芯协同)替代"几何缩微"，6年自研381款芯片，预计2031年密度达1.4nm相当</div></div></li>
+        </ul>
+      </div>
+      <div class="mcard" style="border-top:3px solid var(--purple);">
+        <div class="tags"><span class="tag p">昇腾AI</span><span class="tag b">算力国产替代</span></div>
+        <ul class="ilist">
+          <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">⚡</div><div class="ct"><div class="it" style="font-size:11px;">950超节点1024卡=1EFLOPS FP8</div><div class="id" style="font-size:10px;">业界最大规模；950PR推理卡为H20的2.87倍，成本低三成；Atlas 950 SuperPoD(8192卡/8EFLOPS) Q4上市</div></div></li>
+          <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--green-bg);color:var(--green);">📈</div><div class="ct"><div class="it" style="font-size:11px;">2025出货81万颗→2026超120万颗</div><div class="id" style="font-size:10px;">字节锁定25万颗；阿里/腾讯各十几万颗；生态伙伴3000+家；英伟达中国份额从40%→8%</div></div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert-c alert-i"><span>💡</span><div><strong>技术亮点：</strong>华为全链路自主可控（芯片→OS→生态）。Mate 90全系支持卫星通信，Tandem双层OLED材料供应链完全国产化。昇腾韶关上线大湾区首个"国芯训国模"万卡集群(9000P)。</div></div>
+  </div>
+
+  <!-- 智能汽车 -->
+  <div class="block">
+    <div class="block-title">🚗 鸿蒙智行 · 智能汽车（2026年7月）</div>
+    <div class="card-row row-4">
+      <div class="mcard"><div class="cl">7月交付</div><div class="cv">45,046台</div><div class="cc up">累计148万台</div><div class="cs">新势力最快纪录</div></div>
+      <div class="mcard"><div class="cl">问界(7月)</div><div class="cv">22,572台</div><div class="cc neutral">M9 9639台居首</div><div class="cs">M9累计破30万</div></div>
+      <div class="mcard"><div class="cl">尚界(7月)</div><div class="cv">11,017台</div><div class="cc up">新品牌放量</div><div class="cs">Z7累计破2万</div></div>
+      <div class="mcard"><div class="cl">智界(7月)</div><div class="cv">9,906台</div><div class="cc up">V9 MPV冠军</div><div class="cs">V9 8974台</div></div>
+    </div>
+    <div class="alert-c alert-w"><span>⚠️</span><div><strong>隐忧：</strong>问界品牌7月全车型环比下滑（M6 -48.9%、M5 -61.6%），内部五界分流+乾崑智驾外供稀释独家优势。但整体仍处新势力第一梯队，累计148万台为新势力最快纪录。享界G9已于8/20亮相。</div></div>
+  </div>
+
+  <!-- 国际化/地缘 -->
+  <div class="block">
+    <div class="block-title">🌍 国际化 & 地缘动态</div>
+    <div class="mcard" style="border-left:3px solid var(--red);">
+      <div class="tags"><span class="tag r">美国制裁升级</span></div>
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--red-bg);color:var(--red);">🚫</div><div class="ct"><div class="it">FCC全面禁止进口华为设备（6月）</div><div class="id">升级为"全面海关进口禁令"，含已认证型号；7月再出新规禁止含"黑名单零组件"电子产品在美销售</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--red-bg);color:var(--red);">📋</div><div class="ct"><div class="it">MATCH法案（4月两党议员提出）</div><div class="id">华为/中芯/长鑫/长江存储/华虹列为"受管制设施"，切断设备出口+维修，推动盟友150天对齐</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">📊</div><div class="ct"><div class="it">效果：英伟达中国AI芯片份额40%→8%</div><div class="id">国产算力承接；Bernstein预测480天份额从55%跌至8%</div></div></li>
+      </ul>
+    </div>
+    <div class="mcard" style="border-left:3px solid var(--green);">
+      <div class="tags"><span class="tag g">海外突破</span></div>
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📱</div><div class="ct"><div class="it">5G手机重返国际市场</div><div class="id">Pura 90s Pro(麒麟9030S)在马来西亚/墨西哥/迪拜/印尼开售；沙特实测峰值超1100Mbps</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">🔋</div><div class="ct"><div class="it">数字能源覆盖170+国家</div><div class="id">沙特红海新城1.3GWh储能项目全球标杆</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📡</div><div class="ct"><div class="it">全球5G SEP专利超1.1万族第一</div><div class="id">全球有效授权专利16.5万件，许可协议260+份；将主导AI原生核心网规范制定</div></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 即将发布 -->
+  <div class="block">
+    <div class="block-title">📅 近期关注</div>
+    <div class="mcard">
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🔥</div><div class="ct"><div class="it">Mate 90系列 + Mate XT2三折叠 — 预计9月23日深圳发布</div><div class="id">麒麟9050 Pro首发；全系卫星通信；标准版4699元起</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">📊</div><div class="ct"><div class="it">2026H1财报 — 预计8月底-9月初发布</div><div class="id">关注终端业务增速、昇腾出货量、智能汽车盈利进展</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">🌀</div><div class="ct"><div class="it">HarmonyOS冲刺1亿台目标</div><div class="id">当前8000万+，日均新增超17万台；微信/抖音9月鸿蒙重大版本升级</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">⚡</div><div class="ct"><div class="it">Atlas 950 SuperPoD — Q4上市</div><div class="id">8192卡/8 EFLOPS/全液冷；昇腾950超节点1024卡1EFLOPS已首展</div></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="disc">数据来源：华为2025年报、IDC/Omdia/Counterpoint/TrendForce、财新、中新经纬、日经中文网等公开渠道。2026H1财报数据以官方发布为准。</div>
+  <!--MOD:huawei:END-->
+</div>
+
+<!-- ===== SECTION 5: HR LEARN ===== -->
+<div class="content-section" id="section-learn">
+  <div class="section-head">
+    <div class="section-title">📚 HR每日学习</div>
+    <div class="update-tag">华为HR管理体系</div>
+  </div>
+
+  <!-- 今日课程 -->
+  <div class="learn-hero" id="learnHero">
+    <div class="learn-date" id="learnDate"></div>
+    <div class="learn-topic-tag" id="learnTag"></div>
+    <div class="learn-title" id="learnTitle"></div>
+    <div class="learn-sec">
+      <div class="learn-sec-title">💡 理念是什么</div>
+      <div class="learn-sec-body" id="learnConcept"></div>
+    </div>
+    <div class="learn-sec">
+      <div class="learn-sec-title">⚙️ 管理方法和机制</div>
+      <div class="learn-sec-body" id="learnMechanism"></div>
+    </div>
+    <div class="learn-sec">
+      <div class="learn-sec-title">🛠️ 具体工具</div>
+      <div class="learn-sec-body" id="learnTools"></div>
+    </div>
+    <div class="learn-sec">
+      <div class="learn-sec-title">📋 实操应用案例</div>
+      <div class="learn-sec-body" id="learnExample"></div>
+    </div>
+  </div>
+
+  <!-- 30课清单 -->
+  <div class="learn-history-title">📖 30课知识图谱</div>
+  <div class="learn-topic-list" id="topicList"></div>
+</div>
+
+</div><!-- /main -->
+
+<!-- BOTTOM NAV (mobile) -->
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <div class="bn-item active" onclick="switchTab('stock',this)" data-title="📈 A股投资预测" data-tag="更新：8/21收盘">
+      <span class="bn-icon">📈</span><span class="bn-label">A股</span>
+    </div>
+    <div class="bn-item" onclick="switchTab('house',this)" data-title="🏠 房产投资" data-tag="更新：8/22">
+      <span class="bn-icon">🏠</span><span class="bn-label">房产</span>
+    </div>
+    <div class="bn-item" onclick="switchTab('salary',this)" data-title="💰 薪酬COE" data-tag="更新：8/22">
+      <span class="bn-icon">💰</span><span class="bn-label">薪酬</span>
+    </div>
+    <div class="bn-item" onclick="switchTab('huawei',this)" data-title="📱 华为消息" data-tag="更新：8/22">
+      <span class="bn-icon">📱</span><span class="bn-label">华为</span>
+    </div>
+    <div class="bn-item" onclick="switchTab('learn',this)" data-title="📚 HR学习" data-tag="华为HR体系">
+      <span class="bn-icon">📚</span><span class="bn-label">学习</span>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(tab, el) {
+  document.querySelectorAll('.nav-item').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.bn-item').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.content-section').forEach(e=>e.classList.remove('active'));
+  // activate sidebar nav
+  var sn = document.querySelector('.nav-item[onclick*="'+tab+'"]');
+  if(sn) sn.classList.add('active');
+  // activate bottom nav
+  if(el && el.classList.contains('bn-item')) {
+    el.classList.add('active');
+    // update mobile topbar
+    document.getElementById('mtTitle').textContent = el.dataset.title;
+    document.getElementById('mtTag').textContent = el.dataset.tag;
+  } else if(el) {
+    el.classList.add('active');
+    // also activate matching bottom nav
+    var bn = document.querySelector('.bn-item[onclick*="'+tab+'"]');
+    if(bn) {
+      bn.classList.add('active');
+      document.getElementById('mtTitle').textContent = bn.dataset.title;
+      document.getElementById('mtTag').textContent = bn.dataset.tag;
+    }
+  }
+  document.getElementById('section-'+tab).classList.add('active');
+  // close sidebar on mobile
+  if(window.innerWidth<=768) document.getElementById('sidebar').classList.remove('open');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+/* ===== HR LEARN: 华为HR管理体系30课 ===== */
+const learnTopics = [
+  // 第一周：管理哲学
+  {tag:"管理哲学",title:"以客户为中心",concept:"华为存在的唯一理由就是为客户服务。客户需求是发展的原动力，不是以技术为中心、以产品为中心，而是以客户需求为中心。一切工作的出发点和检验标准都回归到客户。",mechanism:"建立以客户为中心的流程型组织：前端客户需求直接驱动后端研发和交付，流程从客户来到客户去。客户满意度是核心KPI之一，客户投诉直达高层。组织架构按客户群体划分（运营商BG/企业BG/终端BG），确保每个客户群都有端到端的责任主体。",tools:"①Net Promoter Score（NPS）客户净推荐值追踪<br>②客户满意度年度调研<br>③'铁三角'作战模型（客户经理+解决方案专家+交付专家）<br>④客户投诉升级机制（48小时直达CEO）",example:"华为海外某国运营商客户反映基站频繁断站，华为不是派售后去修，而是派研发团队直接去现场，从底层代码改起，3天解决问题。事后复盘写入研发规范，从源头杜绝同类问题。这就是'以客户为中心'不是口号而是流程的体现。"},
+  {tag:"管理哲学",title:"以奋斗者为本",concept:"华为强调长期艰苦奋斗不会过时。奋斗者不仅要有意愿，还要有能力、有贡献。资源向奋斗者倾斜，分配向绩效优异者倾斜，不让雷锋吃亏。'以客户为中心'是方向，'以奋斗者为本'是动力。",mechanism:"建立奋斗者识别和激励闭环：通过绩效评价区分奋斗者，通过薪酬/股权/机会三重激励回报奋斗者。设立'奋斗者协议'，自愿放弃部分带薪休假以换取更多股权激励。福利不搞平均主义，向高绩效者倾斜。",tools:"①奋斗者协议（自愿签署，放弃带薪年假换取股权资格）<br>②绩效-激励联动矩阵（A级激励系数×1.5，D级×0）<br>③特殊贡献奖（关键项目突破即时奖励）<br>④优先配股权（高绩效者优先获得TUP/虚拟股额度）",example:"某研发团队连续3个月攻关5G基站芯片，团队全员签署奋斗者协议放弃周末休息。项目成功后，核心成员获得特殊贡献奖（现金+加速配股），团队整体获得项目奖金包。而同部门另一个按部就班的团队，年终奖只有奋斗者团队的60%。"},
+  {tag:"管理哲学",title:"自我批判",concept:"自我批判是个人进步和公司生存的唯一法宝。只有不断批判自己，才能发现与业界最佳之间的差距。自我批判不是否定自己，而是超越自己——是建设性的反思，不是破坏性的否定。",mechanism:"将自我批判嵌入管理流程：季度经营分析会必设'自我批判'环节，各层级的述职报告必须包含'不足与改进'。成立蓝军参谋部，专门做红军（业务部门）的批判者。高管带头自我批判，形成文化示范。自我批判的质量直接影响绩效评价。",tools:"①蓝军参谋部（独立于业务线的批判组织）<br>②季度自我批判会（各部门复盘+红蓝对抗）<br>③'蓝血十杰'质量奖（奖励管理精细化最佳实践）<br>④高层民主生活会（批评与自我批评）",example:"华为手机业务2012年面临危机，余承东在内部会上做深刻自我批判：产品线太多、没有爆款、渠道失控。批判后大刀阔斧砍掉低端机型，聚焦Ascend系列，最终成就Mate/P系列的高端路线。没有那次自我批判，就没有后来的手机业务崛起。"},
+  {tag:"管理哲学",title:"灰度哲学",concept:"一个清晰方向是在混沌中产生的，从灰色中脱颖而出的。开放、灰度、妥协、宽容——不是妥协原则，而是在坚持方向的前提下灵活实现路径。反对非黑即白、极端理想主义。管理者要懂得在不确定中把握方向。",mechanism:"灰度体现在决策机制上：重要决策不追求'最优解'而追求'次优但可执行'。允许试错，快速迭代，在过程中修正方向。管理者考核不仅看结果，还看'在灰度中决策的能力'。干部选拔标准之一就是'能在复杂局面中保持方向感'。",tools:"①灰度决策框架（方向不变，路径灵活，节奏可调）<br>②试点-复盘-推广三步法<br>③'方向大致正确，组织充满活力'原则<br>④反对'一刀切'的决策审查机制",example:"华为云计算业务早期方向摇摆（公有云还是私有云），任正非没有强行定调，而是允许两个方向并行试点。经过1年市场验证，私有云（企业BG）增长快于公有云，遂聚焦企业云。如果在不确定时强行二选一，可能错失企业云的机会。这就是灰度的价值。"},
+  {tag:"管理哲学",title:"熵减理论",concept:"组织天然趋于熵增（混乱、惰怠、官僚化）。华为借用热力学第二定律，认为企业也遵循熵增定律——不注入能量就会走向无序。对抗熵增的方法：开放系统引入负熵、建立耗散结构、激发活力。让组织始终有危机感和饥饿感。",mechanism:"通过制度设计持续引入负熵流：开放（引入外部人才/思想）、流动（干部轮岗/淘汰）、竞争（内部赛马）、简化（流程瘦身）。定期'炸掉'冗余的层级和流程，打破利益固化。战略预备队、人才梯队、冗余编制都是'耗散结构'的设计。",tools:"①战略预备队（精英人才池，随时调配到战略方向）<br>②干部定期流动制度（3年轮岗，打破板结）<br>③流程瘦身项目（每年砍掉10%冗余流程）<br>④末位淘汰（5-10%强制淘汰，引入新血）",example:"华为2016年发现研发体系出现'熵增'——流程冗长、审批层级多、创新变慢。任正非发起'班长的战争'改革，把决策权从机关下沉到一线'班长'，砍掉3层审批节点，研发效率提升30%。这就是用'简化+授权'引入负熵流的实操。"},
+  // 第二周：价值链管理
+  {tag:"价值链",title:"价值创造→评价→分配",concept:"华为人力资源管理的底层逻辑：价值创造是起点（为客户创造价值），价值评价是标尺（绩效与任职资格），价值分配是动力（薪酬+股权+机会）。三者循环驱动——评价不准则分配失据，分配不公则创造乏力。",mechanism:"建立价值链闭环管理体系：年初PBC承诺价值创造目标→季度/年度绩效评价价值贡献→薪酬/股权/晋升分配价值回报。评价和分配之间设'校准会议'，确保分配公平。价值链的三个环节都有明确的制度和流程，形成PDCA循环。",tools:"①PBC个人绩效承诺（价值创造目标）<br>②绩效等级强制分布ABCD（价值评价标尺）<br>③任职资格认证体系（专业能力评价）<br>④薪酬+TUP+虚拟股+晋升四维分配工具",example:"某产品线年初PBC承诺将产品交付周期缩短30%。年底实际缩短了35%，绩效评定为A。A对应的激励：年终奖系数1.5、TUP额度增加20%、优先晋升一级、获得特殊贡献奖。这就是从'创造'到'评价'到'分配'的完整闭环——干得好就分得多，分得多就更有动力干得好。"},
+  {tag:"价值链",title:"获取分享制",concept:"华为薪酬分配的核心机制：获取在前，分享在后。团队先'获取'（创造收入/利润），再按贡献'分享'。不是固定预算分蛋糕，而是做大蛋糕后按贡献切。这驱动了团队的创业精神和狼性文化。",mechanism:"各部门薪酬包与经营业绩直接挂钩：收入/利润增长→薪酬包扩大→团队分享更多。薪酬包不是总部预算下达，而是按'获取'的业绩计算。团队内部再按个人贡献分配。这形成了'多劳多得、多创多分'的正向循环。",tools:"①薪酬包计算公式（薪酬包=收入×比例+利润×比例+战略调节）<br>②团队奖金池（先团队后个人两层分配）<br>③获取分享协议（年初签订业绩-分享对赌）<br>④战略投入补贴（新业务初期给予额外薪酬包支持）",example:"某地区部年初签订获取分享协议：完成50亿收入目标，薪酬包5000万；超额部分按5%提取奖金。年底实际完成58亿，薪酬包=5000万+8000万×5%=5400万。多出的400万由地区部按个人贡献分配。而另一个只完成45亿目标的地区部，薪酬包按比例缩减。"},
+  {tag:"价值链",title:"饱和配股",concept:"饱和配股是华为控制股权稀释的关键制度：每个职级有配股上限，达到上限后不再新增。这既激励了晋升（升职才能继续配股），又防止了老员工躺在股权上不奋斗。股权不是福利，而是持续奋斗的杠杆。",mechanism:"按职级设定饱和线：13级配股上限X万股，14级Y万股，逐级递增。员工当前持股量达到本级别饱和线后，不再新增配股。要继续配股必须晋升职级。离职时虚拟股必须退还公司（按净资产回购）。这确保股权始终流向在职奋斗者。",tools:"①饱和配股额度表（按职级×岗位序列设定上限）<br>②年度配股评审（绩效+职级剩余额度）<br>③虚拟股回购机制（离职按净资产退回）<br>④配股冻结期（4年归属，每年25%）",example:"某15级员工已配股8万股（15级饱和线）。年底绩效A，按正常规则可配2万股，但因已达饱和线，0配股。第二年该员工晋升16级，饱和线提升至12万股，可配4万股。这就是'饱和配股'倒逼晋升——不升职就没有新的股权激励。"},
+  {tag:"价值链",title:"TUP时间单位计划",concept:"TUP是华为2013年推出的利润分享机制，解决虚拟受限股导致的新老员工利益固化问题。TUP不涉及出资，按年度利润分红，5年为一个周期。让新员工也能享受公司成长红利，不需要花钱买股。",mechanism:"TUP按年度授予，额度与绩效挂钩。每年授予的TUP分5年兑现：第1年0分红，第2年1/3，第3年2/3，第4年全额，第5年全额+增值后清零。之后重新授予新周期TUP。这形成了'滚动激励'——每年都有新的TUP在兑现，保持了持续激励效果。",tools:"①TUP额度计算（绩效等级×职级系数×公司利润系数）<br>②5年滚动兑现表（0→1/3→2/3→1→清零）<br>③TUP分红公告（每年随年报公布分红比例）<br>④TUP与虚拟股的配比（TUP占比逐年提升）",example:"某14级员工2022年获授予10万股TUP。2023年（第2年）分红1/3约3万元，2024年（第3年）分红2/3约6万元，2025年全额约9万元，2026年全额+增值约12万元后清零。2027年重新获授予新周期TUP。整个周期内该员工不花一分钱，累计获得约30万元利润分享。"},
+  {tag:"价值链",title:"知本主义",concept:"华为提出'知本主义'：知识不是一般的力量，而是资本。人才不是成本，而是资本投资。薪酬不是购买劳动力的费用，而是知识资本的回报。这从根本上改变了薪酬定价的逻辑——不是按市场价买人，而是按知识价值投资。",mechanism:"知本主义体现在三个层面：①定价层面——高薪挖顶尖人才，不看当前成本看长期回报；②分配层面——知识贡献者通过股权/TUP分享公司增值；③投入层面——研发投入不计入费用而视为资本投入，研发人员薪酬视为投资而非成本。",tools:"①顶尖人才薪酬包（不受职级体系限制，一人一薪）<br>②研发投入资本化（研发费用视为投资）<br>③天才少年计划（顶级应届生200万+年薪）<br>④知识贡献度量（专利/标准/技术突破积分制）",example:"华为'天才少年计划'以201万-201万年薪招募顶尖博士，远超市场价。外人质疑'太贵'，但华为的逻辑是：一个顶级AI算法工程师的突破，可能价值数亿。这不是'花钱雇人'，是'投资知识资本'。钟钊（天才少年第一批）的AI压缩算法应用到昇腾芯片后，推理效率提升40%，投入产出比远超薪酬成本。"},
+  // 第三周：绩效管理
+  {tag:"绩效管理",title:"PBC个人绩效承诺",concept:"PBC源自IBM，华为引入后深度改造。每个员工年初制定个人绩效承诺，包含业务目标、团队目标、个人发展目标三部分。PBC层层对齐——员工目标支撑主管目标，主管目标支撑部门目标，最终对齐公司战略。",mechanism:"PBC制定流程：公司战略→部门KPI→主管PBC→员工PBC，自上而下分解。每季度review一次，年中可调整。年底按PBC完成度评定绩效等级。PBC不仅是考核工具，更是战略执行工具——确保每个员工的日常工作都对齐战略方向。",tools:"①PBC模板（业务目标60%+团队目标20%+个人发展20%）<br>②PBC对齐矩阵（验证员工目标是否支撑上级目标）<br>③季度PBC Review会议<br>④PBC-绩效等级映射表",example:"公司战略：2025年云计算收入翻倍。→ 企业BG KPI：云收入100亿。→ 某产品线PBC：混合云产品收入30亿。→ 某开发组长PBC：完成3个关键客户定制化需求，支撑1.5亿签约。→ 某开发工程师PBC：按时交付定制化API开发，SLA达标率99.5%。这就是从公司战略到个人PBC的层层对齐。"},
+  {tag:"绩效管理",title:"强制分布",concept:"华为绩效实行强制分布（ABCD等级），A不超过10-15%，B约50-60%，C/D约15-20%。强制分布的目的是拉开差距——让优秀者得到更多，让后进者感到压力。没有区分就没有管理，平均主义是管理的大敌。",mechanism:"强制分布在团队层面执行：主管根据PBC完成度排序后强制套入ABCD比例。跨团队校准会议确保不同主管的评分标准一致。C/D员工进入改进计划，连续两次C/D面临淘汰。A员工获得显著更高的激励（系数1.5-2.0倍）和晋升优先权。",tools:"①强制分布比例表（A≤15%, B=50-60%, C+D=15-20%）<br>②跨团队校准会议（Calibration Meeting）<br>③绩效结果-激励联动表（A级×1.5, B级×1.0, C级×0.5, D级×0）<br>④C/D员工改进计划（PIP）",example:"某20人团队年底绩效评定：2人A（年终奖×1.5+加速配股+优先晋升）、12人B（年终奖×1.0）、4人C（年终奖×0.5+改进计划）、2人D（无年终奖+转岗或淘汰）。主管可能觉得某人是'好人'想给B，但强制分布逼着拉开差距。这种'残酷'的区分反而激发了团队活力。"},
+  {tag:"绩效管理",title:"结果导向",concept:"华为强调'让听得见炮声的人呼唤炮火'——前线决策权下放，后方提供支援。绩效看结果不看苦劳，没有产出就没有绩效。但结果导向不等于短期主义，战略投入的长期价值也要纳入评价。",mechanism:"绩效评价以可量化的业务结果为核心权重（60-70%），过程行为为辅（30-40%）。关键里程碑达成、客户验收、收入/利润贡献等硬结果优先。对于战略性投入（如预研、平台建设），设单独的战略里程碑评价，不与短期KPI混算。",tools:"①结果权重表（业务结果70%+过程行为30%）<br>②战略投入里程碑评价（单独打分，不与短期KPI混算）<br>③客户验收签字单（最硬的结果证据）<br>④'炮火呼唤'授权机制（一线可直接调用后端资源）",example:"某研发工程师加班3个月开发了一个内部工具，但该工具没有被任何业务线采用。另一位工程师只用了2周就解决了一个线上故障，挽回了100万收入。结果导向评价：前者'苦劳'不计入绩效，后者'结果'计入A。但如果是预研项目（如6G前瞻研究），即使没有短期产出，通过战略里程碑评价也能获得好的绩效。"},
+  {tag:"绩效管理",title:"绩效面谈",concept:"华为要求每次绩效评定后必须做面谈。面谈不是通知分数，而是：对齐目标、分析差距、制定改进计划、识别发展需求。好的绩效面谈让员工清楚'为什么是这个分'和'下一步怎么提升'。",mechanism:"绩效面谈制度化为标准流程：①主管提前准备（具体事例+数据支撑）②面谈结构化（结果反馈→差距分析→改进计划→发展机会）③员工签字确认④HR抽查面谈质量。面谈质量本身纳入主管的绩效评价——面谈走过场的主管要被问责。",tools:"①绩效面谈四步法（结果→差距→改进→发展）<br>②面谈准备表（3个具体事例+1个发展机会）<br>③员工签字确认书（确认已理解和认可）<br>④HR面谈质量抽查（随机访谈员工）",example:"某主管给员工评了B。面谈时不是简单说'你是B'，而是：'你今年完成了3个客户需求（好的事例），但PBC中承诺的SLA 99.5%只达到98.7%（差距），主要原因是测试覆盖不够（根因），明年需要加强自动化测试（改进计划），公司有DevOps培训可以参加（发展机会）。' 这种面谈让员工心服口服。"},
+  {tag:"绩效管理",title:"关键事件法",concept:"华为绩效评价不仅看日常表现，更看关键事件——重大突破或重大失误可以一票肯定或一票否决。关键时刻的表现比日常平庸更有评价价值。这鼓励员工在关键项目中敢冲敢拼。",mechanism:"关键事件记录在绩效周期内持续进行，不等到年底回忆。主管在关键事件发生后24小时内记录事实和影响。年底绩效评定时，关键事件可以覆盖日常表现——一次关键突破可以把B升A，一次重大事故可以把B降D。关键事件的定义由部门统一标准。",tools:"①关键事件记录表（时间+事件+影响+证据）<br>②关键事件分级标准（一级=公司级/二级=部门级/三级=团队级）<br>③关键事件一票否决清单（安全事故/客户重大投诉/合规违规）<br>④关键事件即时奖励机制",example:"某工程师日常表现一般（B水平），但在一次客户现网重大故障中，连续48小时排查并修复了根因，挽回了数百万损失。这个关键事件直接将其绩效提升到A，并获得特殊贡献奖。反之，另一位B级员工在一次产品发布中遗漏了安全检查，导致客户数据泄露，这个关键事件直接将其降为D。"},
+  // 第四周：干部管理
+  {tag:"干部管理",title:"将军是打出来的",concept:"华为的干部选拔原则：猛将必发于卒伍，宰相必起于州郡。没有基层作战经验的人不能当将军。干部不是培养出来的，是在实战中打出来的。'赛马不相马'——给机会、给舞台、看结果。",mechanism:"干部选拔以战功为核心标准：所有管理岗位优先从有基层实战经验的人中选拔。'赛马机制'——同一岗位多个候选人并行PK，看谁打得更好。不设'干部苗子'培养池，而是在实战中自然筛选。空降兵极少，几乎所有高管都从基层成长。",tools:"①干部任职资格（必须有基层N年经验）<br>②赛马机制（关键项目多团队并行PK）<br>③战功档案（记录每个干部的关键战役和成果）<br>④'猛将发于卒伍'晋升通道",example:"华为消费者BG CEO余承东，从1993年加入华为做基层研发，经历无线产品线、欧洲市场开拓等多个实战岗位，每个岗位都打过硬仗（欧洲市场从0到第一）。没有任何'干部培养班'经历，完全靠战功一步步升到BG CEO。这就是'将军是打出来的'。"},
+  {tag:"干部管理",title:"能上能下",concept:"华为干部没有终身制。绩效不达标就降职或免职，犯了错就下来。干部'能上能下'是常态，不是惩罚而是调整。下了的干部如果后续表现好，还可以再上。这保持了组织的流动性和危机感。",mechanism:"每年干部任期考评：连续两个周期绩效不达标的干部，降职或转岗。干部下来后保留职级但降待遇，给6-12个月'回血期'，期间表现好可重新任命。干部'能下'不影响个人尊严——下来不是失败，是调整。文化上消除'下来=丢脸'的偏见。",tools:"①干部任期制（每届2-3年，到期考评）<br>②干部降职/转岗流程（绩效触发+组织决定+个人沟通）<br>③'回血期'机制（6-12个月，保留职级降待遇）<br>④再上任通道（回血期表现好可重新任命）",example:"某产品线总裁因连续两个季度未完成收入目标，被调任战略预备队（保留职级，降为专家岗）。在预备队期间，他主导了一个新业务方向的市场调研，半年后被任命为新业务部部长，比原岗位更重要。这就是'能上能下'——下来不是终点，是新的起点。"},
+  {tag:"干部管理",title:"干部八条",concept:"华为2014年发布'干部八条'，是管理者的行为准则：不搞迎来送往、不给上级送礼、不说假话、不捂盖子、不推诿、不滥用资源、不拉帮结派、不侵占公司利益。违反者严肃处理，没有例外。",mechanism:"干部八条作为干部管理的'红线'：签署承诺书→日常监督→违纪查处。设立专门监督渠道（内部审计+员工举报）。一旦查实，无论级别高低一律处理。八条不是口号，而是带牙齿的制度——每年都有干部因违反八条被降职或开除。",tools:"①干部八条承诺书（每年签署）<br>②内部审计抽查（费用报销/资源使用）<br>③员工举报渠道（24小时匿名举报）<br>④违纪处理案例通报（内部公开，以儆效尤）",example:"某地区部副总裁因用公司资源为亲属安排工作，被员工举报。经审计查实后，该副总裁被立即免职并降级处理，通报全公司。虽然他业绩突出、资历深厚，但干部八条面前没有例外。这个案例在内部广泛传播，成为干部八条'带牙齿'的最好证明。"},
+  {tag:"干部管理",title:"干部流动",concept:"华为强制干部定期轮岗流动，'板结是组织的毒药'。在一个岗位超过3年的干部原则上要流动。流动打破利益固化、打破舒适区、促进经验传播。但流动不是乱动，要有计划有目的地流。",mechanism:"干部流动计划：每年年初制定干部流动方案，3年以上干部优先流动。流动方向：机关→一线（补实战）、一线→机关（补全局）、研发→市场（补客户感）、市场→研发（补产品力）。流动前做能力评估，流动后设3个月适应期。流动结果纳入干部发展档案。",tools:"①干部流动规则（3年原则性流动，5年必须流动）<br>②流动匹配矩阵（岗位序列×能力短板）<br>③流动适应期管理（3个月保护期，不因适应期影响绩效）<br>④流动成效追踪（流动后1年业绩对比）",example:"某研发部门总监在岗4年，技术很强但缺乏市场感知。被流动到地区部做技术销售总监，起初很不适应（不懂商务、不会谈客户）。但3个月适应期后，他的技术背景反而成为优势——能用客户听得懂的话解释技术方案。1年后该地区技术销售增长40%。流动让他从'技术专家'变成了'商业领袖'。"},
+  {tag:"干部管理",title:"将星计划",concept:"华为通过'将星计划'系统识别和培养高潜人才。识别标准：绩效持续A、有关键事件突破、具备跨领域潜力。培养方式：跨部门轮岗、战略项目历练、导师制、高层直接关注。不是等岗位空了再找，而是提前储备。",mechanism:"将星计划分三层：识别（每年从A级员工中筛选高潜）→培养（跨部门轮岗+战略项目+导师）→使用（优先安排到关键岗位）。高层领导直接对接将星人才，定期一对一沟通。将星人才有'绿色通道'——晋升不受岗位编制限制，可以特批。",tools:"①高潜人才识别标准（连续2年A+关键事件+360评估）<br>②跨部门轮岗计划（2年内至少2个不同领域岗位）<br>③高层导师制（VP以上担任导师）<br>④将星绿色通道（特批晋升/特批配股/特批薪酬）",example:"某14级工程师连续3年A，在5G芯片攻关中有关键突破。被将星计划选中后：①安排到市场部做6个月技术营销（补客户感知）②安排到供应链做6个月（补全局视角）③由CTO担任导师每月一对一④2年内从14级破格晋升到17级。如果没有将星计划，按正常晋升至少需要5年。"},
+  // 第五周：组织与人才发展
+  {tag:"组织发展",title:"矩阵式组织",concept:"华为采用强矩阵组织：员工同时向行政主管和项目/产品线主管汇报。矩阵的好处是资源灵活调配、专业能力沉淀、跨部门协作。挑战是双线汇报的冲突和博弈，需要清晰的角色定义和考核机制。",mechanism:"矩阵设计中，行政线管人（晋升/培养/日常管理），业务线管事（任务分配/绩效评价/项目奖金）。两条线的权重在绩效评价中明确：通常是行政线40%+业务线60%。双线冲突时由上级矩阵仲裁。矩阵不是'谁都管谁都不管'，而是各有侧重、协同制衡。",tools:"①矩阵角色定义表（行政线管人/业务线管事）<br>②双线绩效权重（行政40%+业务60%）<br>③矩阵仲裁机制（冲突升级路径）<br>④资源池调度制度（行政线负责能力建设，业务线负责使用）",example:"某测试工程师行政上属测试部（管晋升、培训、技术能力发展），业务上属5G项目组（管任务、绩效、项目奖金）。年底绩效：项目组评价他'按时完成测试，发现3个关键缺陷'（业务线60%），测试部评价他'技术能力提升明显，带教2名新人'（行政线40%）。两条线各有侧重，合在一起就是完整评价。"},
+  {tag:"组织发展",title:"华为大学",concept:"华为大学是华为的人才工厂，核心原则'训战结合'——不是课堂讲理论，而是用真实案例复盘、沙盘演练、项目实战来培养。培训不是福利，而是投资。学习效果直接与干部晋升挂钩。",mechanism:"华为大学运营机制：①课程来自真实业务痛点（业务部门提需求）②讲师是实战干部而非职业讲师③训战结合（30%课堂+70%实战）④学习结果计入任职资格和晋升评审。华为大学不是'充电站'而是'战场模拟器'——学完就能用，用了就见效。",tools:"①案例库（每年更新500+真实案例）<br>②沙盘演练系统（模拟真实业务场景）<br>③项目实战制度（学员带真实项目入学）<br>④学习积分制（与任职资格/晋升挂钩）",example:"华为大学的'国家主管训练班'：学员不是来听课的，而是带着自己地区的真实经营数据来。课堂上用案例复盘+沙盘推演分析'为什么这个地区增长慢'，制定改进方案，回去后执行。3个月后回来汇报执行效果。一个培训周期下来，不仅学到了方法论，还实际改善了业务——这就是训战结合。"},
+  {tag:"组织发展",title:"任职资格",concept:"华为任职资格体系是专业能力的标尺：每个岗位序列有清晰的等级标准（1-5级），员工通过认证获得资格等级。资格等级与职级、薪酬挂钩，但不是唯一依据。它解决了'什么是专业能力'和'怎么衡量'的问题。",mechanism:"任职资格认证流程：员工提交申请→准备认证材料（项目案例+行为证据）→评审委员会面试答辩→认证通过/不通过。认证标准公开透明——每个人都知道下一级需要什么样的能力。认证与绩效双轨制：绩效看'干得好不好'，任职资格看'能力到不到'，两者共同决定职级和薪酬。",tools:"①任职资格标准库（按序列×等级定义能力要求）<br>②认证材料模板（项目案例+行为证据+技术答辩）<br>③评审委员会制度（3名以上高一级专家评审）<br>④认证-职级映射表（资格等级→职级范围）",example:"某软件开发工程师要认证'软件工程任职资格4级'。标准要求：能独立负责子系统设计、有至少2个成功上线的项目案例、能在技术评审中提出架构级建议。该工程师准备了3个项目案例和技术方案文档，通过答辩后获得4级认证。这直接支撑了他的职级从15级升到16级——任职资格是晋升的'硬门槛'。"},
+  {tag:"组织发展",title:"人才密度",concept:"华为相信'用优秀的人吸引优秀的人'。一个团队中优秀人才的比例（人才密度）决定了团队的上限。宁可少招也要保证质量，一个A级人才等于3个B级人才的产出。招聘标准不能因为缺人就降低。",mechanism:"人才密度管理贯穿招聘到淘汰全链条：①招聘严控标准（宁可空岗也不降标）②内部流动向高密度团队倾斜（好团队吸引好人才）③低绩效人员及时淘汰（保持密度）④关键岗位设AB角（防止单点失败）。人才密度不是'好人才多'，而是'差人才少'——密度=优秀人才占比。",tools:"①招聘通过率控制（技术面通过率控制在30%以内）<br>②人才密度指标（A级+B级占比，目标>60%）<br>③AB角制度（关键岗位至少2人能胜任）<br>④低绩效淘汰率（每年5-10%自然淘汰）",example:"某新业务部门急需扩充团队，HR建议放宽标准快速招人。业务负责人拒绝：'宁可慢3个月也不降标准。'最终花4个月招到5个人，全部是A级/B级。而另一个部门为了赶进度放宽了标准，招了10个人其中3个C级。一年后，前者团队产出是后者的2倍——5个好人的产出远超10个平庸之人。"},
+  {tag:"组织发展",title:"岗位轮换",concept:"华为鼓励员工在不同岗位、不同部门、不同地域轮换。'板凳要坐十年冷'不等于一坐到底——而是在一个领域深耕到专家级别后，再横向拓展。轮换打破部门墙，培养全局视角，是干部培养的重要手段。",mechanism:"岗位轮换分三种类型：①横向轮换（同层级不同职能，如研发→产品→市场）②纵向轮换（上下流动，如机关到一线）③地域轮换（国内→海外）。轮换遵循'先专后广'原则——先在主航道做到专家，再轮换。轮换有明确目标：补短板、拓视野、建人脉。轮换期不影响晋升，反而加速晋升。",tools:"①个人发展计划（IDP，标注轮换目标和方向）<br>②轮换匹配系统（岗位需求×个人发展意愿）<br>③轮换适应期保护（前3个月不影响绩效评定）<br>④轮换履历计入干部选拔加分项",example:"某人力资源专家在HR体系工作8年，已是薪酬领域专家。IDP中标注'希望拓展业务视角'。轮换到一线地区部做HRBP 2年，直接面对业务部门的需求和挑战。回来后晋升为HR解决方案专家——因为有了业务视角，设计方案不再'闭门造车'，而是真正贴合业务需求。轮换让她从'HR专家'变成了'HR业务伙伴'。"},
+  // 第六周：激励与文化
+  {tag:"激励文化",title:"蓝血十杰",concept:"蓝血十杰是华为管理精细化的标杆——以数据驱动决策、以流程保证质量、以制度替代人治。华为从游击队走向正规军的关键转折，就是建立了像蓝血十杰那样精确的数据和流程体系。管理要靠数据说话，不靠感觉。",mechanism:"蓝血十杰精神渗透到华为管理的每个环节：经营分析会必须用数据说话（不接受'大概'、'差不多'的汇报）；流程IT化（所有关键流程在IT系统中固化，减少人为随意性）；管理决策必须有数据支撑（立项/资源投入/绩效评价都要数据）。每年评选'蓝血十杰'奖，奖励管理精细化最佳实践。",tools:"①经营分析会数据模板（5张报表+3个根因分析）<br>②流程IT化清单（关键流程100%在IT系统固化）<br>③数据质量度量（数据准确率/及时率/完整率）<br>④蓝血十杰年度评选（管理精细化最佳实践奖）",example:"某地区部在季度经营分析会上汇报'市场份额下降'，只有定性描述。总部直接打断：'下降多少？哪个客户？竞品是谁？根因是什么？'要求用数据回答。地区部回去后用数据定位：在某细分市场丢失了2个客户给竞品A，原因是交付延迟。制定了针对性改进措施，下季度市场份额回升。没有数据就没有管理。"},
+  {tag:"激励文化",title:"虚拟受限股vs实体股",concept:"华为的虚拟受限股是长期激励的核心：员工出资购买，享受分红和增值，但无所有权、无表决权、离职必须退还。与实体股相比，虚拟股实现了'收益共享但不分权'，保证了公司治理的稳定性。",mechanism:"虚拟股运作机制：①公司每年公布每股净资产和分红方案②员工按职级+绩效获配额度，自费购买③享受年度分红和净资产增值④离职/退休时公司按净资产回购⑤无表决权，不影响治理结构。TUP作为补充，解决新员工出资困难和利益固化问题。两者配合构成完整的长期激励体系。",tools:"①虚拟股配股评审（职级×绩效×饱和线）<br>②年度分红公告（随年报公布EPS和分红率）<br>③虚拟股回购机制（离职按净资产退回）<br>④TUP-虚拟股配比表（TUP占比逐年提升至30%+）",example:"某15级员工2020年花15万元购买5万股虚拟股（3元/股）。2020-2025年累计分红约12万元（年均2.4万元）。2025年净资产增至4.5元/股，5万股价值22.5万元。如果离职，公司按22.5万回购。整个过程：出了15万，收回12万分红+22.5万回购=34.5万，6年回报率130%。但不享有任何表决权——这就是'收益共享不分权'。"},
+  {tag:"激励文化",title:"荣奖制度",concept:"华为的非物质激励体系极其丰富：明日之星、蓝血十杰、金牌奖、总裁奖、天道酬勤奖等。华为认为，物质激励有边际递减效应，非物质激励才是激发内在动力的长效机制。荣誉感、成就感、归属感比钱更重要。",mechanism:"荣奖体系分层设计：公司级（蓝血十杰/金牌奖，年度评选，CEO颁奖）、BG级（总裁奖/杰出贡献奖）、部门级（明日之星，每季度评选）。获奖不仅是个人的荣誉，还与晋升、任职资格挂钩。颁奖仪式隆重——从CEO到同事全员见证，让荣誉感最大化。",tools:"①明日之星（季度评选，每部门2-3人，奖金+荣誉证书）<br>②金牌奖（年度公司级，团队或个人，CEO亲颁）<br>③蓝血十杰（管理精细化最高奖）<br>④荣誉积分系统（获奖积分计入晋升评审）",example:"某基层工程师解决了困扰团队3个月的技术难题，被评为季度'明日之星'。颁奖会上，BG CEO亲自颁奖，获奖照片挂在部门荣誉墙。这个工程师后来回忆：'奖金只有3000元，但那种被认可的感觉，比年终奖多拿5万还激动。'这就是非物质激励的力量——3000元激发了比5万更强的动力。"},
+  {tag:"激励文化",title:"力出一孔利出一孔",concept:"'力出一孔'指战略聚焦——集中力量在主航道上突破，不搞多元化分散精力。'利出一孔'指利益对齐——所有人的利益来源统一从公司价值创造中来，不允许灰色收入和利益冲突。两个'一孔'保证了战略定力和组织纯洁。",mechanism:"力出一孔：战略预算80%投入主航道（ICT基础设施+终端+智能汽车），非主航道项目严控资源。利出一孔：所有员工的收入来源只有公司正规薪酬+股权，禁止任何形式的利益输送。干部不得在外兼职、不得利用公司资源谋私利。两个'一孔'互为保障——战略聚焦让利益统一有基础，利益统一让战略聚焦不偏移。",tools:"①主航道定义清单（明确哪些是核心，哪些不是）<br>②战略预算分配规则（80%主航道/15%相邻/5%探索）<br>③利益冲突申报制度（干部每年申报外部利益关系）<br>④'利出一孔'审计（费用/兼职/关联交易专项审计）",example:"华为曾有机会进入房地产和金融领域（利润丰厚），但任正非坚持'力出一孔'，全部资源投入ICT主航道。同行企业多元化后主业空心化，华为专注ICT30年成为全球第一。同时，某地区部干部因利用公司渠道为亲属公司接单，被'利出一孔'审计查实后开除——利益不统一，战略聚焦就会打折扣。"},
+  {tag:"激励文化",title:"先立后破",concept:"华为组织变革的原则：先立后破，不破不立是错的。新体系没有跑通之前，旧体系不能拆。改良而非革命，渐进而非激进。每次变革只改20%，验证有效后再继续推。这避免了变革期的真空和混乱。",mechanism:"变革项目管理流程：①试点先行（选1-2个单位试点新流程）②灰度运行（新旧流程并行3-6个月）③效果验证（数据对比新旧流程效果）④全面推广（验证有效后推广）⑤旧流程退出（新流程稳定运行后拆除旧流程）。每步设'刹车机制'——如果效果不及预期，可以回退。",tools:"①变革试点选择标准（代表性+可控性）<br>②新旧并行运行期管理（3-6个月双轨制）<br>③变革效果度量指标（效率/质量/成本对比）<br>④回退机制（效果不达标可退回旧流程）",example:"华为将研发流程从IPD升级到敏捷IPD时，没有一刀切。先在2个产品线试点，与旧IPD并行运行6个月。试点结果：研发周期缩短25%，缺陷率降低15%。验证有效后，才推广到全部产品线。推广过程中，仍有3个特殊产品线保持旧IPD（因为不适合敏捷）。这就是'先立后破'——新流程跑通了再拆旧的。"}
+];
+
+// 计算今日知识点索引（按天轮换30课）
+function getDayOfYear() {
+  var now = new Date();
+  var start = new Date(now.getFullYear(),0,0);
+  return Math.floor((now-start)/86400000);
+}
+function getTodayIndex() {
+  var startDate = new Date(2026, 7, 22); // 2026-08-22起第1课
+  var today = new Date();
+  today.setHours(0,0,0,0);
+  startDate.setHours(0,0,0,0);
+  var diffDays = Math.floor((today - startDate) / 86400000);
+  if (diffDays < 0) diffDays = 0;
+  return diffDays % 30;
+}
+
+// 渲染今日课程
+function renderLearn() {
+  var idx = getTodayIndex();
+  var topic = learnTopics[idx];
+  var today = new Date();
+  var dateStr = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+
+  document.getElementById('learnDate').textContent = dateStr+' · 第'+(idx+1)+'/30课';
+  document.getElementById('learnTag').textContent = topic.tag;
+  document.getElementById('learnTitle').textContent = topic.title;
+  document.getElementById('learnConcept').innerHTML = topic.concept;
+  document.getElementById('learnMechanism').innerHTML = topic.mechanism;
+  document.getElementById('learnTools').innerHTML = topic.tools;
+  document.getElementById('learnExample').innerHTML = topic.example;
+
+  // 30课清单
+  var listHtml = '';
+  for(var i=0;i<learnTopics.length;i++){
+    var isCurrent = i===idx;
+    var numCls = isCurrent?'current':'normal';
+    var txtCls = isCurrent?'current':'';
+    listHtml += '<div class="learn-topic-item"><div class="ti-num '+numCls+'">'+(i+1)+'</div><div class="ti-text '+txtCls+'">'+learnTopics[i].tag+' · '+learnTopics[i].title+'</div></div>';
+  }
+  document.getElementById('topicList').innerHTML = listHtml;
+}
+
+// 初始化
+renderLearn();
+</script>
+</body>
+</html>
