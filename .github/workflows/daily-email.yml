@@ -1,0 +1,25 @@
+name: 每日汇总邮件
+on:
+  schedule:
+    - cron: "0 11 * * *"  # 北京时间 每天 19:00
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests
+      - name: Send daily summary email
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: python scripts/send_email.py
