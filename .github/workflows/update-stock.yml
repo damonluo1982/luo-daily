@@ -1,7 +1,7 @@
 name: A股每日复盘
 on:
   schedule:
-    - cron: "0 10 * * 1-5"  # 北京时间 周一至五 18:00
+    - cron: "30 8 * * 1-5"  # 北京时间 周一至五 16:30
   workflow_dispatch:
 
 permissions:
