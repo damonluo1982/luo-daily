@@ -194,6 +194,13 @@ tr:last-child td { border-bottom:none; }
 .learn-topic-item .ti-num.normal { background:var(--border); color:var(--t2); }
 .learn-topic-item .ti-text { flex:1; color:var(--t2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .learn-topic-item .ti-text.current { color:var(--t1); font-weight:700; }
+.learn-topic-item { cursor:pointer; transition:transform .12s, box-shadow .12s; -webkit-tap-highlight-color:transparent; }
+.learn-topic-item:active { transform:scale(.97); }
+.learn-topic-item.selected { border:1.5px solid var(--indigo); background:var(--indigo-bg); box-shadow:0 1px 3px rgba(79,70,229,.15); }
+.learn-topic-item.selected .ti-text { color:var(--t1); font-weight:700; }
+.ti-badge { font-size:8px; padding:1px 4px; border-radius:4px; background:#f59e0b; color:#fff; font-weight:700; flex-shrink:0; }
+.learn-back-btn { display:none; margin:0 0 8px 0; width:100%; padding:6px 0; border:none; border-radius:8px; background:var(--indigo-bg); color:var(--indigo); font-size:11px; font-weight:700; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.learn-back-btn:active { opacity:.7; }
 
 /* ===== MOBILE SIDEBAR TOGGLE ===== */
 .menu-toggle { display:none; position:fixed; top:10px; left:10px; z-index:101; width:36px; height:36px; background:var(--sidebar-bg); border:none; border-radius:8px; color:#fff; font-size:18px; cursor:pointer; align-items:center; justify-content:center; }
@@ -301,16 +308,16 @@ tr:last-child td { border-bottom:none; }
   <div class="kv-header" style="margin-bottom:5px;">📋 昨日收盘速览 <span class="pill" style="background:#f0f2f5;color:var(--t1);">8/21(周五)</span></div>
   <div class="kv-body" style="padding-top:2px;">
     <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:5px; margin-bottom:5px;">
-      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">上证指数</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">3,905.20</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.04%</div></div>
-      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">深证成指</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">14,094.17</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.87%</div></div>
-      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">创业板指</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">3,545.58</div><div style="font-size:9px;color:var(--red);font-weight:700;">+1.43%</div></div>
-      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">沪深300</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">4,618.90</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.57%</div></div>
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">上证指数</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">3,905</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.04%</div></div>
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">深证成指</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">14,094</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.87%</div></div>
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">创业板指</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">3,546</div><div style="font-size:9px;color:var(--red);font-weight:700;">+1.43%</div></div>
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">沪深300</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">4,619</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.57%</div></div>
     </div>
     <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:5px; margin-bottom:5px;">
-      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">科创50</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">1,653.56</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.04%</div></div>
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">科创50</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">1,654</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.04%</div></div>
       <div style="background:var(--border-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">两市成交</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">1.88万亿</div><div style="font-size:9px;color:var(--t2);font-weight:700;">沪8834亿+深9958亿</div></div>
       <div style="background:var(--border-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">北向资金</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">—</div><div style="font-size:9px;color:var(--t2);font-weight:700;">数据未更新</div></div>
-      <div style="background:var(--border-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">涨跌比</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">739/921</div><div style="font-size:9px;color:var(--t2);font-weight:700;">平80</div></div>
+      <div style="background:var(--border-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">涨跌比</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">—</div><div style="font-size:9px;color:var(--t2);font-weight:700;">数据未更新</div></div>
     </div>
     <p style="font-size:10px;color:var(--t2);margin:4px 0 0 0;line-height:1.45;">📊 <strong>盘面要点：</strong>主要指数全线上涨，创业板指(+1.43%)领涨，深证成指(+0.87%)次之；两市合计成交1.88万亿，较前日变化不大；科技成长风格占优，市场情绪偏暖，但量能未明显放大，持续性待观察。</p>
   </div>
@@ -389,9 +396,9 @@ tr:last-child td { border-bottom:none; }
     <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/18(周二)</div><div style="font-size:12px;font-weight:800;">—</div><div style="font-size:9px;color:var(--t2);">—</div></div>
     <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/19(周三)</div><div style="font-size:12px;font-weight:800;">—</div><div style="font-size:9px;color:var(--t2);">—</div></div>
     <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/20(周四)</div><div style="font-size:12px;font-weight:800;">—</div><div style="font-size:9px;color:var(--t2);">—</div></div>
-    <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/21(周五)</div><div style="font-size:12px;font-weight:800;">4,661.6</div><div style="font-size:9px;color:var(--red);font-weight:700;">+1.97%</div></div>
+    <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/21(周五)</div><div style="font-size:12px;font-weight:800;">—</div><div style="font-size:9px;color:var(--t2);">—</div></div>
   </div>
-  <p style="font-size:10px;color:var(--t2);margin:4px 0 0 0;line-height:1.45;">📊 <strong>周涨幅摘要：</strong>COMEX黄金周五收于4,661.6美元/盎司(+1.97%)，本周金价高位运行，现货黄金一度突破4,630美元。A股贵金属板块周涨超16%，黄金概念股表现强势，预计金价维持强势。</p>
+  <p style="font-size:10px;color:var(--t2);margin:4px 0 0 0;line-height:1.45;">📊 <strong>周涨幅摘要：</strong>本周COMEX黄金期货数据暂缺。A股贵金属板块周涨超16%，黄金概念股表现强势，预计金价高位运行。</p>
 </div>
 
 <div class="disc">⚠️ AI风格模拟分析，不构成投资建议。数据来源东方财富/同花顺等公开渠道。红涨绿跌（中国股市惯例）。</div>
@@ -716,148 +723,184 @@ tr:last-child td { border-bottom:none; }
 <div class="content-section" id="section-huawei">
   <div class="section-head">
     <div class="section-title">📱 华为最新消息</div>
-    <div class="update-tag">更新：8/23</div>
+    <div class="update-tag">更新：8/22</div>
   </div>
   <!--MOD:huawei:START-->
-<!-- 核心速览 -->
-<div class="key-view" style="border-left:3px solid var(--red);">
-  <div class="kv-header">📌 华为速览 <span class="pill" style="background:var(--red-bg);color:var(--red);">2026.8.23</span></div>
-  <div class="kv-body">
-    <p>① <strong>前三季度业绩</strong>：营收5859亿元(+28.3%)，净利润629亿元(-13.8%)，研发投入占21.75%；任正非称"还在挣扎中"</p>
-    <p>② <strong>中国手机第一</strong>：2025全年份额16.4%居首；2026Q2出货1250万台/18%份额，连续多季度第一，苹果降至第五</p>
-    <p>③ <strong>鸿蒙OS</strong>：年度新增装机突破8010万台，日均新增17万+，年底冲1亿台；中国第二大手机OS</p>
-    <p>④ <strong>鸿蒙智行</strong>：2026年7月交付45046台，全系累计超148万台；问界M9累计破30万台</p>
-    <p>⑤ <strong>昇腾AI</strong>：950系列支持FP8/MXFP8，950PR/DT明年上市；昇腾960(2027Q4)/970(2028Q4)规划中</p>
-    <p>⑥ <strong>5G回归</strong>：Pura 90 Pro Max国际版原生5G，峰值下载1100Mbps，时隔7年重返全球市场</p>
-  </div>
-</div>
 
-<!-- 集团动态 -->
-<div class="block">
-  <div class="block-title">🏢 集团层面动态</div>
-  <div class="card-row row-4">
-    <div class="mcard" style="border-top:3px solid var(--blue);"><div class="cl">前三季营收</div><div class="cv">5,859亿</div><div class="cc up">+28.3%</div><div class="cs">手机/汽车/昇腾拉动</div></div>
-    <div class="mcard" style="border-top:3px solid var(--green);"><div class="cl">净利润</div><div class="cv">629亿</div><div class="cc down">-13.8%</div><div class="cs">受荣耀/超聚变出售结算影响</div></div>
-    <div class="mcard" style="border-top:3px solid var(--purple);"><div class="cl">研发投入</div><div class="cv">占21.75%</div><div class="cc up">持续高位</div><div class="cs">前三季度研发费用率</div></div>
-    <div class="mcard" style="border-top:3px solid var(--orange);"><div class="cl">任正非定调</div><div class="cv">"活下来"</div><div class="cc down">生存危机</div><div class="cs">"我们还在挣扎中"</div></div>
-  </div>
-  <div class="mcard">
-    <ul class="ilist">
-      <li class="ili"><div class="ic" style="background:var(--red-bg);color:var(--red);">🗣️</div><div class="ct"><div class="it">任正非最新讲话：不能说华为能活下来，还在挣扎中</div><div class="id">"中国99%的公司可以与美国合作，他们能买到的东西比我们好……未来几年我们能不能为生存活下去？"内部讲话强调克服困难</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">📊</div><div class="ct"><div class="it">前三季度利润下滑与出售荣耀/超聚变结算时间有关</div><div class="id">营收同比+28.3%至5859亿，净利润-13.8%至629亿；手机终端、汽车、昇腾计算成增长核心</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🎯</div><div class="ct"><div class="it">经营方针：追求利润和现金流</div><div class="id">延续"活下来"纲领，边缘业务收缩，聚焦核心竞争力的构建</div></div></li>
-    </ul>
-  </div>
-</div>
 
-<!-- 各产业板块 -->
-<div class="block">
-  <div class="block-title">📊 各产业板块经营动态</div>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>板块</th><th>关键数据</th><th>动态</th></tr></thead>
-      <tbody>
-        <tr><td><strong>终端业务</strong></td><td>2025中国份额16.4%第1</td><td>2026Q2出货1250万台/18%；Pura 90 Pro Max国际版5G回归</td></tr>
-        <tr><td><strong>智能汽车</strong></td><td>7月交付45046台</td><td>累计超148万台；问界M9累计破30万台；尚界Z7/Z7T交付破2万台</td></tr>
-        <tr><td><strong>ICT基础设施</strong></td><td>5G设备全球~30%份额</td><td>5G-A持续部署；全球5G SEP专利超1.1万族</td></tr>
-        <tr><td><strong>云计算</strong></td><td>中国IaaS+PaaS 21.8%</td><td>昇腾云服务客户1800+；智算中心持续落地</td></tr>
-        <tr><td><strong>数字能源</strong></td><td>光伏逆变器全球9年第1</td><td>户储全球17.3%；兆瓦超充获首证</td></tr>
-        <tr><td><strong>海思</strong></td><td>自研芯片381款</td><td>"韬定律"架构创新，麒麟/昇腾/巴龙多线突破</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- 市场份额 -->
-<div class="block">
-  <div class="block-title">🏆 全球市场份额速览</div>
-  <div class="card-row row-2">
-    <div class="mcard" style="border-top:3px solid var(--red);">
-      <div class="tags"><span class="tag r">中国第一</span></div>
-      <div class="tbl-wrap" style="box-shadow:none;">
-        <table>
-          <thead><tr><th>领域</th><th>份额/排名</th><th>关键数据</th></tr></thead>
-          <tbody>
-            <tr><td><strong>中国手机</strong></td><td class="up-t">18% 第1</td><td>2026Q2出货1250万台</td></tr>
-            <tr><td><strong>中国手机(年度)</strong></td><td class="up-t">16.4% 第1</td><td>2025全年重返第一</td></tr>
-            <tr><td><strong>中国云计算</strong></td><td class="up-t">21.8% 第1</td><td>IDC Q1 IaaS+PaaS</td></tr>
-            <tr><td><strong>5G设备全球</strong></td><td class="up-t">~30% 第1</td><td>爱立信~24%第二</td></tr>
-            <tr><td><strong>光伏逆变器</strong></td><td class="up-t">全球9年第1</td><td>累计超445GW</td></tr>
-            <tr><td><strong>鸿蒙智行</strong></td><td class="up-t">新势力第1</td><td>累计交付148万+台</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="mcard" style="border-top:3px solid var(--blue);">
-      <div class="tags"><span class="tag b">全球竞争格局</span></div>
-      <div class="tbl-wrap" style="box-shadow:none;">
-        <table>
-          <thead><tr><th>领域</th><th>华为</th><th>竞品</th></tr></thead>
-          <tbody>
-            <tr><td>中国手机Q2</td><td class="up-t">18%(第1)</td><td>vivo17%>OPPO16%>小米>苹果(第五)</td></tr>
-            <tr><td>5G设备全球</td><td class="up-t">~30%(第1)</td><td>爱立信~24%>诺基亚~17%</td></tr>
-            <tr><td>鸿蒙智行7月</td><td>45046台</td><td>新势力交付速度第一</td></tr>
-            <tr><td>5G SEP专利</td><td class="up-t">超1.1万族第1</td><td>中国企业合计38.5%</td></tr>
-            <tr><td>全球手机</td><td>约6.5%(第6)</td><td>三星>苹果>小米</td></tr>
-          </tbody>
-        </table>
-      </div>
+  <!-- 核心速览 -->
+  <div class="key-view" style="border-left:3px solid var(--red);">
+    <div class="kv-header">📌 华为速览 <span class="pill" style="background:var(--red-bg);color:var(--red);">2026.8</span></div>
+    <div class="kv-body">
+      <p>① <strong>2025年报</strong>：营收8809亿(+2.2%)，净利润680亿(+8.7%)，研发投入1923亿(占21.8%)，现金流1274亿创新高</p>
+      <p>② <strong>中国手机第一</strong>：Q2出货1492万台/份额22.6%(+19.4%)，超越苹果18.1%；Mate 80国产单品销冠</p>
+      <p>③ <strong>鸿蒙OS 6</strong>：装机量突破8000万台，年底冲1亿；中国份额19%超iOS(17%)，成第二大手机OS</p>
+      <p>④ <strong>智能汽车</strong>：7月交付45046台，累计破148万台（新势力最快）；问界M9累计破30万台</p>
+      <p>⑤ <strong>昇腾AI芯片</strong>：2025出货81万颗，2026预计超120万颗；950超节点实现1024卡1EFLOPS</p>
+      <p>⑥ <strong>美国制裁升级</strong>：FCC全面禁止进口华为设备，MATCH法案扩大管制范围</p>
     </div>
   </div>
-</div>
 
-<!-- HarmonyOS生态 -->
-<div class="block">
-  <div class="block-title">🌀 HarmonyOS 生态进展</div>
-  <div class="card-row row-4">
-    <div class="mcard"><div class="cl">年度新增装机</div><div class="cv">8,010万+</div><div class="cc up">日均17万+</div><div class="cs">完成全年目标80%</div></div>
-    <div class="mcard"><div class="cl">中国OS份额</div><div class="cv">第2</div><div class="cc up">超iOS</div><div class="cs">第二大手机OS</div></div>
-    <div class="mcard"><div class="cl">生态设备</div><div class="cv">超13亿台</div><div class="cc up">合作伙伴</div><div class="cs">3200+家</div></div>
-    <div class="mcard"><div class="cl">年底目标</div><div class="cv">1亿台</div><div class="cc up">大概率超额</div><div class="cs">余承东确认</div></div>
-  </div>
-  <div class="mcard">
-    <ul class="ilist">
-      <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🚀</div><div class="ct"><div class="it">HarmonyOS 5/6装机量突破8000万台</div><div class="id">2025年7月破1000万→12月3200万→2026年8月破8000万；12月单月新增695万部，增速24.4%</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📱</div><div class="ct"><div class="it">年底1亿台目标有望提前达成</div><div class="id">余承东此前透露：搭载HarmonyOS 5/6的全场景设备年底总装机有望破1亿台</div></div></li>
-    </ul>
-  </div>
-</div>
-
-<!-- 芯片/技术突破 -->
-<div class="block">
-  <div class="block-title">🔧 芯片 & 技术突破</div>
-  <div class="card-row row-2">
-    <div class="mcard" style="border-top:3px solid var(--red);">
-      <div class="tags"><span class="tag r">麒麟芯片</span><span class="tag o">Mate 90系列</span></div>
+  <!-- 集团动态 -->
+  <div class="block">
+    <div class="block-title">🏢 集团层面动态</div>
+    <div class="card-row row-4">
+      <div class="mcard" style="border-top:3px solid var(--blue);"><div class="cl">2025营收</div><div class="cv">8,809亿</div><div class="cc up">+2.2%</div><div class="cs">历史次高</div></div>
+      <div class="mcard" style="border-top:3px solid var(--green);"><div class="cl">净利润</div><div class="cv">680亿</div><div class="cc up">+8.7%</div><div class="cs">营业利润率11%</div></div>
+      <div class="mcard" style="border-top:3px solid var(--purple);"><div class="cl">研发投入</div><div class="cv">1,923亿</div><div class="cc up">占21.8%</div><div class="cs">近十年累计1.38万亿</div></div>
+      <div class="mcard" style="border-top:3px solid var(--orange);"><div class="cl">经营现金流</div><div class="cv">1,274亿</div><div class="cc up">+44.1%</div><div class="cs">近5年新高</div></div>
+    </div>
+    <div class="mcard">
       <ul class="ilist">
-        <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--red-bg);color:var(--red);">💎</div><div class="ct"><div class="it" style="font-size:11px;">麒麟9010（暂定名）将首发</div><div class="id" style="font-size:10px;">基于"韬定律"架构创新，先进制程受限下通过堆叠/软硬协同实现性能突破</div></div></li>
-        <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🔬</div><div class="ct"><div class="it" style="font-size:11px;">海思"韬定律"持续更新</div><div class="id" style="font-size:10px;">6年自研381款芯片，以架构创新替代几何缩微，预计2031年密度达1.4nm相当</div></div></li>
-      </ul>
-    </div>
-    <div class="mcard" style="border-top:3px solid var(--purple);">
-      <div class="tags"><span class="tag p">昇腾AI</span><span class="tag b">算力路线图</span></div>
-      <ul class="ilist">
-        <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">⚡</div><div class="ct"><div class="it" style="font-size:11px;">昇腾950系列：FP8/MXFP8/MXFP4支持</div><div class="id" style="font-size:10px;">950PR(推理)/950DT(训练)明年上市；自研HiF8精度接近FP16</div></div></li>
-        <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--green-bg);color:var(--green);">📈</div><div class="ct"><div class="it" style="font-size:11px;">昇腾960/970规划：2027Q4/2028Q4</div><div class="id" style="font-size:10px;">960性能翻倍支持HiF4；970全面翻倍，内存带宽+1.5倍</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--red-bg);color:var(--red);">🗣️</div><div class="ct"><div class="it">任正非8/20最新讲话：AI两大基础优势——电力+电信网络</div><div class="id">与中国华能董事长会谈，强调"没有网络的算力是信息孤岛"，双方将在AI/算力/算电协同领域深化合作</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">👤</div><div class="ct"><div class="it">组织架构调整：汪涛当选副董事长，首次当值轮值董事长(4/1-9/30)</div><div class="id">轮值成员由"徐直军/孟晚舟/胡厚崑"变为"徐直军/孟晚舟/汪涛"；胡厚崑退出轮值序列。余承东集齐终端BG董事长+终端公司董事长+产品投资委员会主任三职</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🎯</div><div class="ct"><div class="it">孟晚舟定调：AI是未来十年最具确定性的战略机遇</div><div class="id">华为以硬件为主要盈利模式，AI驱动全产业智能化升级</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">⚠️</div><div class="ct"><div class="it">2026H1财报尚未发布（预计8月底-9月初）</div><div class="id">部分媒体称"H1收入4175亿"疑似误引2024年数据，建议等待官方披露核实</div></div></li>
       </ul>
     </div>
   </div>
-  <div class="alert-c alert-i"><span>💡</span><div><strong>技术亮点：</strong>华为AI芯片路线图清晰——950系列明年上市，960/970持续迭代；"韬定律"驱动芯片架构创新，突破制程限制。</div></div>
-</div>
 
-<!-- 国际化/地缘 -->
-<div class="block">
-  <div class="block-title">🌍 国际化 & 地缘动态</div>
-  <div class="mcard">
-    <ul class="ilist">
-      <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📡</div><div class="ct"><div class="it">5G手机重返全球市场</div><div class="id">Pura 90 Pro Max国际版原生5G，实测峰值下载1100Mbps，时隔7年回归</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">⚠️</div><div class="ct"><div class="it">美国制裁持续加码</div><div class="id">实体清单增至152家；英国2027年前拆除华为5G设备；FCC禁购令</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🌐</div><div class="ct"><div class="it">鸿蒙智行海外初露锋芒</div><div class="id">2025年出口交付3.97万台，海外市场拓展中</div></div></li>
-    </ul>
+  <!-- 各产业板块 -->
+  <div class="block">
+    <div class="block-title">📊 各产业板块经营情况（2025年报）</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>板块</th><th>收入(亿)</th><th>同比</th><th>关键动态</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ICT基础设施</strong></td><td>3,750</td><td class="up-t">+2.6%</td><td>5G-A用户全球破亿；U6GHz商用元年；MWC发布AI-Centric Network</td></tr>
+          <tr><td><strong>终端业务</strong></td><td>3,445</td><td class="up-t">+1.6%</td><td>Mate 80国产单品销冠；2026出货目标6000万部(+20%)；5G手机重返国际市场</td></tr>
+          <tr><td><strong>智能汽车</strong></td><td>450</td><td class="up-t">+72.1%</td><td>增速最快板块！累计交付148万台；享界G9 8/20亮相</td></tr>
+          <tr><td><strong>数字能源</strong></td><td>773</td><td class="up-t">+12.7%</td><td>光伏逆变器全球9年第一；户储全球17.3%第一；兆瓦超充获首证</td></tr>
+          <tr><td><strong>云计算</strong></td><td>322</td><td class="down-t">-3.5%</td><td>阶段性承压；智算云客户突破1800家；IDC口径Q1中国IaaS+PaaS份额21.8%居首</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 
-<div class="disc">⚠️ 信息来自公开渠道。</div>
+  <!-- 市场份额 -->
+  <div class="block">
+    <div class="block-title">🏆 全球市场份额速览</div>
+    <div class="card-row row-2">
+      <div class="mcard" style="border-top:3px solid var(--red);">
+        <div class="tags"><span class="tag r">中国第一</span></div>
+        <div class="tbl-wrap" style="box-shadow:none;">
+          <table>
+            <thead><tr><th>领域</th><th>份额/排名</th><th>关键数据</th></tr></thead>
+            <tbody>
+              <tr><td><strong>中国手机</strong></td><td class="up-t">22.6% 第1</td><td>Q2出货1492万台(+19.4%)</td></tr>
+              <tr><td><strong>折叠屏</strong></td><td class="up-t">超50% 第1</td><td>Q1中国市场</td></tr>
+              <tr><td><strong>中国云计算</strong></td><td class="up-t">21.8% 第1</td><td>IDC Q1 IaaS+PaaS</td></tr>
+              <tr><td><strong>5G设备全球</strong></td><td class="up-t">28.7%-31.5% 第1</td><td>爱立信23-25%第二</td></tr>
+              <tr><td><strong>光伏逆变器</strong></td><td class="up-t">全球9年第1</td><td>累计超445GW</td></tr>
+              <tr><td><strong>户用储能</strong></td><td class="up-t">17.3% 第1</td><td>全球份额</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="mcard" style="border-top:3px solid var(--blue);">
+        <div class="tags"><span class="tag b">全球竞争格局</span></div>
+        <div class="tbl-wrap" style="box-shadow:none;">
+          <table>
+            <thead><tr><th>领域</th><th>华为</th><th>竞品</th></tr></thead>
+            <tbody>
+              <tr><td>全球手机Q2</td><td>约6.5%(第6)</td><td>三星22%>苹果20%>小米11%</td></tr>
+              <tr><td>中国手机Q2</td><td class="up-t">22.6%(第1)</td><td>苹果18.1%>OPPO/vivo各16%</td></tr>
+              <tr><td>5G设备全球</td><td class="up-t">~30%(第1)</td><td>爱立信~24%>诺基亚~17%</td></tr>
+              <tr><td>新势力7月</td><td>45046台(第3)</td><td>零跑10.1万>极氪3.6万>小米3万+</td></tr>
+              <tr><td>5G SEP专利</td><td class="up-t">超1.1万族第1</td><td>中国企业合计38.5%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HarmonyOS生态 -->
+  <div class="block">
+    <div class="block-title">🌀 HarmonyOS 生态进展</div>
+    <div class="card-row row-4">
+      <div class="mcard"><div class="cl">鸿蒙6装机量</div><div class="cv">8,000万+</div><div class="cc up">年底冲1亿</div><div class="cs">47天增1000万</div></div>
+      <div class="mcard"><div class="cl">中国OS份额</div><div class="cv">19%</div><div class="cc up">超iOS(17%)</div><div class="cs">第二大手机OS</div></div>
+      <div class="mcard"><div class="cl">全球开发者</div><div class="cv">1,100万+</div><div class="cc up">生态爆发</div><div class="cs">应用38-40万个</div></div>
+      <div class="mcard"><div class="cl">开源设备</div><div class="cv">13亿台</div><div class="cc up">代码1.4亿行</div><div class="cs">伙伴550+家</div></div>
+    </div>
+    <div class="mcard">
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🔄</div><div class="ct"><div class="it">HarmonyOS 7开发者测试版发布（HDC 6/12）</div><div class="id">彻底剔除安卓兼容层；综合性能提升超30%、内存占用降30%；智能体框架2.0复杂任务成功率超90%</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📱</div><div class="ct"><div class="it">TOP100应用适配率97%，微信/抖音9月迎鸿蒙重大版本升级</div><div class="id">鸿蒙版抖音安装量破1800万；微信500天迭代200+版本；应用日均下载2亿次</div></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 芯片/技术突破 -->
+  <div class="block">
+    <div class="block-title">🔧 芯片 & 技术突破</div>
+    <div class="card-row row-2">
+      <div class="mcard" style="border-top:3px solid var(--red);">
+        <div class="tags"><span class="tag r">麒麟芯片</span><span class="tag o">Mate 90系列 9月发布</span></div>
+        <ul class="ilist">
+          <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--red-bg);color:var(--red);">💎</div><div class="ct"><div class="it" style="font-size:11px;">麒麟9050 Pro（Pro Max/RS首发）</div><div class="id" style="font-size:10px;">全球首款"逻辑折叠"手机芯片——双层垂直堆叠，密度+55%接近3nm水准，功耗-41%，面积-37.5%</div></div></li>
+          <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🔬</div><div class="ct"><div class="it" style="font-size:11px;">海思"韬定律"</div><div class="id" style="font-size:10px;">以"时间缩微"(逻辑折叠/软硬芯协同)替代"几何缩微"，6年自研381款芯片，预计2031年密度达1.4nm相当</div></div></li>
+        </ul>
+      </div>
+      <div class="mcard" style="border-top:3px solid var(--purple);">
+        <div class="tags"><span class="tag p">昇腾AI</span><span class="tag b">算力国产替代</span></div>
+        <ul class="ilist">
+          <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">⚡</div><div class="ct"><div class="it" style="font-size:11px;">950超节点1024卡=1EFLOPS FP8</div><div class="id" style="font-size:10px;">业界最大规模；950PR推理卡为H20的2.87倍，成本低三成；Atlas 950 SuperPoD(8192卡/8EFLOPS) Q4上市</div></div></li>
+          <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--green-bg);color:var(--green);">📈</div><div class="ct"><div class="it" style="font-size:11px;">2025出货81万颗→2026超120万颗</div><div class="id" style="font-size:10px;">字节锁定25万颗；阿里/腾讯各十几万颗；生态伙伴3000+家；英伟达中国份额从40%→8%</div></div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert-c alert-i"><span>💡</span><div><strong>技术亮点：</strong>华为全链路自主可控（芯片→OS→生态）。Mate 90全系支持卫星通信，Tandem双层OLED材料供应链完全国产化。昇腾韶关上线大湾区首个"国芯训国模"万卡集群(9000P)。</div></div>
+  </div>
+
+  <!-- 智能汽车 -->
+  <div class="block">
+    <div class="block-title">🚗 鸿蒙智行 · 智能汽车（2026年7月）</div>
+    <div class="card-row row-4">
+      <div class="mcard"><div class="cl">7月交付</div><div class="cv">45,046台</div><div class="cc up">累计148万台</div><div class="cs">新势力最快纪录</div></div>
+      <div class="mcard"><div class="cl">问界(7月)</div><div class="cv">22,572台</div><div class="cc neutral">M9 9639台居首</div><div class="cs">M9累计破30万</div></div>
+      <div class="mcard"><div class="cl">尚界(7月)</div><div class="cv">11,017台</div><div class="cc up">新品牌放量</div><div class="cs">Z7累计破2万</div></div>
+      <div class="mcard"><div class="cl">智界(7月)</div><div class="cv">9,906台</div><div class="cc up">V9 MPV冠军</div><div class="cs">V9 8974台</div></div>
+    </div>
+    <div class="alert-c alert-w"><span>⚠️</span><div><strong>隐忧：</strong>问界品牌7月全车型环比下滑（M6 -48.9%、M5 -61.6%），内部五界分流+乾崑智驾外供稀释独家优势。但整体仍处新势力第一梯队，累计148万台为新势力最快纪录。享界G9已于8/20亮相。</div></div>
+  </div>
+
+  <!-- 国际化/地缘 -->
+  <div class="block">
+    <div class="block-title">🌍 国际化 & 地缘动态</div>
+    <div class="mcard" style="border-left:3px solid var(--red);">
+      <div class="tags"><span class="tag r">美国制裁升级</span></div>
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--red-bg);color:var(--red);">🚫</div><div class="ct"><div class="it">FCC全面禁止进口华为设备（6月）</div><div class="id">升级为"全面海关进口禁令"，含已认证型号；7月再出新规禁止含"黑名单零组件"电子产品在美销售</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--red-bg);color:var(--red);">📋</div><div class="ct"><div class="it">MATCH法案（4月两党议员提出）</div><div class="id">华为/中芯/长鑫/长江存储/华虹列为"受管制设施"，切断设备出口+维修，推动盟友150天对齐</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">📊</div><div class="ct"><div class="it">效果：英伟达中国AI芯片份额40%→8%</div><div class="id">国产算力承接；Bernstein预测480天份额从55%跌至8%</div></div></li>
+      </ul>
+    </div>
+    <div class="mcard" style="border-left:3px solid var(--green);">
+      <div class="tags"><span class="tag g">海外突破</span></div>
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📱</div><div class="ct"><div class="it">5G手机重返国际市场</div><div class="id">Pura 90s Pro(麒麟9030S)在马来西亚/墨西哥/迪拜/印尼开售；沙特实测峰值超1100Mbps</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">🔋</div><div class="ct"><div class="it">数字能源覆盖170+国家</div><div class="id">沙特红海新城1.3GWh储能项目全球标杆</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📡</div><div class="ct"><div class="it">全球5G SEP专利超1.1万族第一</div><div class="id">全球有效授权专利16.5万件，许可协议260+份；将主导AI原生核心网规范制定</div></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 即将发布 -->
+  <div class="block">
+    <div class="block-title">📅 近期关注</div>
+    <div class="mcard">
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🔥</div><div class="ct"><div class="it">Mate 90系列 + Mate XT2三折叠 — 预计9月23日深圳发布</div><div class="id">麒麟9050 Pro首发；全系卫星通信；标准版4699元起</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">📊</div><div class="ct"><div class="it">2026H1财报 — 预计8月底-9月初发布</div><div class="id">关注终端业务增速、昇腾出货量、智能汽车盈利进展</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">🌀</div><div class="ct"><div class="it">HarmonyOS冲刺1亿台目标</div><div class="id">当前8000万+，日均新增超17万台；微信/抖音9月鸿蒙重大版本升级</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">⚡</div><div class="ct"><div class="it">Atlas 950 SuperPoD — Q4上市</div><div class="id">8192卡/8 EFLOPS/全液冷；昇腾950超节点1024卡1EFLOPS已首展</div></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="disc">数据来源：华为2025年报、IDC/Omdia/Counterpoint/TrendForce、财新、中新经纬、日经中文网等公开渠道。2026H1财报数据以官方发布为准。</div>
   <!--MOD:huawei:END-->
 </div>
 
@@ -891,8 +934,10 @@ tr:last-child td { border-bottom:none; }
     </div>
   </div>
 
+  <button class="learn-back-btn" id="learnBackBtn" onclick="backToTodayLearn()">📌 回到今日课程</button>
+
   <!-- 30课清单 -->
-  <div class="learn-history-title">📖 30课知识图谱</div>
+  <div class="learn-history-title">📖 30课知识图谱<span style="font-weight:400;font-size:9px;color:var(--t2);">（点击任意课切换复习）</span></div>
   <div class="learn-topic-list" id="topicList"></div>
 </div>
 
@@ -1008,14 +1053,29 @@ function getTodayIndex() {
   return diffDays % 30;
 }
 
-// 渲染今日课程
+// 渲染课程（learnViewIdx为当前查看的课，默认今日；点击清单可切换复习）
+var learnViewIdx = getTodayIndex();
+
+function switchLearn(i) {
+  learnViewIdx = i;
+  renderLearn();
+  var hero = document.getElementById('learnHero');
+  if (hero && hero.scrollIntoView) { hero.scrollIntoView({behavior:'smooth', block:'start'}); }
+}
+
+function backToTodayLearn() {
+  learnViewIdx = getTodayIndex();
+  renderLearn();
+}
+
 function renderLearn() {
-  var idx = getTodayIndex();
+  var todayIdx = getTodayIndex();
+  var idx = learnViewIdx;
   var topic = learnTopics[idx];
   var today = new Date();
   var dateStr = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
 
-  document.getElementById('learnDate').textContent = dateStr+' · 第'+(idx+1)+'/30课';
+  document.getElementById('learnDate').textContent = dateStr+' · 第'+(idx+1)+'/30课'+(idx===todayIdx?'':'（复习模式）');
   document.getElementById('learnTag').textContent = topic.tag;
   document.getElementById('learnTitle').textContent = topic.title;
   document.getElementById('learnConcept').innerHTML = topic.concept;
@@ -1023,15 +1083,20 @@ function renderLearn() {
   document.getElementById('learnTools').innerHTML = topic.tools;
   document.getElementById('learnExample').innerHTML = topic.example;
 
-  // 30课清单
+  // 30课清单（点击切换）
   var listHtml = '';
   for(var i=0;i<learnTopics.length;i++){
-    var isCurrent = i===idx;
-    var numCls = isCurrent?'current':'normal';
-    var txtCls = isCurrent?'current':'';
-    listHtml += '<div class="learn-topic-item"><div class="ti-num '+numCls+'">'+(i+1)+'</div><div class="ti-text '+txtCls+'">'+learnTopics[i].tag+' · '+learnTopics[i].title+'</div></div>';
+    var isSel = i===idx;
+    var isToday = i===todayIdx;
+    var numCls = isSel?'current':'normal';
+    var txtCls = isSel?'current':'';
+    var badge = isToday?'<span class="ti-badge">今日</span>':'';
+    listHtml += '<div class="learn-topic-item'+(isSel?' selected':'')+'" onclick="switchLearn('+i+')"><div class="ti-num '+numCls+'">'+(i+1)+'</div><div class="ti-text '+txtCls+'">'+learnTopics[i].tag+' · '+learnTopics[i].title+'</div>'+badge+'</div>';
   }
   document.getElementById('topicList').innerHTML = listHtml;
+
+  var backBtn = document.getElementById('learnBackBtn');
+  if (backBtn) { backBtn.style.display = (idx===todayIdx)?'none':'block'; }
 }
 
 // 初始化
