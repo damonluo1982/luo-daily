@@ -262,14 +262,14 @@ tr:last-child td { border-bottom:none; }
 <!-- MOBILE TOP BAR -->
 <div class="mobile-topbar" id="mobileTopbar">
   <div class="mt-title" id="mtTitle">📈 A股投资预测</div>
-  <div class="mt-tag" id="mtTag">更新：8/21收盘</div>
+  <div class="mt-tag" id="mtTag">更新：8/27</div>
 </div>
 
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <h1>LUO每日必看</h1>
-    <div class="date">2026-08-22 周六</div>
+    <div class="date" id="sideDate"></div>
   </div>
   <div class="nav-section">
     <div class="nav-item active" onclick="switchTab('stock',this)">
@@ -301,104 +301,49 @@ tr:last-child td { border-bottom:none; }
 <div class="content-section active" id="section-stock">
   <div class="section-head">
     <div class="section-title">📈 A股投资预测</div>
-    <div class="update-tag">更新：8/27</div>
+    <div class="update-tag">更新：8/22</div>
   </div>
   <!--MOD:stock:START-->
 <div class="key-view" style="border-left:3px solid var(--t1); padding:10px 12px;">
-  <div class="kv-header" style="margin-bottom:5px;">📋 今日收盘速览 <span class="pill" style="background:var(--red-bg);color:var(--red);">8/27(周四)</span></div>
+  <div class="kv-header" style="margin-bottom:5px;">📋 昨日收盘速览 <span class="pill" style="background:#f0f2f5;color:var(--t1);">8/21(周五)</span></div>
   <div class="kv-body" style="padding-top:2px;">
     <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:5px; margin-bottom:5px;">
-      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">上证指数</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">3,956.57</div><div style="font-size:9px;color:var(--red);font-weight:700;">+1.13%</div></div>
-      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">深证成指</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">14,048.88</div><div style="font-size:9px;color:var(--red);font-weight:700;">+1.50%</div></div>
-      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">创业板指</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">3,473.35</div><div style="font-size:9px;color:var(--red);font-weight:700;">+1.71%</div></div>
-      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">沪深300</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">4,630.28</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.86%</div></div>
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">上证指数</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">3,905</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.04%</div></div>
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">深证成指</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">14,094</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.87%</div></div>
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">创业板指</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">3,546</div><div style="font-size:9px;color:var(--red);font-weight:700;">+1.43%</div></div>
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">沪深300</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">4,619</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.57%</div></div>
     </div>
     <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:5px; margin-bottom:5px;">
-      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">科创50</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">1,693.48</div><div style="font-size:9px;color:var(--red);font-weight:700;">+3.77%</div></div>
-      <div style="background:var(--border-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">两市成交</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">2.13万亿</div><div style="font-size:9px;color:var(--red);font-weight:700;">沪1.01万亿</div></div>
+      <div style="background:var(--red-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">科创50</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">1,654</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.04%</div></div>
+      <div style="background:var(--border-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">两市成交</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">1.88万亿</div><div style="font-size:9px;color:var(--t2);font-weight:700;">沪8834亿+深9958亿</div></div>
       <div style="background:var(--border-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">北向资金</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">—</div><div style="font-size:9px;color:var(--t2);font-weight:700;">数据未更新</div></div>
-      <div style="background:var(--border-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">涨跌比</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">920:749</div><div style="font-size:9px;color:var(--red);font-weight:700;">涨多跌少</div></div>
+      <div style="background:var(--border-light); border-radius:6px; padding:5px 6px; text-align:center;"><div style="font-size:8px;color:var(--t2);">涨跌比</div><div style="font-size:13px;font-weight:800;letter-spacing:-.5px;">—</div><div style="font-size:9px;color:var(--t2);font-weight:700;">数据未更新</div></div>
     </div>
-    <p style="font-size:10px;color:var(--t2);margin:4px 0 0 0;line-height:1.45;">📊 <strong>盘面要点：</strong>主要指数全线放量大涨，科创50飙升3.77%领跑，两市成交额2.13万亿较昨日明显放量。市场情绪显著回暖，上涨家数920家远超下跌749家，量价齐升格局下科技成长与资源品共振走强。</p>
-    <div style="font-size:10px;color:var(--t2);margin:6px 0 0 0;line-height:1.45;"><strong>上证指数·近5日：</strong></div>
-    <div style="display:flex;gap:4px;margin-top:3px;overflow-x:auto;">
-      <div style="background:var(--border-light);border-radius:4px;padding:3px 5px;text-align:center;flex:1;min-width:60px;"><div style="font-size:8px;color:var(--t2);">08/21</div><div style="font-size:11px;font-weight:700;">3905.20</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.04%</div></div>
-      <div style="background:var(--green-bg);border-radius:4px;padding:3px 5px;text-align:center;flex:1;min-width:60px;"><div style="font-size:8px;color:var(--t2);">08/24</div><div style="font-size:11px;font-weight:700;">3882.01</div><div style="font-size:9px;color:var(--green);font-weight:700;">-0.59%</div></div>
-      <div style="background:var(--red-light);border-radius:4px;padding:3px 5px;text-align:center;flex:1;min-width:60px;"><div style="font-size:8px;color:var(--t2);">08/25</div><div style="font-size:11px;font-weight:700;">3889.44</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.19%</div></div>
-      <div style="background:var(--red-light);border-radius:4px;padding:3px 5px;text-align:center;flex:1;min-width:60px;"><div style="font-size:8px;color:var(--t2);">08/26</div><div style="font-size:11px;font-weight:700;">3912.52</div><div style="font-size:9px;color:var(--red);font-weight:700;">+0.59%</div></div>
-      <div style="background:var(--red-light);border-radius:4px;padding:3px 5px;text-align:center;flex:1;min-width:60px;"><div style="font-size:8px;color:var(--t2);">08/27</div><div style="font-size:11px;font-weight:800;">3956.57</div><div style="font-size:9px;color:var(--red);font-weight:800;">+1.13%</div></div>
-    </div>
-  </div>
-</div>
-
-<div class="block">
-  <div class="block-title">📰 今日要闻</div>
-  <div class="mcard" style="padding:8px 10px;">
-    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">① <strong>康希诺20%涨停</strong>：官宣mRNA个性化肿瘤疫苗战略合作，5天3板，疫苗板块受催化大涨</p>
-    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">② <strong>科创50暴涨3.77%</strong>：半导体设备/材料方向强势领涨，存储龙头中报业绩爆发持续提振科技成长</p>
-    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">③ <strong>A股交易新规7/6已实施</strong>：盘后固定价格交易扩围至全部A股及ETF，中长期资金配置渠道拓宽</p>
-    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">④ <strong>多地楼市新政密集落地</strong>：北京、上海、成都等9月前释放政策利好，地产链估值修复预期升温</p>
-    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">⑤ <strong>沪金高位回落收995.30元/克</strong>：连续三日回调，但周涨幅仍达+5.26%，避险逻辑未改</p>
-  </div>
-</div>
-
-<div class="block">
-  <div class="block-title">📊 今日涨跌幅最大板块（8/27）</div>
-  <div class="card-row row-2">
-    <div class="mcard" style="border-top:3px solid var(--red);">
-      <div class="tags"><span class="tag r">涨幅TOP5</span></div>
-      <div class="tbl-wrap" style="box-shadow:none;">
-        <table>
-          <thead><tr><th>板块</th><th>今日涨幅</th></tr></thead>
-          <tbody>
-            <tr><td>科创50</td><td class="up-t">+3.77%</td></tr>
-            <tr><td>半导体</td><td class="up-t">+3.20%</td></tr>
-            <tr><td>疫苗</td><td class="up-t">+2.85%</td></tr>
-            <tr><td>有色金属</td><td class="up-t">+2.40%</td></tr>
-            <tr><td>证券</td><td class="up-t">+2.10%</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="mcard" style="border-top:3px solid var(--green);">
-      <div class="tags"><span class="tag g">跌幅TOP5</span></div>
-      <div class="tbl-wrap" style="box-shadow:none;">
-        <table>
-          <thead><tr><th>板块</th><th>今日跌幅</th></tr></thead>
-          <tbody>
-            <tr><td>银行</td><td class="down-t">-0.80%</td></tr>
-            <tr><td>煤炭</td><td class="down-t">-0.60%</td></tr>
-            <tr><td>公用事业</td><td class="down-t">-0.45%</td></tr>
-            <tr><td>石油石化</td><td class="down-t">-0.30%</td></tr>
-            <tr><td>食品饮料</td><td class="down-t">-0.20%</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <p style="font-size:10px;color:var(--t2);margin:4px 0 0 0;line-height:1.45;">📊 <strong>盘面要点：</strong>主要指数全线上涨，创业板指(+1.43%)领涨，深证成指(+0.87%)次之；两市合计成交1.88万亿，较前日变化不大；科技成长风格占优，市场情绪偏暖，但量能未明显放大，持续性待观察。</p>
   </div>
 </div>
 
 <div class="key-view" style="border-left:3px solid var(--red);">
-  <div class="kv-header">📌 本周总结 <span class="pill" style="background:var(--red-bg);color:var(--red);">8/21-8/27</span></div>
+  <div class="kv-header">📌 本周总结 <span class="pill" style="background:var(--red-bg);color:var(--red);">8/17-8/21</span></div>
   <div class="kv-body">
-    <p>① <strong>沪金冲高回落仍涨5.26%</strong>：周内触及1006.82元/克历史新高后连续三日回调，收995.30元/克，避险+宽松预期支撑高位</p>
-    <p>② <strong>科技成长风格强势回归</strong>：科创50今日暴涨3.77%，半导体/疫苗领涨，存储龙头业绩爆发带动产业链共振</p>
-    <p>③ <strong>量能显著放大至2.13万亿</strong>：今日成交较昨日明显放量，市场情绪回暖，上涨家数920家远超下跌749家</p>
-    <p>④ <strong>资源品高位分化</strong>：有色金属仍强但银行/煤炭等防御方向回调，资金从高股息切向高弹性成长</p>
+    <p>① <strong>指数分化</strong>：上证周内窄幅震荡收平，创业板/深成指表现强势，成长风格明显占优，科创50相对偏弱</p>
+    <p>② <strong>量能平稳</strong>：两市日均成交约1.9万亿，未见显著放量或缩量，存量资金博弈格局延续</p>
+    <p>③ <strong>风格偏成长</strong>：创业板+1.43%显著跑赢上证+0.04%，显示资金偏好高弹性成长板块，消费/金融等权重板块表现平淡</p>
+    <p>④ <strong>市场情绪回暖</strong>：主要指数全线收红，赚钱效应改善，但需关注量能能否配合指数上攻</p>
   </div>
 </div>
 
 <div class="key-view" style="border-left:3px solid var(--orange);">
-  <div class="kv-header">📌 下周操作建议 <span class="pill" style="background:var(--orange-bg);color:var(--orange);">8/28-9/27</span></div>
+  <div class="kv-header">📌 下周操作建议 <span class="pill" style="background:var(--orange-bg);color:var(--orange);">8/24-8/28</span></div>
   <div class="kv-body">
-    <p>① <strong>明天(周五)</strong>：科创50/半导体ETF或延续强势但需防高位分歧，黄金ETF高位震荡可逢回调分批关注；疫苗ETF受康希诺催化或有脉冲 ⚠️中风险</p>
-    <p>② <strong>未来一周</strong>：关注量能能否维持2万亿上方及美债收益率走向，若量能持续，科技+资源双主线有望轮动；建议均衡配置（半导体ETF+有色ETF+黄金ETF），回避纯题材炒作 ⚠️中风险</p>
-    <p>③ <strong>未来一个月</strong>：9月美联储议息及国内政策窗口临近，若美债利率见顶回落，成长风格有望进一步占优；方向上关注超跌的医药ETF（疫苗/创新药）、科技ETF（半导体/通信）修复机会，以及黄金ETF逢低配置价值 ⚠️中高风险</p>
+    <p>① <strong>明天(周一)</strong>：关注创业板/深成指强势能否延续，若放量上攻可关注成长类ETF（创业板ETF/科技ETF）；若缩量回落则谨慎追高 ⚠️中风险</p>
+    <p>② <strong>未来一周</strong>：重点观察两市成交能否站稳2万亿，若放量突破则反弹有望延续；否则维持震荡格局，建议均衡配置（宽基+成长） ⚠️中风险</p>
+    <p>③ <strong>未来一个月</strong>：关注政策面催化（如产业扶持/货币宽松预期），方向上关注科技成长（半导体ETF/新能源ETF）与顺周期（有色ETF/证券ETF）轮动机会 ⚠️中高风险</p>
   </div>
 </div>
 
 <div class="block">
-  <div class="block-title">📊 本周涨跌幅最大板块（8/21-8/27）</div>
+  <div class="block-title">📊 本周涨跌幅最大板块（8/17-8/21）</div>
   <div class="card-row row-2">
     <div class="mcard" style="border-top:3px solid var(--red);">
       <div class="tags"><span class="tag r">涨幅TOP5</span></div>
@@ -406,11 +351,11 @@ tr:last-child td { border-bottom:none; }
         <table>
           <thead><tr><th>板块</th><th>周涨幅</th><th>说明</th></tr></thead>
           <tbody>
-            <tr><td>科创50</td><td class="up-t">+3.77%</td><td>半导体爆发</td></tr>
-            <tr><td>有色金属</td><td class="up-t">+2.40%</td><td>资源品强势</td></tr>
-            <tr><td>疫苗</td><td class="up-t">+2.85%</td><td>康希诺催化</td></tr>
-            <tr><td>证券</td><td class="up-t">+2.10%</td><td>牛市旗手异动</td></tr>
-            <tr><td>半导体</td><td class="up-t">+3.20%</td><td>业绩驱动</td></tr>
+            <tr><td>贵金属</td><td class="up-t">+16.2%</td><td>连涨5日</td></tr>
+            <tr><td>石油石化</td><td class="up-t">+5.44%</td><td>资源品走强</td></tr>
+            <tr><td>有色金属</td><td class="up-t">+2.50%</td><td>资金持续流入</td></tr>
+            <tr><td>银行</td><td class="up-t">+2.40%</td><td>防御属性</td></tr>
+            <tr><td>航运港口</td><td class="up-t">连涨5日</td><td>景气度回升</td></tr>
           </tbody>
         </table>
       </div>
@@ -421,44 +366,39 @@ tr:last-child td { border-bottom:none; }
         <table>
           <thead><tr><th>板块</th><th>周跌幅</th><th>说明</th></tr></thead>
           <tbody>
-            <tr><td>银行</td><td class="down-t">-0.80%</td><td>高股息回调</td></tr>
-            <tr><td>煤炭</td><td class="down-t">-0.60%</td><td>防御退潮</td></tr>
-            <tr><td>公用事业</td><td class="down-t">-0.45%</td><td>资金流出</td></tr>
-            <tr><td>石油石化</td><td class="down-t">-0.30%</td><td>油价回落</td></tr>
-            <tr><td>食品饮料</td><td class="down-t">-0.20%</td><td>消费疲弱</td></tr>
+            <tr><td>传媒</td><td class="down-t">-5.54%</td><td>资金流出</td></tr>
+            <tr><td>计算机</td><td class="down-t">-4.95%</td><td>获利回吐</td></tr>
+            <tr><td>综合</td><td class="down-t">-3.97%</td><td>弱势整理</td></tr>
+            <tr><td>医药生物</td><td class="down-t">-3.0%+</td><td>集采压力</td></tr>
+            <tr><td>电子</td><td class="down-t">-2.76%</td><td>主力大幅流出</td></tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
-  <div class="alert-c alert-i"><span>💡</span><div><strong>板块轮动信号：</strong>科技成长（科创50/半导体/疫苗）与资源品（有色）领涨，高股息防御方向（银行/煤炭/公用事业）集体回调。资金从防御性板块撤出，涌入高弹性成长与顺周期资源方向，风格切换信号明确。</div></div>
+  <div class="alert-c alert-i"><span>💡</span><div><strong>板块轮动信号：</strong>资源品（贵金属/有色/石油）+银行等防御方向领涨，科技（电子/计算机/传媒）集体回调。主力资金明显从科技板块撤出，转向资源与防御板块，风格切换特征显著。</div></div>
 </div>
 
 <div class="block">
-  <div class="block-title">📅 本周关键事件（8/21-8/27）</div>
+  <div class="block-title">📅 本周关键事件（8/17-8/21）</div>
   <div class="mcard" style="padding:8px 10px;">
-    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">① <strong>沪金突破1006元/克创历史新高</strong>：周一盘中触及1006.82元/克，周涨幅+5.26%，避险情绪与货币宽松预期共振</p>
-    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">② <strong>康希诺官宣mRNA肿瘤疫苗合作</strong>：5天3板20%涨停，疫苗板块集体走强，创新药方向受提振</p>
-    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">③ <strong>多地楼市新政密集落地</strong>：北京、上海、成都等城市9月前释放政策利好，地产链估值修复预期升温</p>
-    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">④ <strong>两市成交重回2万亿上方</strong>：今日成交2.13万亿较昨日明显放量，市场情绪显著回暖</p>
-    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">⑤ <strong>全球央行议息周期临近</strong>：9月美联储议息窗口将至，美债收益率走向成市场焦点</p>
+    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">① <strong>贵金属价格大涨</strong>：本周贵金属板块累计涨超16%，创3月以来新高，带动有色/资源股走强</p>
+    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">② <strong>主力资金大调仓</strong>：本周主力合计净流出约1490亿，电子行业净流出570亿居首，资源品获净流入</p>
+    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">③ <strong>市场风格切换</strong>：31个申万一级行业仅7个上涨，资金从成长/科技撤出转向资源+银行等防御板块</p>
+    <p style="font-size:10px;color:var(--t2);margin:2px 0;line-height:1.45;">④ <strong>量能持续萎缩</strong>：两市成交连续4日缩量，市场观望情绪浓厚，等待方向选择</p>
   </div>
 </div>
 
 <div class="block">
-  <div class="block-title">🥇 黄金·过去一周每日收盘（沪金连续，元/克）</div>
-  <div class="mcard" style="padding:8px 10px;">
-    <div style="display:flex;gap:4px;overflow-x:auto;">
-      <div style="background:var(--green-bg);border-radius:4px;padding:3px 5px;text-align:center;flex:1;min-width:58px;"><div style="font-size:8px;color:var(--t2);">08/19</div><div style="font-size:11px;font-weight:700;">945.56</div><div style="font-size:9px;color:var(--green);font-weight:700;">-1.13%</div></div>
-      <div style="background:var(--red-light);border-radius:4px;padding:3px 5px;text-align:center;flex:1;min-width:58px;"><div style="font-size:8px;color:var(--t2);">08/20</div><div style="font-size:11px;font-weight:700;">972.94</div><div style="font-size:9px;color:var(--red);font-weight:700;">+2.90%</div></div>
-      <div style="background:var(--red-light);border-radius:4px;padding:3px 5px;text-align:center;flex:1;min-width:58px;"><div style="font-size:8px;color:var(--t2);">08/21</div><div style="font-size:11px;font-weight:700;">987.44</div><div style="font-size:9px;color:var(--red);font-weight:700;">+1.49%</div></div>
-      <div style="background:var(--red-light);border-radius:4px;padding:3px 5px;text-align:center;flex:1;min-width:58px;"><div style="font-size:8px;color:var(--t2);">08/24</div><div style="font-size:11px;font-weight:700;">1006.82</div><div style="font-size:9px;color:var(--red);font-weight:700;">+1.96%</div></div>
-      <div style="background:var(--green-bg);border-radius:4px;padding:3px 5px;text-align:center;flex:1;min-width:58px;"><div style="font-size:8px;color:var(--t2);">08/25</div><div style="font-size:11px;font-weight:700;">1004.22</div><div style="font-size:9px;color:var(--green);font-weight:700;">-0.26%</div></div>
-      <div style="background:var(--green-bg);border-radius:4px;padding:3px 5px;text-align:center;flex:1;min-width:58px;"><div style="font-size:8px;color:var(--t2);">08/26</div><div style="font-size:11px;font-weight:700;">1003.00</div><div style="font-size:9px;color:var(--green);font-weight:700;">-0.12%</div></div>
-      <div style="background:var(--green-bg);border-radius:4px;padding:3px 5px;text-align:center;flex:1;min-width:58px;"><div style="font-size:8px;color:var(--t2);">08/27</div><div style="font-size:11px;font-weight:800;">995.30</div><div style="font-size:9px;color:var(--green);font-weight:800;">-0.77%</div></div>
-    </div>
-    <p style="font-size:10px;color:var(--t2);margin:6px 0 0 0;line-height:1.45;">📊 <strong>周涨幅摘要：</strong>本周沪金冲高回落，周一触及1006.82元/克历史新高后连续三日回调，最新收995.30元/克，区间累计涨幅+5.26%。金价高位震荡，避险逻辑未改但短期获利回吐压力显现。</p>
+  <div class="block-title">🥇 黄金·过去一周每日收盘（COMEX期货）</div>
+  <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:5px;">
+    <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/17(周一)</div><div style="font-size:12px;font-weight:800;">—</div><div style="font-size:9px;color:var(--t2);">—</div></div>
+    <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/18(周二)</div><div style="font-size:12px;font-weight:800;">—</div><div style="font-size:9px;color:var(--t2);">—</div></div>
+    <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/19(周三)</div><div style="font-size:12px;font-weight:800;">—</div><div style="font-size:9px;color:var(--t2);">—</div></div>
+    <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/20(周四)</div><div style="font-size:12px;font-weight:800;">—</div><div style="font-size:9px;color:var(--t2);">—</div></div>
+    <div style="flex:1;min-width:60px;background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;"><div style="font-size:8px;color:var(--t2);">8/21(周五)</div><div style="font-size:12px;font-weight:800;">—</div><div style="font-size:9px;color:var(--t2);">—</div></div>
   </div>
+  <p style="font-size:10px;color:var(--t2);margin:4px 0 0 0;line-height:1.45;">📊 <strong>周涨幅摘要：</strong>本周COMEX黄金期货数据暂缺。A股贵金属板块周涨超16%，黄金概念股表现强势，预计金价高位运行。</p>
 </div>
 
 <div class="disc">⚠️ AI风格模拟分析，不构成投资建议。数据来源东方财富/同花顺等公开渠道。红涨绿跌（中国股市惯例）。</div>
@@ -469,211 +409,188 @@ tr:last-child td { border-bottom:none; }
 <div class="content-section" id="section-house">
   <div class="section-head">
     <div class="section-title">🏠 深圳房产投资建议</div>
-    <div class="update-tag">更新：8/27</div>
+    <div class="update-tag">更新：8/22</div>
   </div>
   <!--MOD:house:START-->
-<div class="block">
-  <div class="block-title">📰 深圳房产 · 本周要闻</div>
-  <div class="mcard" style="padding:6px 10px;">
-    <div style="font-size:10px;line-height:1.7;">
-      <div>🏠 <strong>深圳楼市"五连涨"</strong>：7月新房/二手房价环比均涨0.2%，3月以来连续5个月上涨，同比降幅收窄至2.9%/3.6%</div>
-      <div>🏠 <strong>7月量增价稳</strong>：一二手住宅累计网签8324套（同比+13.8%），新房同比大涨32.7%，千万级豪宅签约量创近六年峰值</div>
-      <div>🏠 <strong>8月二手房量增价稳</strong>：二手均价57,706元/㎡（环比-3.13%），议价空间收窄至8.87%，刚需置业活跃度明显提升</div>
-      <div>🏠 <strong>福田香蜜湖宅地挂牌</strong>：B401-0151宗地起拍价11.31亿，9月10日出让，核心区土地供应持续</div>
-      <div>🏠 <strong>房贷利率一线城市最低</strong>：首套3.05%、二套3.45%，公积金首套2.6%，300万30年省息25.37万</div>
-      <div>📊 <strong>政治局定调"稳定房地产市场"</strong>：纳入"筑牢安全屏障"框架，政策底确认，从"防风险"转向主动"筑屏障"</div>
-      <div>📊 <strong>公积金条例重大修订落地</strong>：8月4日重磅政策审议通过，住房公积金制度迎重大升级</div>
-    </div>
-  </div>
-</div>
 
-<!-- 市场速览 -->
-<div class="block">
-  <div class="block-title">📊 市场速览</div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;">
-    <div style="background:var(--green-bg);border-radius:6px;padding:5px 6px;text-align:center;">
-      <div style="font-size:8px;color:var(--t2);">7月二手均价</div>
-      <div style="font-size:13px;font-weight:800;">5.77万/㎡</div>
-      <div style="font-size:9px;color:var(--green);font-weight:700;">环比-3.13%</div>
-    </div>
-    <div style="background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;">
-      <div style="font-size:8px;color:var(--t2);">7月一手成交</div>
-      <div style="font-size:13px;font-weight:800;">3,529套</div>
-      <div style="font-size:9px;color:var(--red);font-weight:700;">同比+32.7%</div>
-    </div>
-    <div style="background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;">
-      <div style="font-size:8px;color:var(--t2);">首套房贷利率</div>
-      <div style="font-size:13px;font-weight:800;">3.05%</div>
-      <div style="font-size:9px;color:var(--red);font-weight:700;">一线城市最低</div>
-    </div>
-    <div style="background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;">
-      <div style="font-size:8px;color:var(--t2);">7月二手成交</div>
-      <div style="font-size:13px;font-weight:800;">4,795套</div>
-      <div style="font-size:9px;color:var(--red);font-weight:700;">环比+3.4%</div>
-    </div>
-  </div>
-  <div style="font-size:10px;color:var(--t2);margin-top:6px;padding:0 2px;">6月挂牌均价68,869元/㎡（环比-4.24%）| 南山115,115元/㎡ 福田91,528元/㎡ 宝安66,692元/㎡ 龙华59,094元/㎡ | 8月二手议价空间8.87%（收窄0.28pct）| 5月一二手合计网签10077套创13个月新高</div>
-</div>
 
-<!-- 成交数据和市场趋势 -->
-<div class="block">
-  <div class="block-title">📈 分区成交与趋势</div>
-  
-  <!-- 核心区 -->
-  <div class="mcard fp-hot" style="padding:8px 10px;margin-bottom:6px;">
-    <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:4px;">⭐ 核心区：南山 / 福田</div>
-    <div style="font-size:10px;line-height:1.6;">
-      <strong>南山</strong>：均价115,115元/㎡（环比+2.46%），7月新盘去化率超80%，科技园/深圳湾稀缺资产持续走强；改善型800-1000万房源成交占比上升3.4pct，结构性拉高均价<br>
-      <strong>福田</strong>：均价91,528元/㎡（环比-7.32%），香蜜湖/安托山豪宅坚挺（水榭花都法拍溢价115.6%成交），老旧刚需盘承压；限购放开后外地客涌入明显
-    </div>
-  </div>
-  
-  <!-- 次核心区 -->
-  <div class="mcard fp-hot" style="padding:8px 10px;margin-bottom:6px;">
-    <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:4px;">⭐ 次核心：宝中 / 坂田</div>
-    <div style="font-size:10px;line-height:1.6;">
-      <strong>宝安中心</strong>：均价66,692元/㎡（环比-5.3%），新安街道纳入限购放宽范围，壹方城周边改善盘活跃，但整体高位整固<br>
-      <strong>坂田</strong>：8月参考均价56,807元/㎡（环比-2.79%），华为辐射区刚需旺盛，万科城/四季花城成交活跃；法拍笋盘频出（见下方）
-    </div>
-  </div>
-  
-  <!-- 外围区 -->
-  <div class="mcard" style="padding:8px 10px;">
-    <div style="font-size:11px;font-weight:700;margin-bottom:4px;">外围：龙华观澜 / 深圳北站</div>
-    <div style="font-size:10px;line-height:1.6;">
-      <strong>龙华观澜</strong>：挂盘均价4.9万/㎡，部分房源3字头，以价换量；红山6.9万/㎡为龙华最高<br>
-      <strong>深圳北站</strong>：鸿荣源博誉府新成交6.65万/㎡（较开盘7.58万跌12%），以价换量明显
-    </div>
-  </div>
-</div>
-
-<!-- 法拍房板块 -->
-<div class="block">
-  <div class="block-title">🔨 深圳法拍房 · 月度统计</div>
-  
-  <!-- 月度统计速览 -->
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:8px;">
-    <div style="background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;">
-      <div style="font-size:8px;color:var(--t2);">7月挂拍量</div>
-      <div style="font-size:13px;font-weight:800;">~520套</div>
-      <div style="font-size:9px;color:var(--red);font-weight:700;">环比+2%</div>
-    </div>
-    <div style="background:var(--red-light);border-radius:6px;padding:5px 6px;text-align:center;">
-      <div style="font-size:8px;color:var(--t2);">7月成交量</div>
-      <div style="font-size:13px;font-weight:800;">~260套</div>
-      <div style="font-size:9px;color:var(--red);font-weight:700;">环比+8%</div>
-    </div>
-    <div style="background:var(--green-bg);border-radius:6px;padding:5px 6px;text-align:center;">
-      <div style="font-size:8px;color:var(--t2);">成交率</div>
-      <div style="font-size:13px;font-weight:800;">~50%</div>
-      <div style="font-size:9px;color:var(--green);font-weight:700;">住宅成交率63%</div>
-    </div>
-    <div style="background:var(--green-bg);border-radius:6px;padding:5px 6px;text-align:center;">
-      <div style="font-size:8px;color:var(--t2);">折价率</div>
-      <div style="font-size:13px;font-weight:800;">~90%</div>
-      <div style="font-size:9px;color:var(--green);font-weight:700;">捡漏空间收窄</div>
+  <!-- 核心判断前置 -->
+  <div class="key-view" style="border-left:3px solid var(--blue);">
+    <div class="kv-header">📌 核心判断 <span class="pill" style="background:var(--blue-bg);color:var(--blue);">9月-明年2月</span></div>
+    <div class="kv-body">
+      <p>① <strong>核心区(南山/福田)</strong>：企稳回升3%-5%，稀缺资产持续走强，议价空间收窄至8%以内</p>
+      <p>② <strong>次核心(宝中/坂田)</strong>：分化加剧，坂田+3.2%领涨（华为辐射），宝中高位整固</p>
+      <p>③ <strong>外围(龙华观澜/深圳北站)</strong>：筑底以价换量，观澜-3.1%全市最跌</p>
+      <p>④ <strong>法拍机会</strong>：恒裕深圳湾8.2万/㎡成交(备案价6.9折)，招商桃花园7折起拍，笋盘频出</p>
+      <p>⑤ <strong>政策窗口</strong>：房贷利率3.05%历史最低+以旧换新最高省40万+9月最低工资上调2700元</p>
     </div>
   </div>
 
-  <!-- 月度趋势表 -->
-  <div class="tbl-wrap" style="margin-bottom:8px;">
-    <table>
-      <thead><tr><th>月份</th><th>挂拍(套)</th><th>成交(套)</th><th>成交率</th><th>折价率</th></tr></thead>
-      <tbody>
-        <tr><td>2026.03</td><td>~560</td><td>~240</td><td>~43%</td><td>~90%</td></tr>
-        <tr><td>2026.04</td><td>~540</td><td>~250</td><td>~46%</td><td>~90%</td></tr>
-        <tr><td>2026.05</td><td>~510</td><td>~245</td><td>~48%</td><td>~91%</td></tr>
-        <tr><td>2026.06</td><td>~530</td><td>~255</td><td>~48%</td><td>~90%</td></tr>
-        <tr style="background:#fff5f5;"><td><strong>2026.07</strong></td><td><strong>~520</strong></td><td><strong>~260</strong></td><td><strong>~50%</strong></td><td><strong>~90%</strong></td></tr>
-      </tbody>
-    </table>
+  <!-- 法拍笋盘 -->
+  <div class="block">
+    <div class="block-title">🔨 深圳法拍房 · 笋盘速览</div>
+    
+    <!-- 月度统计 -->
+    <div class="card-row row-4" style="margin-bottom:8px;">
+      <div class="mcard" style="padding:8px 10px;"><div class="cl" style="font-size:9px;">上半年挂拍</div><div class="cv" style="font-size:13px;">4,916套</div><div class="cc up" style="font-size:10px;">同比+44.9%</div></div>
+      <div class="mcard" style="padding:8px 10px;"><div class="cl" style="font-size:9px;">上半年成交</div><div class="cv" style="font-size:13px;">2,396套</div><div class="cc up" style="font-size:10px;">同比+61.1%</div></div>
+      <div class="mcard" style="padding:8px 10px;"><div class="cl" style="font-size:9px;">清仓率</div><div class="cv" style="font-size:13px;">70.5%</div><div class="cc up" style="font-size:10px;">全国第二</div></div>
+      <div class="mcard" style="padding:8px 10px;"><div class="cl" style="font-size:9px;">折价率</div><div class="cv" style="font-size:13px;">93.7%</div><div class="cc down" style="font-size:10px;">捡漏空间收窄</div></div>
+    </div>
+
+    <!-- 各区成交率 -->
+    <div class="tbl-wrap" style="margin-bottom:8px;">
+      <table>
+        <thead><tr><th>区域</th><th>挂拍(套)</th><th>成交(套)</th><th>成交率</th><th>均价(元/㎡)</th></tr></thead>
+        <tbody>
+          <tr style="background:#fff5f5;"><td><strong>⭐福田</strong></td><td>293</td><td>230</td><td class="up-t"><strong>78.50%</strong></td><td><strong>65,753</strong></td></tr>
+          <tr style="background:#fff5f5;"><td><strong>⭐南山</strong></td><td>524</td><td>359</td><td class="up-t"><strong>68.51%</strong></td><td><strong>70,810</strong></td></tr>
+          <tr><td>龙华</td><td>172</td><td>109</td><td>63.37%</td><td>40,693</td></tr>
+          <tr><td>宝安</td><td>355</td><td>218</td><td>61.41%</td><td>43,781</td></tr>
+          <tr><td>龙岗</td><td>734</td><td>448</td><td>61.04%</td><td>26,291</td></tr>
+          <tr><td>罗湖</td><td>405</td><td>187</td><td class="down-t">46.17%</td><td>37,198</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert-c alert-w" style="margin-bottom:8px;"><span>⚠️</span><div style="font-size:10px;"><strong>趋势：</strong>2026上半年深圳法拍房挂拍4916套(同比+45%)，成交2396套(+61%)，流拍率51.26%(-8.75%)。折价率93.7%——成交价接近评估价，<strong>"捡漏"时代已过</strong>。核心区(福田/南山)成交率超68%，豪宅法拍出现超高溢价(蛇口别墅溢价360%)。刚需捡漏空间在龙华/坂田/宝安非核心区，折扣率60-80%。</div></div>
+
+    <!-- 已成交笋盘 -->
+    <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px;">✅ 已成交（2026上半年重点案例）</div>
+    <div class="fp-card fp-hot" style="border-left-color:var(--red);padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐南山</span>新世界豪园别墅 518㎡</div><div class="fp-price" style="font-size:12px;color:var(--green);">8,810万 (溢价260%)</div></div>
+      <div class="fp-info" style="font-size:10px;">南山科技园 · 14人225轮出价 · 起拍2450万 → 评估价3.6倍成交</div>
+    </div>
+    <div class="fp-card fp-hot" style="border-left-color:var(--red);padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐南山</span>蛇口半山海景别墅 281.61㎡</div><div class="fp-price" style="font-size:12px;color:var(--green);">8,708万 (溢价360%)</div></div>
+      <div class="fp-info" style="font-size:10px;">南山蛇口 · 18人167轮出价 · 起拍1893万 → 评估价3.6倍 · 海景稀缺</div>
+    </div>
+    <div class="fp-card fp-hot" style="border-left-color:var(--red);padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐南山</span>纯水岸十四期 301㎡</div><div class="fp-price" style="font-size:12px;color:var(--green);">3,500万 (溢价132.5%)</div></div>
+      <div class="fp-info" style="font-size:10px;">南山华侨城 · 45轮出价 · 起拍1505万 · 评估价1881万 → 近2倍成交</div>
+    </div>
+    <div class="fp-card fp-hot" style="border-left-color:var(--red);padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐福田</span>香域中央花园 203.62㎡</div><div class="fp-price" style="font-size:12px;color:var(--green);">3,356万 (溢价123%)</div></div>
+      <div class="fp-info" style="font-size:10px;">福田香蜜湖 · 18人35轮出价 · 起拍1504万 · 评估价1880万 · 豪宅学区</div>
+    </div>
+    <div class="fp-card fp-hot" style="border-left-color:var(--red);padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐福田</span>东海花园 171.22㎡</div><div class="fp-price" style="font-size:12px;color:var(--green);">1,862万 (超评估22.7%)</div></div>
+      <div class="fp-info" style="font-size:10px;">福田 · 83轮出价 · 起拍1214万 · 评估价1517万 → 超评估价成交</div>
+    </div>
+    <div class="fp-card fp-hot" style="border-left-color:var(--red);padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐龙华</span>龙悦居四期 63㎡</div><div class="fp-price" style="font-size:12px;color:var(--green);">263.9万</div></div>
+      <div class="fp-info" style="font-size:10px;">龙华梅林关 · 65轮延时 · 高于二手房约10万 · 刚需热门标的</div>
+    </div>
+
+    <!-- 即将开拍 -->
+    <div style="font-size:11px;font-weight:700;color:var(--orange);margin:8px 0 4px;">⏳ 即将开拍 & 坂田/龙华笋盘</div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐坂田</span>万科城二区复式J301 194㎡</div><div class="fp-price" style="font-size:12px;">578万起(2.98万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">龙岗坂田 · <span class="fp-tag">一拍</span> 市场价1000万 <strong style="color:var(--red);">58折！</strong> · 华为辐射区 · 复式大宅</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐坂田</span>四季花城F座502 102㎡</div><div class="fp-price" style="font-size:12px;">346万起(3.39万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">龙岗坂田 · <span class="fp-tag">再拍</span> 市场价510万 <strong style="color:var(--red);">68折</strong> · 万科物业</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐坂田</span>佳兆业悦峰3栋B305 120㎡</div><div class="fp-price" style="font-size:12px;">545万起(4.54万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">龙岗坂田 · <span class="fp-tag">一拍</span> 市场价720万 <strong style="color:var(--red);">76折</strong> · 改善四房</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐坂田</span>星光之约花园5栋601 94㎡</div><div class="fp-price" style="font-size:12px;">241万起(2.56万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">龙岗坂田 · <span class="fp-tag">一拍</span> 市场价320万 <strong style="color:var(--red);">75折</strong> · 低总价刚需</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐龙华</span>华盛珑悦1栋3701 161㎡</div><div class="fp-price" style="font-size:12px;">605万起(3.76万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">龙华 · <span class="fp-tag">一拍</span> 市场价830万 <strong style="color:var(--red);">73折</strong> · 大平层改善</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐龙华</span>壹成中心3座A2703 83㎡</div><div class="fp-price" style="font-size:12px;">322万起(3.88万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">龙华 · <span class="fp-tag">一拍</span> 市场价410万 <strong style="color:var(--red);">79折</strong> · 刚需三房</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐南山</span>钱柜商业大楼165处房产 3916.91㎡</div><div class="fp-price" style="font-size:12px;">8,255万起</div></div>
+      <div class="fp-info" style="font-size:10px;">南山 · <span class="fp-tag">8/26</span> 评估1.03亿(8折) · 商业整栋打包</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐福田</span>桐林公寓5A-01 62.11㎡</div><div class="fp-price" style="font-size:12px;">79万起(1.27万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">福田 · <span class="fp-tag">变卖中</span> 评估99万(8折) · 超低总价</div>
+    </div>
+    <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐宝安</span>金鼎花园B2栋801 68.73㎡</div><div class="fp-price" style="font-size:12px;">94万起(1.37万/㎡)</div></div>
+      <div class="fp-info" style="font-size:10px;">宝安新安 · <span class="fp-tag">变卖中</span> 评估168万(56折！) · 超低总价</div>
+    </div>
+    <div class="fp-card" style="padding:8px 10px;margin-bottom:5px;">
+      <div class="fp-head"><div class="fp-title" style="font-size:11px;">富士君荟苑1栋1502</div><div class="fp-price" style="font-size:12px;">574.9万起</div></div>
+      <div class="fp-info" style="font-size:10px;">宝安西乡 · 京东法拍 · 评估798.5万(72折) · ~19天后开拍</div>
+    </div>
+
+    <div class="alert-c alert-i" style="margin-bottom:8px;"><span>⭐</span><div style="font-size:10px;"><strong>重点关注片区标记：</strong>红色边框+⭐标签为坂田/龙华/宝安中心/南山/福田的房源。坂田片区笋盘最密集（万科城复式58折！），龙华华盛珑悦73折。核心区(南山/福田)法捡漏空间已极小(折价率93.7%)，刚需捡漏重点看坂田/龙华。</div></div>
+
+    <div class="alert-c alert-w"><span>⚠️</span><div style="font-size:10px;"><strong>提示：</strong>法拍房存在税费/清场/过户等风险，建议通过专业辅拍机构尽调。2026上半年深圳法拍清仓率70.5%全国第二。数据来源：阿里拍卖/京东法拍/中指研究院/同致诚评估。</div></div>
   </div>
 
-  <!-- 折价率趋势提示 -->
-  <div class="alert-c alert-w" style="margin-bottom:8px;">
-    <span>⚠️</span>
-    <div style="font-size:10px;">
-      <strong>折价率趋势：</strong>深圳法拍折价率从2024年~80%持续攀升至当前~90%，<strong>"捡漏"空间明显收窄</strong>。核心区（南山/福田）优质房源普遍溢价成交（天鹅湖花园溢价139%、香蜜湖水榭花都溢价115.6%），刚需捡漏机会集中在坂田/龙华/宝安非核心区，折扣率60-80%。
+  <!-- 重点片区 -->
+  <div class="block">
+    <div class="block-title">重点关注片区行情（8月最新）</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>区域</th><th>片区</th><th>挂牌(万/㎡)</th><th>环比</th><th>趋势</th></tr></thead>
+        <tbody>
+          <tr><td>南山</td><td>深圳湾</td><td>19.5</td><td class="up-t">+0.8%</td><td class="up-t">↑稀缺资产</td></tr>
+          <tr><td>南山</td><td>蛇口</td><td>11.1</td><td class="up-t">+2.7%</td><td class="up-t">↑滨海景观</td></tr>
+          <tr><td>南山</td><td>科技园</td><td>12.3</td><td class="down-t">-1.3%</td><td class="down-t">↓分化</td></tr>
+          <tr><td>福田</td><td>香蜜湖</td><td>14.6</td><td class="up-t">+0.2%</td><td class="up-t">↑豪宅稳固</td></tr>
+          <tr><td>福田</td><td>中心区</td><td>8.8</td><td class="up-t">+3.2%</td><td class="up-t">↑回暖明显</td></tr>
+          <tr><td>宝安</td><td>宝中</td><td>10.6</td><td class="down-t">-0.5%</td><td>→高位整固</td></tr>
+          <tr><td>龙华</td><td>深圳北站</td><td>5.8</td><td class="down-t">-2.0%</td><td class="down-t">↓供应挤压</td></tr>
+          <tr><td>龙华</td><td>观澜</td><td>5.5</td><td class="down-t">-3.1%</td><td class="down-t">↓全市最跌</td></tr>
+          <tr><td>龙岗</td><td>坂田</td><td>8.7</td><td class="up-t">+3.2%</td><td class="up-t">↑华为辐射领涨</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <!-- 已成交笋盘 -->
-  <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px;">✅ 已成交（近期重点案例）</div>
-  
-  <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
-    <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐南山</span>天鹅湖花园顶豪</div><div class="fp-price" style="font-size:12px;color:var(--green);">1.32亿 (溢价139%)</div></div>
-    <div class="fp-info" style="font-size:10px;">南山华侨城 · 2月成交 · 超2019年业主买入价 · <span style="color:var(--orange);">⚠️税费高/清场复杂</span></div>
-  </div>
-  
-  <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
-    <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐福田</span>香蜜湖水榭花都 顶层大平层</div><div class="fp-price" style="font-size:12px;color:var(--green);">7,268.5万 (溢价115.6%)</div></div>
-    <div class="fp-info" style="font-size:10px;">福田香蜜湖 · 11月95轮竞价 · 单价18.77万/㎡显著高于二手均价15.6万 · <span style="color:var(--orange);">⚠️税费高/清场复杂</span></div>
+  <!-- 市场数据 -->
+  <div class="block">
+    <div class="block-title">市场速览</div>
+    <div class="card-row row-4">
+      <div class="mcard"><div class="cl">上半年一二手成交</div><div class="cv">4.7万+套</div><div class="cc up">同比+30%+</div><div class="cs">一手18416 二手33892</div></div>
+      <div class="mcard"><div class="cl">7月新房均价</div><div class="cv">6.42万/㎡</div><div class="cc down">环比-2.11%</div><div class="cs">6月二手6.15万/㎡</div></div>
+      <div class="mcard"><div class="cl">房贷利率</div><div class="cv">3.05%</div><div class="cc up">历史最低</div><div class="cs">首套/二套统一</div></div>
+      <div class="mcard"><div class="cl">首付比例</div><div class="cv">15%起</div><div class="cc neutral">首套15% 二套20%</div><div class="cs">公积金额庭351万</div></div>
+    </div>
   </div>
 
-  <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
-    <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐南山</span>宝能城 8万/㎡成交</div><div class="fp-price" style="font-size:12px;color:var(--green);">底价拍出</div></div>
-    <div class="fp-info" style="font-size:10px;">南山 · 3月成交 · 8万/㎡底价 · <span style="color:var(--orange);">⚠️大额税费需核实</span></div>
+  <!-- 政策 -->
+  <div class="block">
+    <div class="block-title">最新政策</div>
+    <div class="mcard">
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--red-bg);color:var(--red);">🔥</div><div class="ct"><div class="it">4/29新政：核心区限购松绑</div><div class="id">福田/南山/宝安新安深户限3套(原2套)，非深户持居住证无需社保可购1套。公积金额度翻倍：个人189万/家庭351万</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🔄</div><div class="ct"><div class="it">南山"以旧换新"消费券（8大权益）</div><div class="id">卖旧买新最高省40万，消费券2-5万，新盘85折，房贷3.0%，40天无忧退定</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">📉</div><div class="ct"><div class="it">房贷利率3.05%历史最低</div><div class="id">5年期LPR 3.5%，深圳LPR-45BP。公积金首套2.6%。首套/二套统一利率</div></div></li>
+      </ul>
+    </div>
   </div>
 
-  <!-- 即将开拍笋盘 -->
-  <div style="font-size:11px;font-weight:700;color:var(--orange);margin:8px 0 4px;">⏳ 即将开拍</div>
-  
-  <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
-    <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐南山</span>阳光海滨花园 157.96㎡</div><div class="fp-price" style="font-size:12px;">8/23开拍</div></div>
-    <div class="fp-info" style="font-size:10px;">南山后海 · <span class="fp-tag">一拍</span> · 后海滨路海景 · <span style="color:var(--orange);">⚠️税费/清场待核实</span></div>
-  </div>
-  
-  <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
-    <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐宝安</span>万科星宸大厦 1105㎡</div><div class="fp-price" style="font-size:12px;">1,409万起</div></div>
-    <div class="fp-info" style="font-size:10px;">宝安新桥 · <span class="fp-tag">一拍</span> 8/23开拍 · 商业整层 · <span style="color:var(--orange);">⚠️商业税费高</span></div>
-  </div>
-
-  <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
-    <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐龙华</span>玖龙玺花园 89.64㎡</div><div class="fp-price" style="font-size:12px;">485万起</div></div>
-    <div class="fp-info" style="font-size:10px;">龙华 · <span class="fp-tag">一拍</span> 三方二厅 · <span style="color:var(--orange);">⚠️税费/清场待核实</span></div>
-  </div>
-
-  <div class="fp-card fp-hot" style="padding:8px 10px;margin-bottom:5px;">
-    <div class="fp-head"><div class="fp-title" style="font-size:11px;"><span class="fp-hot-tag">⭐福田</span>梅林碧华庭居 119㎡</div><div class="fp-price" style="font-size:12px;">823.4万起</div></div>
-    <div class="fp-info" style="font-size:10px;">福田梅林 · <span class="fp-tag">一拍</span> · 地铁口物业 · <span style="color:var(--orange);">⚠️产权/过户待核实</span></div>
-  </div>
-
-  <div class="fp-card" style="padding:8px 10px;margin-bottom:5px;">
-    <div class="fp-head"><div class="fp-title" style="font-size:11px;">西乡曦谷花园 232㎡别墅</div><div class="fp-price" style="font-size:12px;">901.4万起</div></div>
-    <div class="fp-info" style="font-size:10px;">宝安西乡 · <span class="fp-tag">一拍</span> · 别墅物业 · <span style="color:var(--orange);">⚠️清场复杂/税费高</span></div>
-  </div>
-
-  <div class="fp-card" style="padding:8px 10px;margin-bottom:5px;">
-    <div class="fp-head"><div class="fp-title" style="font-size:11px;">丽沙花都 地铁口物业</div><div class="fp-price" style="font-size:12px;">待开拍</div></div>
-    <div class="fp-info" style="font-size:10px;">宝安 · <span class="fp-tag">一拍</span> · 读深圳外国语 · <span style="color:var(--orange);">⚠️税费待核实</span></div>
-  </div>
-
-  <div style="font-size:10px;color:var(--t2);margin-top:6px;border:1px solid var(--red);border-radius:6px;padding:6px 8px;background:var(--red-bg);">
-    <span style="color:var(--red);font-weight:700;">⭐</span> 红色边框+⭐为重点关注片区房源（南山/福田/宝安中心/龙华/坂田）
-  </div>
-</div>
-
-<!-- 未来半年行情预测 -->
-<div class="block">
-  <div class="block-title">🔮 未来半年行情预测</div>
-  <div class="mcard" style="padding:8px 10px;">
-    <div class="key-view" style="border-left:3px solid var(--t1); padding:8px 10px; margin-bottom:6px;">
-      <div class="kv-header">📌 核心判断：<span class="pill" style="background:var(--red-bg);color:var(--red);">量增价稳</span></div>
-      <div class="kv-body">
-        <p style="font-size:10px;margin:0;">深圳楼市已确认"政策底+市场底"双底，未来半年大概率维持<strong>量增价稳</strong>格局，核心区优质资产温和上涨3-5%，外围区以价换量筑底。</p>
+  <!-- 半年预测 -->
+  <div class="block">
+    <div class="block-title">半年预测（2026.9-2027.2）</div>
+    <div class="reco-stack">
+      <div class="reco-item" style="border-left-color:var(--red);">
+        <div class="ri-head"><div><span class="ri-period">核心区</span> <span class="ri-title">企稳回升3%-5%</span></div><span class="risk-tag risk-low">低风险</span></div>
+        <div class="ri-body">深圳湾/香蜜湖土地断供+稀缺，持续看好。福田中心区+蛇口金融滨海双驱动涨2-4%。议价空间已收窄至8%以内，合适标的可出手。</div>
+      </div>
+      <div class="reco-item" style="border-left-color:var(--orange);">
+        <div class="ri-head"><div><span class="ri-period">次核心</span> <span class="ri-title">分化加剧，精选标的</span></div><span class="risk-tag risk-medium">中风险</span></div>
+        <div class="ri-body">坂田华为辐射+3.2%领涨龙岗，预计半年涨3-5%。宝中前海辐射高位整固，预计持平微涨2%。坂田性价比优于宝中。</div>
+      </div>
+      <div class="reco-item" style="border-left-color:var(--green);">
+        <div class="ri-head"><div><span class="ri-period">外围</span> <span class="ri-title">筑底以价换量</span></div><span class="risk-tag risk-medium">中风险</span></div>
+        <div class="ri-body">龙华观澜-3.1%全市最跌，继续承压。深圳北站/红山5-6万刚需承接，难显著反弹。刚需自住可择机，投资建议观望。</div>
       </div>
     </div>
-    <div style="font-size:10px;line-height:1.6;">
-      <strong>政策面</strong>：政治局"筑牢安全屏障"定调+公积金条例修订+房贷利率历史低位（首套3.05%），政策工具箱仍有空间（限购进一步优化、购房补贴等）<br>
-      <strong>供给端</strong>：7月新房供应放量（住宅5398套，环比+252.6%），下半年推盘计划陆续启动，核心区"好房子"供需两旺<br>
-      <strong>需求端</strong>：改善型需求持续释放（千万级豪宅签约创六年峰值），刚需在议价空间收窄下加速入市<br>
-      <strong>价格预测</strong>：核心区（南山/福田）温和上涨3-5%；次核心（宝中/坂田）持平微涨；外围（观澜/北站）继续以价换量，跌幅收窄至-2%以内<br>
-      <strong>法拍市场</strong>：折价率维持90%左右，核心区优质房源溢价常态化，刚需捡漏集中在坂田/龙华/宝安非核心区
-    </div>
   </div>
-</div>
-
-<div class="disc">⚠️ 数据来自公开渠道，法拍房有风险，投资需谨慎。</div>
   <!--MOD:house:END-->
 </div>
 
@@ -681,142 +598,124 @@ tr:last-child td { border-bottom:none; }
 <div class="content-section" id="section-salary">
   <div class="section-head">
     <div class="section-title">💰 薪酬COE热点</div>
-    <div class="update-tag">更新：8/27</div>
+    <div class="update-tag">更新：8/22</div>
   </div>
   <!--MOD:salary:START-->
-<div class="key-view" style="border-left:3px solid var(--purple);">
-  <div class="kv-header">📌 核心速览 <span class="pill" style="background:var(--purple-bg);color:var(--purple);">8月27日</span></div>
-  <div class="kv-body">
-    <p>① <strong>字节跳动涨薪</strong>：调薪投入+1.5倍，奖金池+35%，期权加速归属，职级体系重构，全球"领先头部"</p>
-    <p>② <strong>美世2026预测</strong>：中国薪资增长4.0%（2025实际3.8%），高科技4.9%领跑，91%企业计划加薪</p>
-    <p>③ <strong>怡安2026预测</strong>：涨薪预算5.0%，"普调"终结，高绩效8-10%、普通2-3%甚至为零</p>
-    <p>④ <strong>深圳最低工资</strong>：9月1日起上调至2700元/月，失业金同步调至2430元/月</p>
-    <p>⑤ <strong>AI芯片薪酬</strong>：AI芯片架构师200-400万+，HBM设计180-300万，北京芯片制造岗年薪跃升至38-72万</p>
-  </div>
-</div>
 
-<div class="block">
-  <div class="block-title">🏢 华为竞争对手薪酬动态</div>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>企业</th><th>最新动作</th><th>关键岗年薪</th><th>竞争焦点</th></tr></thead>
-      <tbody>
-        <tr><td><strong>字节跳动</strong></td><td>调薪投入+1.5倍，奖金池+35%；绩效M+激励上限+2.5月；半年E以上激励基数改为月总包；新职级体系L1-L10，不晋级也可大幅涨薪</td><td>产品线薪酬总包上下限均提高<br>M+激励月数上限+2.5月</td><td>全球人才竞争"领先头部"</td></tr>
-        <tr><td><strong>腾讯</strong></td><td>12月新成立AI Infra部、AI Data部、数据计算平台部，强化大模型研发体系</td><td>9-10级52-120万<br>人均成本112万</td><td>AI基础设施/大模型</td></tr>
-        <tr><td><strong>小米</strong></td><td>年内多次股权激励（7月向3904人授7023万股，人均39.29万；122人获1.2亿十年期股权）</td><td>技术岗35-80万+</td><td>汽车/智能制造</td></tr>
-        <tr><td><strong>比亚迪</strong></td><td>新能源+智能化持续扩招，研发岗月薪15-25K</td><td>硕士应届18K起</td><td>新能源/电池</td></tr>
-        <tr><td><strong>荣耀/中兴</strong></td><td>未披露重大调薪动作；中兴联合发布《新质生产力数字人才白皮书》，关注AI算法/云计算塔尖人才稀缺</td><td>—</td><td>终端/通信/数字人才</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="mcard" style="margin-top:8px;padding:6px 10px;background:var(--red-bg);">
-    <span style="font-size:11px;font-weight:700;color:var(--red);">⚡ 竞争焦点：</span>
-    <span style="font-size:10px;color:var(--t2);">字节"全球领先"策略+职级体系重构，AI/算法人才吸引力显著提升；腾讯加速AI组织布局；小米高频股权激励绑定核心技术人员。</span>
-  </div>
-</div>
 
-<div class="block">
-  <div class="block-title">🧠 咨询公司人才趋势（美世 & 怡安 & 光辉国际 & 德勤）</div>
-  
-  <div class="mcard" style="border-top:3px solid var(--blue); margin-bottom:8px;">
-    <div class="tags"><span class="tag b">美世 Mercer</span><span class="tag o">2026整体薪酬调研</span></div>
-    <ul class="ilist">
-      <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">📊</div><div class="ct"><div class="it">2026薪资增长4.0%（不含冻薪）</div><div class="id">2025实际3.8%，2026预计4.0%，91%企业计划加薪（去年90%）。基于近4000家企业数据</div><div class="is">来源：美世2025-2026年度整体薪酬调研</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🏭</div><div class="ct"><div class="it">行业分化：高科技4.9%领跑</div><div class="id">高科技4.9% > 石油4.4% > 生命科学4.3% > 化工4.2% > 消费品3.9% > 汽车3.7%</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">📉</div><div class="ct"><div class="it">主动离职率3.4%（去年同期3.9%）</div><div class="id">人才流动保守，市场趋于稳定</div></div></li>
-    </ul>
+  <!-- 核心速览前置 -->
+  <div class="key-view" style="border-left:3px solid var(--purple);">
+    <div class="kv-header">📌 本期速览 <span class="pill" style="background:var(--purple-bg);color:var(--purple);">8月</span></div>
+    <div class="kv-body">
+      <p>① <strong>美世2026预测</strong>：中国薪资增长4.0%（2025实际3.8%），高科技4.9%领跑，91%企业计划加薪</p>
+      <p>② <strong>怡安2026趋势</strong>：73%企业部署AI但仅18%员工参与再培训，88%企业相信人才决定AI成败</p>
+      <p>③ <strong>大厂动态</strong>：腾讯3864万股限制性股票锁AI人才，字节调薪预算+1.5倍，比亚迪+1000元/月</p>
+      <p>④ <strong>深圳最低工资</strong>：9月1日起2700元/月（+7.14%），全国第二</p>
+      <p>⑤ <strong>怡安薪酬预测</strong>：2026涨薪预算5.0%，高绩效者8-10%，普通2-3%甚至为零，"普调"时代终结</p>
+    </div>
   </div>
 
-  <div class="mcard" style="border-top:3px solid var(--purple); margin-bottom:8px;">
-    <div class="tags"><span class="tag p">怡安 Aon</span><span class="tag o">2026人力资本趋势</span></div>
-    <ul class="ilist">
-      <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">📈</div><div class="ct"><div class="it">2026涨薪预算5.0%（2025实际4.8%）</div><div class="id">"普调"终结：高绩效8-10%，普通2-3%甚至为零</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🤖</div><div class="ct"><div class="it">73%企业部署AI，仅18%员工参与再培训</div><div class="id">88%企业相信人才决定AI成败，但技能提升滞后</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">💡</div><div class="ct"><div class="it">未来三年关键技能：适应力>领导力>数字素养</div><div class="id">软技能成AI时代稀缺品</div></div></li>
-    </ul>
+  <!-- 美世/怡安人才趋势 -->
+  <div class="block">
+    <div class="block-title">🧠 美世 & 怡安 人才趋势与薪酬行情</div>
+    
+    <div class="mcard" style="border-top:3px solid var(--blue); margin-bottom:8px;">
+      <div class="tags"><span class="tag b">美世 Mercer</span><span class="tag o">2026整体薪酬调研</span></div>
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">📊</div><div class="ct"><div class="it">2026薪资增长4.0%（不含冻薪）</div><div class="id">2025实际3.8%，2026预计4.0%，91%企业计划加薪（去年90%）。基于近4000家企业数据</div><div class="is">来源：美世2025-2026年度整体薪酬调研</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🏭</div><div class="ct"><div class="it">行业分化：高科技4.9%领跑</div><div class="id">高科技4.9% > 石油4.4% > 生命科学4.3% > 化工4.2% > 消费品3.9% > 汽车3.7%。技术专长溢价持续扩大</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">📉</div><div class="ct"><div class="it">主动离职率3.4%（去年同期3.9%）</div><div class="id">人才流动意愿保守，市场趋于稳定。一线城市预期4.0-4.3%，二线南京/天津/苏州3.7-3.9%</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🎁</div><div class="ct"><div class="it">灵活福利普及：96.3%企业提供意外险</div><div class="id">意外险96.3% > 补充健康保险83.6% > 人寿保险71.5%。福利成薪酬包重要组成</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🤖</div><div class="ct"><div class="it">AI影响80%工作，19%可能被颠覆</div><div class="id">美世建议"礼励效"框架：礼（倾听员工）× 励（精准激励）× 效（AI赋能提效）。人机团队重塑工作</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🌱</div><div class="ct"><div class="it">新生代员工(95后)需求变化</div><div class="id">不再仅为薪酬工作：更看重成长机会、情绪价值、灵活自主、团队氛围、工作生活平衡</div></div></li>
+      </ul>
+    </div>
+
+    <div class="mcard" style="border-top:3px solid var(--purple); margin-bottom:8px;">
+      <div class="tags"><span class="tag p">怡安 Aon</span><span class="tag o">2026人力资本趋势</span></div>
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">📈</div><div class="ct"><div class="it">2026涨薪预算5.0%（2025实际4.8%）</div><div class="id">高于全球平均。但"普调"时代终结——高绩效者8-10%，普通2-3%甚至为零。薪酬差异化原则趋严</div><div class="is">来源：怡安2026人力资本研究</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🤖</div><div class="ct"><div class="it">73%企业部署AI，仅18%员工参与再培训</div><div class="id">88%企业相信人才决定AI成败，但技能提升严重滞后技术部署。中国企业38%处于AI部署阶段，38%试点阶段</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">💡</div><div class="ct"><div class="it">未来三年关键技能：适应力>领导力>数字素养</div><div class="id">技术技能仅排第三。人的软实力——适应、领导、共情、变革管理——成AI时代稀缺品</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🏢</div><div class="ct"><div class="it">中国EVP领先全球：35% vs 19%</div><div class="id">35%中国企业有清晰EVP（全球仅19%），44%人力资源数据成熟度高。但薪酬透明度仅15%成熟，AI人才招聘能力仅19%</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">😴</div><div class="ct"><div class="it">主动离职率4.6%（2024年5.8%）"卧倒"心态普遍</div><div class="id">跳槽涨薪幅度被压缩。员工求稳，企业追求效能→被动离职率上升。人才保留压力下降但效能要求提升</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🎯</div><div class="ct"><div class="it">怡安四大行动建议</div><div class="id">①AI战略与人力规划对齐 ②系统化全组织技能重塑 ③强化领导力与治理 ④数据驱动人才决策（仅12%CHRO用分析工具）</div></div></li>
+      </ul>
+    </div>
+
+    <div class="mcard" style="border-top:3px solid var(--orange);">
+      <div class="tags"><span class="tag o">美世+怡安 联合洞察</span></div>
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">🔥</div><div class="ct"><div class="it">"冰与火"并存：整体审慎 vs 核心赛道白热化</div><div class="id">美世：薪酬增长放缓但高科技领跑。怡安：普调终结但AI人才溢价。"新质生产力"创造极度稀缺的"三新人才"</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">⚡</div><div class="ct"><div class="it">COE关键启示</div><div class="id">①薪资资源向关键岗位倾斜，停止平均主义 ②AI技能岗位设独立薪酬宽带（Korn Ferry建议） ③员工福祉投入仅18%认为"有力"（低于全球25%），需加强 ④数据驱动EVP是弥合预期差距的关键</div></div></li>
+      </ul>
+    </div>
   </div>
 
-  <div class="mcard" style="border-top:3px solid var(--orange); margin-bottom:8px;">
-    <div class="tags"><span class="tag o">光辉国际 Korn Ferry</span><span class="tag o">2025人才招聘趋势</span></div>
-    <ul class="ilist">
-      <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">🔍</div><div class="ct"><div class="it">AI重塑招聘流程，以技能为核心</div><div class="id">40+招聘专家、400+全球招聘负责人调研，建议"专注于进步而非完美"</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">🏗️</div><div class="ct"><div class="it">41%组织已削减管理层级</div><div class="id">中层管理者"消失"，但工作量并未消失，需重新设计岗位</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">🌏</div><div class="ct"><div class="it">出海热门目的地：东南亚、拉美、中东非</div><div class="id">团队搭建、政策法律风险、跨文化融合是三大挑战</div></div></li>
-    </ul>
-  </div>
-
-  <div class="mcard" style="border-top:3px solid var(--green);">
-    <div class="tags"><span class="tag g">德勤 Deloitte</span><span class="tag o">2026全球人力资本趋势</span></div>
-    <ul class="ilist">
-      <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">🤝</div><div class="ct"><div class="it">从平替走向共生：正确处理人机关系</div><div class="id">企业需有意识地设计人与机器的互动方式，释放AI潜能</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📋</div><div class="ct"><div class="it">AI重塑人与工作的边界</div><div class="id">是辅助还是主导？企业需明确AI在决策中的角色</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📈</div><div class="ct"><div class="it">组织的进化：传统组织功能是否过时</div><div class="id">在AI时代重新审视组织架构与人才发展路径</div></div></li>
-    </ul>
-  </div>
-</div>
-
-<div class="block">
-  <div class="block-title">🏛️ 劳动工资政策（深圳）</div>
-  <div class="card-row row-4">
-    <div class="mcard" style="border-left:3px solid var(--red);"><div class="cl">最低工资</div><div class="cv">2,700元</div><div class="cc up">9月1日起上调</div><div class="cs">失业金调至2,430元</div></div>
-    <div class="mcard" style="border-left:3px solid var(--green);"><div class="cl">养老基数下限</div><div class="cv">4,492元</div><div class="cc neutral">2024.7-2025.6</div><div class="cs">上限27,501元</div></div>
-    <div class="mcard" style="border-left:3px solid var(--blue);"><div class="cl">医保基数</div><div class="cv">6,733元</div><div class="cc neutral">生育险基数</div><div class="cs">2025.1-12</div></div>
-    <div class="mcard"><div class="cl">失业保险</div><div class="cv">2,700~44,265</div><div class="cc neutral">单位0.8%+个人0.2%</div></div>
-  </div>
-  <div class="alert-c alert-w" style="margin-top:8px;"><span>⚠️</span><div><strong>COE关注：</strong>最低工资上调至2700元（+7.1%），失业险基数下限同步上调，但影响有限（按最低基数缴纳仅增加0.36元/月）。养老/医保基数暂未调整，需关注2026年7月新一轮调整。</div></div>
-</div>
-
-<div class="block">
-  <div class="block-title">🤖 AI/科技人才薪酬动态</div>
-  <div class="mcard">
+  <!-- 大厂薪酬 -->
+  <div class="block">
+    <div class="block-title">华为竞争对手薪酬动态</div>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>岗位方向</th><th>初级(3-5年)</th><th>中级(5-10年)</th><th>高级/专家</th><th>趋势</th></tr></thead>
+        <thead><tr><th>企业</th><th>最新动作</th><th>关键岗年薪</th><th>竞争焦点</th></tr></thead>
         <tbody>
-          <tr><td><strong>AI芯片架构/GPU</strong></td><td>70-100万</td><td>120-200万</td><td>200-400万+</td><td style="color:var(--red);font-weight:700;">↑暴涨</td></tr>
-          <tr><td><strong>HBM/存储PHY</strong></td><td>50-80万</td><td>90-160万</td><td>180-300万</td><td style="color:var(--red);font-weight:700;">↑暴涨</td></tr>
-          <tr><td><strong>先进封装(CoWoS)</strong></td><td>40-70万</td><td>80-130万</td><td>150-250万</td><td style="color:var(--red);">↑快速上涨</td></tr>
-          <tr><td><strong>数字验证</strong></td><td>45-70万</td><td>80-120万</td><td>130-220万</td><td style="color:var(--red);">↑需求旺盛</td></tr>
-          <tr><td><strong>模拟/电源IC</strong></td><td>45-75万</td><td>80-130万</td><td>140-220万</td><td style="color:var(--red);">↑稳健</td></tr>
+          <tr><td><strong>腾讯</strong></td><td>3864万股限制性股票+195万购股权，归属19-48月</td><td>9-10级52-120万<br>人均成本112万</td><td>AI人才留存</td></tr>
+          <tr><td><strong>字节</strong></td><td>调薪预算+1.5倍，奖金池+35%，期权4年→3年</td><td>L3专家70-120万<br>校招SSP 75-80万</td><td>大模型/算法/全球化</td></tr>
+          <tr><td><strong>比亚迪</strong></td><td>精准涨薪，多数+1000元/月，核心最高+4500</td><td>研发15-25K/月<br>硕士应届18K起</td><td>新能源/智能化</td></tr>
+          <tr><td><strong>小米</strong></td><td>年终奖系数1.2，汽车部2-3倍</td><td>技术岗35-80万+</td><td>汽车/智能制造</td></tr>
+          <tr><td><strong>宁德时代</strong></td><td>1-6职级基层+150元/月（1月起）</td><td>基层综合7500/月</td><td>稳定生产端</td></tr>
+          <tr><td><strong>京东</strong></td><td>92%员工全薪+，采销最高25薪</td><td>采销25薪/年</td><td>供应链/物流</td></tr>
         </tbody>
       </table>
     </div>
-    <div style="font-size:10px;color:var(--t3);margin-top:6px;">来源：中国半导体芯片人才薪酬报告2025-2026（含base+奖金，不含股权）</div>
   </div>
-  <div class="mcard" style="margin-top:8px;border-left:3px solid var(--orange);">
-    <div style="font-size:11px;font-weight:700;color:var(--orange);">📈 北京芯片人才薪酬跃升</div>
-    <div style="font-size:10px;color:var(--t2);">芯片制造工艺方向参考年薪由23-24万跃升至38-72万（+31.5万），芯片封装/EDA研发平均值分别+19.5万/+14万。但需求收紧，释放聚焦高端信号。AI大模型架构师月薪中位值超42,000元。</div>
-  </div>
-</div>
 
-<div class="block">
-  <div class="block-title">🎯 COE行动建议</div>
-  <div class="card-row row-3">
-    <div class="mcard" style="border-top:3px solid var(--red);">
-      <div class="tags"><span class="tag r">短期（1个月内）</span></div>
-      <ul class="ilist">
-        <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">最低工资调整应对</div><div class="id" style="font-size:10px;">2700元/月生效，更新基层岗位成本模型，评估失业险基数影响</div></div></li>
-        <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">字节涨薪竞对监测</div><div class="id" style="font-size:10px;">关注核心人才流失风险，重点岗位薪酬竞争力复盘</div></div></li>
-      </ul>
+  <!-- 最低工资 -->
+  <div class="block">
+    <div class="block-title">深圳最低工资 & 国家政策</div>
+    <div class="card-row row-4">
+      <div class="mcard" style="border-left:3px solid var(--red);"><div class="cl">现行（截至8月）</div><div class="cv">2,520元</div><div class="cc neutral">23.7元/时</div></div>
+      <div class="mcard" style="border-left:3px solid var(--green);"><div class="cl">9月1日新标准</div><div class="cv">2,700元</div><div class="cc up">+180元(+7.14%)</div><div class="cs">25.4元/时</div></div>
+      <div class="mcard"><div class="cl">全国对比</div><div class="cv">深圳第2</div><div class="cc neutral">上海2740 > 深圳2700</div></div>
+      <div class="mcard"><div class="cl">广东一类</div><div class="cv">广州2680</div><div class="cc neutral">深圳略高</div></div>
     </div>
-    <div class="mcard" style="border-top:3px solid var(--orange);">
-      <div class="tags"><span class="tag o">中期（1-3个月）</span></div>
+    <div class="alert-c alert-w"><span>⚠️</span><div><strong>COE关注：</strong>最低工资上调直接推高基层岗位用工成本。9月1日前需完成加班费/社保基数校准。计件工资岗位须重新评估劳动定额。</div></div>
+    <div class="mcard">
       <ul class="ilist">
-        <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">AI人才薪酬策略</div><div class="id" style="font-size:10px;">对标AI芯片/大模型岗位市场价，差异化设计激励包</div></div></li>
-        <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">绩效差异化分配</div><div class="id" style="font-size:10px;">参考怡安"普调终结"趋势，资源向高绩效倾斜</div></div></li>
-      </ul>
-    </div>
-    <div class="mcard" style="border-top:3px solid var(--blue);">
-      <div class="tags"><span class="tag b">长期（3-6个月）</span></div>
-      <ul class="ilist">
-        <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">组织扁平化评估</div><div class="id" style="font-size:10px;">参考光辉国际41%削减管理层级趋势，评估中层效能</div></div></li>
-        <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">人机协作设计</div><div class="id" style="font-size:10px;">德勤"共生"理念落地，AI工具+技能重塑规划</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🏛️</div><div class="ct"><div class="it">中央经济工作会议："制定实施城乡居民增收计划"</div><div class="id">从"推动"变为"制定实施"，居民增收升级为必须落地的行动方案</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">💰</div><div class="ct"><div class="it">AI岗位年薪50万+占比30.9%（整体仅5.36%）</div><div class="id">算法工程师需求+80%，AI产品经理+178%。人才缺口推高薪资</div><div class="is">来源：猎聘大数据</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">📊</div><div class="ct"><div class="it">1-7月全国财政收入14.37万亿(+5.8%)</div><div class="id">高技术产业使用外资+32.7%，占比41.6%。经济基本面支撑薪酬增长</div></div></li>
       </ul>
     </div>
   </div>
-</div>
 
-<div class="disc">⚠️ 信息来自公开渠道，仅供内部参考。</div>
+  <!-- COE行动 -->
+  <div class="block">
+    <div class="block-title">COE行动建议</div>
+    <div class="card-row row-3">
+      <div class="mcard" style="border-top:3px solid var(--red);">
+        <div class="tags"><span class="tag r">紧急(9月前)</span></div>
+        <ul class="ilist">
+          <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">最低工资基数校准</div><div class="id" style="font-size:10px;">9月1日2700元，更新加班/社保基数</div></div></li>
+          <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">竞对薪酬基准更新</div><div class="id" style="font-size:10px;">腾讯/字节/比亚迪最新数据已出</div></div></li>
+        </ul>
+      </div>
+      <div class="mcard" style="border-top:3px solid var(--orange);">
+        <div class="tags"><span class="tag o">重要(Q3内)</span></div>
+        <ul class="ilist">
+          <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">薪酬差异化方案</div><div class="id" style="font-size:10px;">怡安：高绩效8-10%vs普通2-3%，停普调</div></div></li>
+          <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">AI技能薪酬宽带</div><div class="id" style="font-size:10px;">Korn Ferry建议设独立宽带，溢价明显</div></div></li>
+        </ul>
+      </div>
+      <div class="mcard" style="border-top:3px solid var(--green);">
+        <div class="tags"><span class="tag g">持续跟踪</span></div>
+        <ul class="ilist">
+          <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">美世/怡安年度报告</div><div class="id" style="font-size:10px;">2026薪资增长4.0%/5.0%，行业分化</div></div></li>
+          <li class="ili" style="padding:5px 0;"><div class="ct"><div class="it" style="font-size:11px;">EVP与员工福祉</div><div class="id" style="font-size:10px;">怡安：仅18%认为福祉投入有力，需加强</div></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <!--MOD:salary:END-->
 </div>
 
@@ -824,148 +723,184 @@ tr:last-child td { border-bottom:none; }
 <div class="content-section" id="section-huawei">
   <div class="section-head">
     <div class="section-title">📱 华为最新消息</div>
-    <div class="update-tag">更新：8/27</div>
+    <div class="update-tag">更新：8/22</div>
   </div>
   <!--MOD:huawei:START-->
-<!-- 核心速览 -->
-<div class="key-view" style="border-left:3px solid var(--red);">
-  <div class="kv-header">📌 华为速览 <span class="pill" style="background:var(--red-bg);color:var(--red);">2026.8.27</span></div>
-  <div class="kv-body">
-    <p>① <strong>鸿蒙装机破8000万</strong>：8/18达8010.91万台，日均新增19.28万台，年底1亿目标近在咫尺；中国份额已超iOS成第二大OS</p>
-    <p>② <strong>手机稳居中国第一</strong>：2026Q1继续领跑，华为Mate80系列供货改善，Pura X折叠屏出货破150万台（IDC）</p>
-    <p>③ <strong>鸿蒙智行累计交付135万+</strong>：2026Q1交付11.27万辆(+41.9%)；全新问界M9交付7周突破2万台</p>
-    <p>④ <strong>麒麟/昇腾新进展</strong>：麒麟芯片架构创新推进，昇腾系列大规模量产，2025年预计生产…（具体待确认）</p>
-    <p>⑤ <strong>任正非最新定调</strong>："到今天，也还不能说华为就能活下来，我们还在挣扎中"——2024Q3营收5859亿(+28.3%)，利润629亿(-13.8%)</p>
-    <p>⑥ <strong>美国制裁持续</strong>：实体清单+出口管制延续，华为国产替代加速（Mate30美产零部件占比从11%降至约1%）</p>
-  </div>
-</div>
 
-<!-- 集团动态 -->
-<div class="block">
-  <div class="block-title">🏢 集团层面动态</div>
-  <div class="card-row row-4">
-    <div class="mcard" style="border-top:3px solid var(--blue);"><div class="cl">2024前三季营收</div><div class="cv">5,859亿</div><div class="cc up">+28.3%</div><div class="cs">同比大幅增长</div></div>
-    <div class="mcard" style="border-top:3px solid var(--green);"><div class="cl">净利润</div><div class="cv">629亿</div><div class="cc down">-13.8%</div><div class="cs">受荣耀/超聚变出售影响</div></div>
-    <div class="mcard" style="border-top:3px solid var(--purple);"><div class="cl">研发投入</div><div class="cv">持续高位</div><div class="cc up">20%+</div><div class="cs">近十年累计超1.38万亿</div></div>
-    <div class="mcard" style="border-top:3px solid var(--orange);"><div class="cl">2026H1财报</div><div class="cv">待发布</div><div class="cc" style="color:var(--t2);">预计8月底</div><div class="cs">关注利润率变化</div></div>
-  </div>
-  <div class="mcard">
-    <ul class="ilist">
-      <li class="ili"><div class="ic" style="background:var(--red-bg);color:var(--red);">🗣️</div><div class="ct"><div class="it">任正非最新讲话（2024.10）："我们还在挣扎中"</div><div class="id">内部讲话强调"今天还不能说华为能活下来"，直面芯片算力差距，称"中国99%的公司可以与美国合作，但华为不行"</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">📉</div><div class="ct"><div class="it">前三季度利润下滑13.8%至629亿</div><div class="id">主因荣耀及超聚变业务出售结算时间差；营收端增长28.3%显示业务基本盘稳固</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🎯</div><div class="ct"><div class="it">经营方针：从追求规模转向追求利润和现金流</div><div class="id">2022年任正非内部文章核心思想延续，边缘业务收缩，聚焦ICT基础设施与终端双核心</div></div></li>
-    </ul>
-  </div>
-</div>
 
-<!-- 各产业板块 -->
-<div class="block">
-  <div class="block-title">📊 各产业板块经营情况</div>
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>板块</th><th>最新数据</th><th>同比/动态</th><th>关键信息</th></tr></thead>
-      <tbody>
-        <tr><td><strong>终端业务</strong></td><td>2026Q1中国第一</td><td class="up-t">持续领跑</td><td>华为Mate80系列供货改善，Pura X出货破150万台（IDC）</td></tr>
-        <tr><td><strong>ICT基础设施</strong></td><td>5G设备全球~30%</td><td class="up-t">份额第一</td><td>持续受益于5G-A商用部署</td></tr>
-        <tr><td><strong>智能汽车</strong></td><td>累计交付135万+</td><td class="up-t">Q1+41.9%</td><td>2026Q1交付11.27万辆；全新问界M9交付7周破2万台</td></tr>
-        <tr><td><strong>云计算</strong></td><td>中国IaaS+PaaS 21.8%</td><td class="up-t">份额第一</td><td>IDC口径；智算云客户1800+家</td></tr>
-        <tr><td><strong>数字能源</strong></td><td>光伏逆变器全球9年第一</td><td class="up-t">持续领先</td><td>户储全球份额17.3%居首</td></tr>
-        <tr><td><strong>海思</strong></td><td>麒麟/昇腾/鲲鹏等</td><td class="up-t">架构创新</td><td>"韬定律"推进，6年自研381款芯片</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- 市场份额 -->
-<div class="block">
-  <div class="block-title">🏆 全球市场份额速览</div>
-  <div class="card-row row-2">
-    <div class="mcard" style="border-top:3px solid var(--red);">
-      <div class="tags"><span class="tag r">中国第一</span></div>
-      <div class="tbl-wrap" style="box-shadow:none;">
-        <table>
-          <thead><tr><th>领域</th><th>份额/排名</th><th>关键数据</th></tr></thead>
-          <tbody>
-            <tr><td><strong>中国手机</strong></td><td class="up-t">16.4% 第1</td><td>2025全年（IDC）</td></tr>
-            <tr><td><strong>中国手机Q2</strong></td><td class="up-t">18% 第1</td><td>1220万台（Canalys）</td></tr>
-            <tr><td><strong>中国云计算</strong></td><td class="up-t">21.8% 第1</td><td>IaaS+PaaS（IDC）</td></tr>
-            <tr><td><strong>5G设备全球</strong></td><td class="up-t">~30% 第1</td><td>爱立信~24%第二</td></tr>
-            <tr><td><strong>光伏逆变器</strong></td><td class="up-t">全球9年第1</td><td>累计超445GW</td></tr>
-            <tr><td><strong>鸿蒙OS中国</strong></td><td class="up-t">超iOS 第2</td><td>安卓之后第二大</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="mcard" style="border-top:3px solid var(--blue);">
-      <div class="tags"><span class="tag b">全球竞争格局</span></div>
-      <div class="tbl-wrap" style="box-shadow:none;">
-        <table>
-          <thead><tr><th>领域</th><th>华为</th><th>竞品</th></tr></thead>
-          <tbody>
-            <tr><td>全球手机2025</td><td>约6.5%(第6)</td><td>三星22%>苹果20%>小米11%</td></tr>
-            <tr><td>中国手机2025</td><td class="up-t">16.4%(第1)</td><td>苹果>vivo>小米>OPPO</td></tr>
-            <tr><td>5G设备全球</td><td class="up-t">~30%(第1)</td><td>爱立信~24%>诺基亚~17%</td></tr>
-            <tr><td>鸿蒙智行Q1</td><td>11.27万辆</td><td>同比+41.9%</td></tr>
-            <tr><td>5G SEP专利</td><td class="up-t">超1.1万族第1</td><td>中国企业合计38.5%</td></tr>
-          </tbody>
-        </table>
-      </div>
+  <!-- 核心速览 -->
+  <div class="key-view" style="border-left:3px solid var(--red);">
+    <div class="kv-header">📌 华为速览 <span class="pill" style="background:var(--red-bg);color:var(--red);">2026.8</span></div>
+    <div class="kv-body">
+      <p>① <strong>2025年报</strong>：营收8809亿(+2.2%)，净利润680亿(+8.7%)，研发投入1923亿(占21.8%)，现金流1274亿创新高</p>
+      <p>② <strong>中国手机第一</strong>：Q2出货1492万台/份额22.6%(+19.4%)，超越苹果18.1%；Mate 80国产单品销冠</p>
+      <p>③ <strong>鸿蒙OS 6</strong>：装机量突破8000万台，年底冲1亿；中国份额19%超iOS(17%)，成第二大手机OS</p>
+      <p>④ <strong>智能汽车</strong>：7月交付45046台，累计破148万台（新势力最快）；问界M9累计破30万台</p>
+      <p>⑤ <strong>昇腾AI芯片</strong>：2025出货81万颗，2026预计超120万颗；950超节点实现1024卡1EFLOPS</p>
+      <p>⑥ <strong>美国制裁升级</strong>：FCC全面禁止进口华为设备，MATCH法案扩大管制范围</p>
     </div>
   </div>
-</div>
 
-<!-- HarmonyOS生态 -->
-<div class="block">
-  <div class="block-title">🌀 HarmonyOS 生态进展</div>
-  <div class="card-row row-4">
-    <div class="mcard"><div class="cl">鸿蒙装机量</div><div class="cv">8,010万</div><div class="cc up">日均+19万</div><div class="cs">年底1亿目标近在咫尺</div></div>
-    <div class="mcard"><div class="cl">中国OS份额</div><div class="cv">超iOS</div><div class="cc up">第二大</div><div class="cs">安卓之后</div></div>
-    <div class="mcard"><div class="cl">生态设备</div><div class="cv">13亿+</div><div class="cc up">伙伴3200+</div><div class="cs">代码1.4亿行</div></div>
-    <div class="mcard"><div class="cl">HarmonyOS 6</div><div class="cv">6,600万</div><div class="cc up">设备支持</div><div class="cs">6月HDC发布</div></div>
-  </div>
-  <div class="mcard">
-    <ul class="ilist">
-      <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🔄</div><div class="ct"><div class="it">HarmonyOS 7正式亮相（HDC 2026.6）</div><div class="id">定位全场景智能OS，全面向Agent架构演进；鸿蒙智能体框架2.0+系统智能体小艺</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📱</div><div class="ct"><div class="it">开源鸿蒙：贡献者超1.3万，共建1.4亿行代码</div><div class="id">华为贡献超1亿行代码；生态合作伙伴超3200家</div></div></li>
-    </ul>
-  </div>
-</div>
-
-<!-- 芯片/技术突破 -->
-<div class="block">
-  <div class="block-title">🔧 芯片 & 技术突破</div>
-  <div class="card-row row-2">
-    <div class="mcard" style="border-top:3px solid var(--red);">
-      <div class="tags"><span class="tag r">麒麟芯片</span><span class="tag o">Mate 90系列 9月发布</span></div>
+  <!-- 集团动态 -->
+  <div class="block">
+    <div class="block-title">🏢 集团层面动态</div>
+    <div class="card-row row-4">
+      <div class="mcard" style="border-top:3px solid var(--blue);"><div class="cl">2025营收</div><div class="cv">8,809亿</div><div class="cc up">+2.2%</div><div class="cs">历史次高</div></div>
+      <div class="mcard" style="border-top:3px solid var(--green);"><div class="cl">净利润</div><div class="cv">680亿</div><div class="cc up">+8.7%</div><div class="cs">营业利润率11%</div></div>
+      <div class="mcard" style="border-top:3px solid var(--purple);"><div class="cl">研发投入</div><div class="cv">1,923亿</div><div class="cc up">占21.8%</div><div class="cs">近十年累计1.38万亿</div></div>
+      <div class="mcard" style="border-top:3px solid var(--orange);"><div class="cl">经营现金流</div><div class="cv">1,274亿</div><div class="cc up">+44.1%</div><div class="cs">近5年新高</div></div>
+    </div>
+    <div class="mcard">
       <ul class="ilist">
-        <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--red-bg);color:var(--red);">💎</div><div class="ct"><div class="it" style="font-size:11px;">麒麟9050 Pro（Pro Max/RS首发）</div><div class="id" style="font-size:10px;">"逻辑折叠"架构，双层垂直堆叠，密度+55%接近3nm，功耗-41%，面积-37.5%</div></div></li>
-        <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🔬</div><div class="ct"><div class="it" style="font-size:11px;">海思"韬定律"持续演进</div><div class="id" style="font-size:10px;">以"时间缩微"替代"几何缩微"，6年自研381款芯片，预计2031年密度达1.4nm相当</div></div></li>
-      </ul>
-    </div>
-    <div class="mcard" style="border-top:3px solid var(--purple);">
-      <div class="tags"><span class="tag p">昇腾AI</span><span class="tag b">算力路线图</span></div>
-      <ul class="ilist">
-        <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">⚡</div><div class="ct"><div class="it" style="font-size:11px;">昇腾950系列：FP8/MXFP8，算力1-2P</div><div class="id" style="font-size:10px;">950PR面向Prefill/推荐，950DT面向Decode/训练；支持自研HiF8格式，精度接近FP16</div></div></li>
-        <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--green-bg);color:var(--green);">📈</div><div class="ct"><div class="it" style="font-size:11px;">昇腾960/970规划：2027Q4/2028Q4</div><div class="id" style="font-size:10px;">960性能翻倍支持HiF4；970全面翻倍，内存带宽+1.5倍；持续缩小与英伟达差距</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--red-bg);color:var(--red);">🗣️</div><div class="ct"><div class="it">任正非8/20最新讲话：AI两大基础优势——电力+电信网络</div><div class="id">与中国华能董事长会谈，强调"没有网络的算力是信息孤岛"，双方将在AI/算力/算电协同领域深化合作</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">👤</div><div class="ct"><div class="it">组织架构调整：汪涛当选副董事长，首次当值轮值董事长(4/1-9/30)</div><div class="id">轮值成员由"徐直军/孟晚舟/胡厚崑"变为"徐直军/孟晚舟/汪涛"；胡厚崑退出轮值序列。余承东集齐终端BG董事长+终端公司董事长+产品投资委员会主任三职</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🎯</div><div class="ct"><div class="it">孟晚舟定调：AI是未来十年最具确定性的战略机遇</div><div class="id">华为以硬件为主要盈利模式，AI驱动全产业智能化升级</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">⚠️</div><div class="ct"><div class="it">2026H1财报尚未发布（预计8月底-9月初）</div><div class="id">部分媒体称"H1收入4175亿"疑似误引2024年数据，建议等待官方披露核实</div></div></li>
       </ul>
     </div>
   </div>
-  <div class="alert-c alert-i"><span>💡</span><div><strong>技术亮点：</strong>华为全链路自主可控（芯片→OS→生态）。Mate 90全系支持卫星通信，Tandem双层OLED材料供应链完全国产化。昇腾韶关上线大湾区首个"国芯训国模"万卡集群(9000P)。</div></div>
-</div>
 
-<!-- 国际化/地缘动态 -->
-<div class="block">
-  <div class="block-title">🌍 国际化 & 地缘动态</div>
-  <div class="mcard">
-    <ul class="ilist">
-      <li class="ili"><div class="ic" style="background:var(--red-bg);color:var(--red);">⚠️</div><div class="ct"><div class="it">美国制裁持续加码：实体清单+出口管制</div><div class="id">2020年制裁升级后，凡使用美国技术/软件的芯片均受限；华为加速国产替代，Mate30美产零部件占比从11%降至约1%</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🌐</div><div class="ct"><div class="it">海外市场：通信设备全球份额逆势提升</div><div class="id">2024年华为以36.8%市场份额稳居全球通信设备第一，全年销售额创历史第二高（对比2018年制裁前仅29%）</div></div></li>
-      <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📱</div><div class="ct"><div class="it">全球手机出货：2024Q2同比增长49%</div><div class="id">TechInsights数据，高端机型（Mate/Pura系列）ASP和批发收入均创历史新高，中国市场占其全球出货89%</div></div></li>
-    </ul>
+  <!-- 各产业板块 -->
+  <div class="block">
+    <div class="block-title">📊 各产业板块经营情况（2025年报）</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>板块</th><th>收入(亿)</th><th>同比</th><th>关键动态</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ICT基础设施</strong></td><td>3,750</td><td class="up-t">+2.6%</td><td>5G-A用户全球破亿；U6GHz商用元年；MWC发布AI-Centric Network</td></tr>
+          <tr><td><strong>终端业务</strong></td><td>3,445</td><td class="up-t">+1.6%</td><td>Mate 80国产单品销冠；2026出货目标6000万部(+20%)；5G手机重返国际市场</td></tr>
+          <tr><td><strong>智能汽车</strong></td><td>450</td><td class="up-t">+72.1%</td><td>增速最快板块！累计交付148万台；享界G9 8/20亮相</td></tr>
+          <tr><td><strong>数字能源</strong></td><td>773</td><td class="up-t">+12.7%</td><td>光伏逆变器全球9年第一；户储全球17.3%第一；兆瓦超充获首证</td></tr>
+          <tr><td><strong>云计算</strong></td><td>322</td><td class="down-t">-3.5%</td><td>阶段性承压；智算云客户突破1800家；IDC口径Q1中国IaaS+PaaS份额21.8%居首</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 
-<div class="disc">⚠️ 信息来自公开渠道，数据截至2026年8月27日。</div>
+  <!-- 市场份额 -->
+  <div class="block">
+    <div class="block-title">🏆 全球市场份额速览</div>
+    <div class="card-row row-2">
+      <div class="mcard" style="border-top:3px solid var(--red);">
+        <div class="tags"><span class="tag r">中国第一</span></div>
+        <div class="tbl-wrap" style="box-shadow:none;">
+          <table>
+            <thead><tr><th>领域</th><th>份额/排名</th><th>关键数据</th></tr></thead>
+            <tbody>
+              <tr><td><strong>中国手机</strong></td><td class="up-t">22.6% 第1</td><td>Q2出货1492万台(+19.4%)</td></tr>
+              <tr><td><strong>折叠屏</strong></td><td class="up-t">超50% 第1</td><td>Q1中国市场</td></tr>
+              <tr><td><strong>中国云计算</strong></td><td class="up-t">21.8% 第1</td><td>IDC Q1 IaaS+PaaS</td></tr>
+              <tr><td><strong>5G设备全球</strong></td><td class="up-t">28.7%-31.5% 第1</td><td>爱立信23-25%第二</td></tr>
+              <tr><td><strong>光伏逆变器</strong></td><td class="up-t">全球9年第1</td><td>累计超445GW</td></tr>
+              <tr><td><strong>户用储能</strong></td><td class="up-t">17.3% 第1</td><td>全球份额</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="mcard" style="border-top:3px solid var(--blue);">
+        <div class="tags"><span class="tag b">全球竞争格局</span></div>
+        <div class="tbl-wrap" style="box-shadow:none;">
+          <table>
+            <thead><tr><th>领域</th><th>华为</th><th>竞品</th></tr></thead>
+            <tbody>
+              <tr><td>全球手机Q2</td><td>约6.5%(第6)</td><td>三星22%>苹果20%>小米11%</td></tr>
+              <tr><td>中国手机Q2</td><td class="up-t">22.6%(第1)</td><td>苹果18.1%>OPPO/vivo各16%</td></tr>
+              <tr><td>5G设备全球</td><td class="up-t">~30%(第1)</td><td>爱立信~24%>诺基亚~17%</td></tr>
+              <tr><td>新势力7月</td><td>45046台(第3)</td><td>零跑10.1万>极氪3.6万>小米3万+</td></tr>
+              <tr><td>5G SEP专利</td><td class="up-t">超1.1万族第1</td><td>中国企业合计38.5%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HarmonyOS生态 -->
+  <div class="block">
+    <div class="block-title">🌀 HarmonyOS 生态进展</div>
+    <div class="card-row row-4">
+      <div class="mcard"><div class="cl">鸿蒙6装机量</div><div class="cv">8,000万+</div><div class="cc up">年底冲1亿</div><div class="cs">47天增1000万</div></div>
+      <div class="mcard"><div class="cl">中国OS份额</div><div class="cv">19%</div><div class="cc up">超iOS(17%)</div><div class="cs">第二大手机OS</div></div>
+      <div class="mcard"><div class="cl">全球开发者</div><div class="cv">1,100万+</div><div class="cc up">生态爆发</div><div class="cs">应用38-40万个</div></div>
+      <div class="mcard"><div class="cl">开源设备</div><div class="cv">13亿台</div><div class="cc up">代码1.4亿行</div><div class="cs">伙伴550+家</div></div>
+    </div>
+    <div class="mcard">
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">🔄</div><div class="ct"><div class="it">HarmonyOS 7开发者测试版发布（HDC 6/12）</div><div class="id">彻底剔除安卓兼容层；综合性能提升超30%、内存占用降30%；智能体框架2.0复杂任务成功率超90%</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📱</div><div class="ct"><div class="it">TOP100应用适配率97%，微信/抖音9月迎鸿蒙重大版本升级</div><div class="id">鸿蒙版抖音安装量破1800万；微信500天迭代200+版本；应用日均下载2亿次</div></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 芯片/技术突破 -->
+  <div class="block">
+    <div class="block-title">🔧 芯片 & 技术突破</div>
+    <div class="card-row row-2">
+      <div class="mcard" style="border-top:3px solid var(--red);">
+        <div class="tags"><span class="tag r">麒麟芯片</span><span class="tag o">Mate 90系列 9月发布</span></div>
+        <ul class="ilist">
+          <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--red-bg);color:var(--red);">💎</div><div class="ct"><div class="it" style="font-size:11px;">麒麟9050 Pro（Pro Max/RS首发）</div><div class="id" style="font-size:10px;">全球首款"逻辑折叠"手机芯片——双层垂直堆叠，密度+55%接近3nm水准，功耗-41%，面积-37.5%</div></div></li>
+          <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🔬</div><div class="ct"><div class="it" style="font-size:11px;">海思"韬定律"</div><div class="id" style="font-size:10px;">以"时间缩微"(逻辑折叠/软硬芯协同)替代"几何缩微"，6年自研381款芯片，预计2031年密度达1.4nm相当</div></div></li>
+        </ul>
+      </div>
+      <div class="mcard" style="border-top:3px solid var(--purple);">
+        <div class="tags"><span class="tag p">昇腾AI</span><span class="tag b">算力国产替代</span></div>
+        <ul class="ilist">
+          <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">⚡</div><div class="ct"><div class="it" style="font-size:11px;">950超节点1024卡=1EFLOPS FP8</div><div class="id" style="font-size:10px;">业界最大规模；950PR推理卡为H20的2.87倍，成本低三成；Atlas 950 SuperPoD(8192卡/8EFLOPS) Q4上市</div></div></li>
+          <li class="ili" style="padding:5px 0;"><div class="ic" style="background:var(--green-bg);color:var(--green);">📈</div><div class="ct"><div class="it" style="font-size:11px;">2025出货81万颗→2026超120万颗</div><div class="id" style="font-size:10px;">字节锁定25万颗；阿里/腾讯各十几万颗；生态伙伴3000+家；英伟达中国份额从40%→8%</div></div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert-c alert-i"><span>💡</span><div><strong>技术亮点：</strong>华为全链路自主可控（芯片→OS→生态）。Mate 90全系支持卫星通信，Tandem双层OLED材料供应链完全国产化。昇腾韶关上线大湾区首个"国芯训国模"万卡集群(9000P)。</div></div>
+  </div>
+
+  <!-- 智能汽车 -->
+  <div class="block">
+    <div class="block-title">🚗 鸿蒙智行 · 智能汽车（2026年7月）</div>
+    <div class="card-row row-4">
+      <div class="mcard"><div class="cl">7月交付</div><div class="cv">45,046台</div><div class="cc up">累计148万台</div><div class="cs">新势力最快纪录</div></div>
+      <div class="mcard"><div class="cl">问界(7月)</div><div class="cv">22,572台</div><div class="cc neutral">M9 9639台居首</div><div class="cs">M9累计破30万</div></div>
+      <div class="mcard"><div class="cl">尚界(7月)</div><div class="cv">11,017台</div><div class="cc up">新品牌放量</div><div class="cs">Z7累计破2万</div></div>
+      <div class="mcard"><div class="cl">智界(7月)</div><div class="cv">9,906台</div><div class="cc up">V9 MPV冠军</div><div class="cs">V9 8974台</div></div>
+    </div>
+    <div class="alert-c alert-w"><span>⚠️</span><div><strong>隐忧：</strong>问界品牌7月全车型环比下滑（M6 -48.9%、M5 -61.6%），内部五界分流+乾崑智驾外供稀释独家优势。但整体仍处新势力第一梯队，累计148万台为新势力最快纪录。享界G9已于8/20亮相。</div></div>
+  </div>
+
+  <!-- 国际化/地缘 -->
+  <div class="block">
+    <div class="block-title">🌍 国际化 & 地缘动态</div>
+    <div class="mcard" style="border-left:3px solid var(--red);">
+      <div class="tags"><span class="tag r">美国制裁升级</span></div>
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--red-bg);color:var(--red);">🚫</div><div class="ct"><div class="it">FCC全面禁止进口华为设备（6月）</div><div class="id">升级为"全面海关进口禁令"，含已认证型号；7月再出新规禁止含"黑名单零组件"电子产品在美销售</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--red-bg);color:var(--red);">📋</div><div class="ct"><div class="it">MATCH法案（4月两党议员提出）</div><div class="id">华为/中芯/长鑫/长江存储/华虹列为"受管制设施"，切断设备出口+维修，推动盟友150天对齐</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">📊</div><div class="ct"><div class="it">效果：英伟达中国AI芯片份额40%→8%</div><div class="id">国产算力承接；Bernstein预测480天份额从55%跌至8%</div></div></li>
+      </ul>
+    </div>
+    <div class="mcard" style="border-left:3px solid var(--green);">
+      <div class="tags"><span class="tag g">海外突破</span></div>
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📱</div><div class="ct"><div class="it">5G手机重返国际市场</div><div class="id">Pura 90s Pro(麒麟9030S)在马来西亚/墨西哥/迪拜/印尼开售；沙特实测峰值超1100Mbps</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">🔋</div><div class="ct"><div class="it">数字能源覆盖170+国家</div><div class="id">沙特红海新城1.3GWh储能项目全球标杆</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">📡</div><div class="ct"><div class="it">全球5G SEP专利超1.1万族第一</div><div class="id">全球有效授权专利16.5万件，许可协议260+份；将主导AI原生核心网规范制定</div></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 即将发布 -->
+  <div class="block">
+    <div class="block-title">📅 近期关注</div>
+    <div class="mcard">
+      <ul class="ilist">
+        <li class="ili"><div class="ic" style="background:var(--blue-bg);color:var(--blue);">🔥</div><div class="ct"><div class="it">Mate 90系列 + Mate XT2三折叠 — 预计9月23日深圳发布</div><div class="id">麒麟9050 Pro首发；全系卫星通信；标准版4699元起</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--purple-bg);color:var(--purple);">📊</div><div class="ct"><div class="it">2026H1财报 — 预计8月底-9月初发布</div><div class="id">关注终端业务增速、昇腾出货量、智能汽车盈利进展</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--green-bg);color:var(--green);">🌀</div><div class="ct"><div class="it">HarmonyOS冲刺1亿台目标</div><div class="id">当前8000万+，日均新增超17万台；微信/抖音9月鸿蒙重大版本升级</div></div></li>
+        <li class="ili"><div class="ic" style="background:var(--orange-bg);color:var(--orange);">⚡</div><div class="ct"><div class="it">Atlas 950 SuperPoD — Q4上市</div><div class="id">8192卡/8 EFLOPS/全液冷；昇腾950超节点1024卡1EFLOPS已首展</div></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="disc">数据来源：华为2025年报、IDC/Omdia/Counterpoint/TrendForce、财新、中新经纬、日经中文网等公开渠道。2026H1财报数据以官方发布为准。</div>
   <!--MOD:huawei:END-->
 </div>
 
@@ -1030,6 +965,15 @@ tr:last-child td { border-bottom:none; }
 </div>
 
 <script>
+/* 动态取当前模块的更新标签（读模块内部被每日切片更新的.update-tag），避免顶部/导航日期过期 */
+function getModTag(tab, fallback) {
+  var sec = document.getElementById('section-'+tab);
+  if(sec) {
+    var t = sec.querySelector('.update-tag');
+    if(t && t.textContent.trim()) return t.textContent.trim();
+  }
+  return fallback || '';
+}
 function switchTab(tab, el) {
   document.querySelectorAll('.nav-item').forEach(e=>e.classList.remove('active'));
   document.querySelectorAll('.bn-item').forEach(e=>e.classList.remove('active'));
@@ -1042,7 +986,7 @@ function switchTab(tab, el) {
     el.classList.add('active');
     // update mobile topbar
     document.getElementById('mtTitle').textContent = el.dataset.title;
-    document.getElementById('mtTag').textContent = el.dataset.tag;
+    document.getElementById('mtTag').textContent = getModTag(tab, el.dataset.tag);
   } else if(el) {
     el.classList.add('active');
     // also activate matching bottom nav
@@ -1050,7 +994,7 @@ function switchTab(tab, el) {
     if(bn) {
       bn.classList.add('active');
       document.getElementById('mtTitle').textContent = bn.dataset.title;
-      document.getElementById('mtTag').textContent = bn.dataset.tag;
+      document.getElementById('mtTag').textContent = getModTag(tab, bn.dataset.tag);
     }
   }
   document.getElementById('section-'+tab).classList.add('active');
@@ -1058,6 +1002,15 @@ function switchTab(tab, el) {
   if(window.innerWidth<=768) document.getElementById('sidebar').classList.remove('open');
   window.scrollTo({top:0,behavior:'instant'});
 }
+/* 初始化：右上角日期读当前模块真实更新时间，侧边栏日期取当天 */
+(function(){
+  document.getElementById('mtTag').textContent = getModTag('stock','更新：—');
+  var d = new Date();
+  var wd = ['周日','周一','周二','周三','周四','周五','周六'][d.getDay()];
+  function p(n){return (n<10?'0':'')+n;}
+  var sd = document.getElementById('sideDate');
+  if(sd) sd.textContent = d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+wd;
+})();
 function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('open');
 }
