@@ -84,6 +84,43 @@ def fetch_sector_rank():
 WEEKDAYS_CN = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 
 
+US_INDEX_CODES = [
+    ("us.DJI", "道琼斯"), ("us.IXIC", "纳斯达克"), ("us.INX", "标普500"),
+]
+
+
+def fetch_us_index():
+    """Return US major indices (DJI/IXIC/INX) latest quote from Tencent API.
+
+    Note: A-share task runs 16:30 Beijing time = 04:30 ET (US market closed),
+    so values are the latest close (overnight session for A-share view)."""
+    try:
+        codes = ",".join(c for c, _ in US_INDEX_CODES)
+        r = requests.get("https://qt.gtimg.cn/q=" + codes,
+                         headers=HEADERS, timeout=15)
+        r.encoding = "gbk"
+        lines = []
+        for row in r.text.strip().split(";"):
+            row = row.strip()
+            if "=" not in row:
+                continue
+            parts = row.split("=")[1].strip('"').split("~")
+            if len(parts) < 33:
+                continue
+            name = parts[1]
+            price = parts[3]
+            pct = parts[32]
+            if not price or not pct or pct == "-":
+                continue
+            lines.append("%s: %s点, 涨跌幅%s%%" % (name, price, pct))
+        if not lines:
+            return ""
+        return "美股三大指数最新行情（北京时间16:30取数时为隔夜收盘）:\n" + "\n".join(lines)
+    except Exception as e:
+        print("[warn] us index quotes failed:", e)
+        return ""
+
+
 def fetch_gold(days=7):
     """Return recent N trading days of SHFE gold continuous (AU0) daily close
     in CNY/gram from Sina futures API, with daily chg% and week chg%."""
@@ -162,3 +199,5 @@ if __name__ == "__main__":
     print(fetch_gold())
     print()
     print(fetch_sh_index_5d())
+    print()
+    print(fetch_us_index())
