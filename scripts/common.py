@@ -37,30 +37,54 @@ def deepseek_chat(messages, max_tokens=7000, temperature=0.7):
     return r.json()["choices"][0]["message"]["content"]
 
 
-def tavily_search(query, max_results=6):
-    """Tavily web search. Returns list of {title,url,content}."""
+def tavily_search(query, max_results=6, max_age_days=None):
+    """Tavily web search. Returns list of {title,url,content,published_date}.
+
+    max_age_days: if set, drop results whose publish date is older than this.
+    Results without a publish date are kept (model must judge them cautiously).
+    """
     import requests
     key = os.environ.get("TAVILY_API_KEY", "")
     if not key:
         print("[warn] TAVILY_API_KEY not set, skip search:", query[:40])
         return []
-    try:
+
+    def _call(payload):
         r = requests.post(
             "https://api.tavily.com/search",
             headers={"Content-Type": "application/json"},
-            json={"api_key": key, "query": query,
-                  "search_depth": "advanced",
-                  "max_results": max_results,
-                  "include_answer": False},
-            timeout=60)
+            json=payload, timeout=60)
         r.raise_for_status()
-        return [{"title": x.get("title", ""),
-                 "url": x.get("url", ""),
-                 "content": x.get("content", "")}
-                for x in r.json().get("results", [])]
+        return r.json().get("results", [])
+
+    base = {"api_key": key, "query": query,
+            "search_depth": "advanced",
+            "max_results": max_results,
+            "include_answer": False}
+    try:
+        try:
+            results = _call(dict(base, include_publish_date=True))
+        except Exception:
+            # older API may reject the param: retry without it
+            results = _call(base)
     except Exception as e:
         print("[warn] tavily failed:", e)
         return []
+
+    cutoff = None
+    if max_age_days:
+        cutoff = (datetime.date.today()
+                  - datetime.timedelta(days=max_age_days)).isoformat()
+    out = []
+    for x in results:
+        pub = str(x.get("published_date") or "")[:10]
+        if cutoff and pub and pub < cutoff:
+            continue  # older than allowed age, drop
+        out.append({"title": x.get("title", ""),
+                    "url": x.get("url", ""),
+                    "content": x.get("content", ""),
+                    "published_date": pub})
+    return out
 
 
 def read_index():
