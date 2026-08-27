@@ -124,9 +124,41 @@ def fetch_gold(days=7):
         return ""
 
 
+def fetch_sh_index_5d(days=5):
+    """Return recent N trading days of SSE Composite (sh000001) daily close
+    with chg% from Tencent daily kline API."""
+    try:
+        import datetime
+        url = ("https://web.ifzq.gtimg.cn/appstock/app/fqkline/get"
+               "?param=sh000001,day,,,%d,qfq" % (days + 1))
+        r = requests.get(url, headers=HEADERS, timeout=15)
+        d = r.json()["data"]["sh000001"]
+        k = d.get("qfqday") or d.get("day")
+        recent = k[-(days + 1):]  # extra 1 day for chg% of first shown day
+        lines = []
+        prev = None
+        for row in recent:
+            date_s, close = row[0], float(row[2])
+            dt = datetime.date.fromisoformat(date_s)
+            if prev is not None:
+                pct = (close - prev) / prev * 100
+                lines.append("%s(%s): 收盘%.2f, 涨跌幅%+.2f%%"
+                             % (date_s[5:].replace("-", "/"),
+                                WEEKDAYS_CN[dt.weekday()], close, pct))
+            prev = close
+        if not lines:
+            return ""
+        return "上证指数最近%d个交易日收盘点位:\n" % len(lines) + "\n".join(lines)
+    except Exception as e:
+        print("[warn] sh index kline failed:", e)
+        return ""
+
+
 if __name__ == "__main__":
     print(fetch_index_quotes())
     print()
     print(fetch_sector_rank())
     print()
     print(fetch_gold())
+    print()
+    print(fetch_sh_index_5d())
